@@ -22,7 +22,7 @@
   --color-glass: rgba(255, 255, 255, 0.14);
   --color-glass-border: rgba(200, 169, 106, 0.28);
 
-  /* Typography — Playfair · Roboto · Yellowtail (EN) · IBM Plex Arabic (AR) */
+  /* Typography — Playfair · Roboto · Yellowtail (EN) · Tajawal · Noto Naskh (AR) */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-editorial: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-countdown: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -154,19 +154,58 @@ fieldset {
   border: none;
 }
 
-/* RTL — IBM Plex Sans Arabic */
+/* RTL — High-quality Arabic typography */
 html[dir="rtl"] {
-  --font-display: 'IBM Plex Sans Arabic', sans-serif;
-  --font-editorial: 'IBM Plex Sans Arabic', sans-serif;
-  --font-countdown: 'IBM Plex Sans Arabic', sans-serif;
-  --font-body: 'IBM Plex Sans Arabic', sans-serif;
-  --font-accent: 'IBM Plex Sans Arabic', sans-serif;
-  --font-luxury: 'IBM Plex Sans Arabic', sans-serif;
-  --font-serif: 'IBM Plex Sans Arabic', sans-serif;
+  --font-display: 'Noto Naskh Arabic', 'Tajawal', serif;
+  --font-editorial: 'Noto Naskh Arabic', 'Tajawal', serif;
+  --font-countdown: 'Noto Naskh Arabic', 'Tajawal', serif;
+  --font-body: 'Tajawal', 'Segoe UI', sans-serif;
+  --font-accent: 'Tajawal', sans-serif;
+  --font-luxury: 'Noto Naskh Arabic', 'Tajawal', serif;
+  --font-serif: 'Noto Naskh Arabic', 'Tajawal', serif;
 }
 
 html[dir="rtl"] body {
   font-family: var(--font-body);
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1;
+  font-variant-ligatures: common-ligatures;
+}
+
+html[dir="rtl"] [data-i18n],
+html[dir="rtl"] .section__eyebrow,
+html[dir="rtl"] .section__title,
+html[dir="rtl"] .hero__subtitle,
+html[dir="rtl"] .hero__prelude,
+html[dir="rtl"] .countdown__label,
+html[dir="rtl"] .countdown__until,
+html[dir="rtl"] .detail-card__title,
+html[dir="rtl"] .footer__tagline,
+html[dir="rtl"] .scroll-indicator__text,
+html[dir="rtl"] .hero__meta-label,
+html[dir="rtl"] .loader__text,
+html[dir="rtl"] .thanks__body,
+html[dir="rtl"] .story__body,
+html[dir="rtl"] .story__lead,
+html[dir="rtl"] .story__closing,
+html[dir="rtl"] .timeline__text,
+html[dir="rtl"] .timeline__title {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[dir="rtl"] .section__title,
+html[dir="rtl"] .hero__subtitle,
+html[dir="rtl"] .story__lead {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+html[dir="rtl"] .countdown__number {
+  font-family: var(--font-countdown);
+  font-weight: 700;
   letter-spacing: 0;
 }
 

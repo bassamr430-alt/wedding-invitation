@@ -104,10 +104,6 @@
   let currentLang = CONFIG.defaultLang;
   let lenis = null;
   let musicStarted = false;
-  let musicContext = null;
-  let musicGain = null;
-  let musicSource = null;
-  let musicBuffer = null;
   let musicUnlocked = false;
 
   /* ═══════════════════════════════════════════════════════════
@@ -832,105 +828,20 @@
   }
 
   /* ═══════════════════════════════════════════════════════════
-     MUSIC — Gapless loop via Web Audio (fallback: HTML audio)
+     MUSIC — Autoplay (muted) then unmute on first interaction
      ═══════════════════════════════════════════════════════════ */
   const MUSIC_VOLUME = 0.45;
 
-  function getMusicSrc() {
-    if (!DOM.bgMusic) return '';
-    const sourceEl = DOM.bgMusic.querySelector('source');
-    return sourceEl ? sourceEl.src : DOM.bgMusic.src;
-  }
-
-  function startGaplessMusicSource() {
-    if (!musicContext || !musicBuffer || !musicGain) return;
-
-    if (musicSource) {
-      try {
-        musicSource.stop();
-      } catch (err) {
-        /* already stopped */
-      }
-      musicSource.disconnect();
-    }
-
-    musicSource = musicContext.createBufferSource();
-    musicSource.buffer = musicBuffer;
-    musicSource.loop = true;
-    musicSource.connect(musicGain);
-    musicSource.start(0);
-    musicStarted = true;
-  }
-
-  async function initGaplessMusic() {
-    const src = getMusicSrc();
-    if (!src) return false;
-
-    try {
-      musicContext = new (window.AudioContext || window.webkitAudioContext)();
-      musicGain = musicContext.createGain();
-      musicGain.gain.value = 0;
-      musicGain.connect(musicContext.destination);
-
-      const response = await fetch(src);
-      if (!response.ok) throw new Error('Music fetch failed');
-
-      musicBuffer = await musicContext.decodeAudioData(await response.arrayBuffer());
-      startGaplessMusicSource();
-      return true;
-    } catch (err) {
-      console.warn('Gapless music unavailable, using HTML audio fallback.', err);
-      musicContext = null;
-      musicGain = null;
-      musicSource = null;
-      musicBuffer = null;
-      return false;
-    }
-  }
-
-  function unlockMusic() {
-    if (musicUnlocked) return;
-
-    if (musicContext && musicGain) {
-      musicContext.resume().then(() => {
-        musicGain.gain.value = MUSIC_VOLUME;
-        musicUnlocked = true;
-        musicStarted = true;
-      }).catch(() => {});
-      return;
-    }
-
-    if (!DOM.bgMusic) return;
-
-    DOM.bgMusic.muted = false;
-    DOM.bgMusic.volume = MUSIC_VOLUME;
-
-    const playPromise = DOM.bgMusic.play();
-    if (playPromise) {
-      playPromise
-        .then(() => {
-          musicStarted = true;
-          musicUnlocked = true;
-        })
-        .catch(() => {});
-    }
-  }
-
   function tryAutoPlayMusic() {
-    if (musicStarted) return;
-
-    if (musicContext && musicGain) {
-      musicContext.resume().catch(() => {});
-      musicStarted = true;
-      return;
-    }
-
-    if (!DOM.bgMusic) return;
+    if (!DOM.bgMusic || musicStarted) return;
 
     DOM.bgMusic.volume = MUSIC_VOLUME;
     DOM.bgMusic.muted = true;
 
-    DOM.bgMusic.play()
+    const playPromise = DOM.bgMusic.play();
+    if (!playPromise) return;
+
+    playPromise
       .then(() => {
         musicStarted = true;
       })
@@ -939,37 +850,41 @@
       });
   }
 
-  function initHtmlAudioFallback() {
-    if (!DOM.bgMusic) return;
+  function unlockMusic() {
+    if (musicUnlocked || !DOM.bgMusic) return;
 
-    DOM.bgMusic.removeAttribute('loop');
+    DOM.bgMusic.muted = false;
     DOM.bgMusic.volume = MUSIC_VOLUME;
-    DOM.bgMusic.load();
 
-    DOM.bgMusic.addEventListener('timeupdate', () => {
-      const { currentTime, duration } = DOM.bgMusic;
-      if (!duration || !Number.isFinite(duration)) return;
-      if (currentTime >= duration - 0.035) {
-        DOM.bgMusic.currentTime = 0;
-      }
-    });
+    if (DOM.bgMusic.paused) {
+      DOM.bgMusic.play()
+        .then(() => {
+          musicUnlocked = true;
+          musicStarted = true;
+        })
+        .catch(() => {});
+      return;
+    }
 
-    DOM.bgMusic.addEventListener('canplay', tryAutoPlayMusic, { once: true });
-    DOM.bgMusic.addEventListener('loadeddata', tryAutoPlayMusic, { once: true });
-
-    DOM.bgMusic.addEventListener('error', () => {
-      console.warn('Background music failed to load.');
-    });
-
-    setTimeout(tryAutoPlayMusic, 200);
+    musicUnlocked = true;
+    musicStarted = true;
   }
 
   function initMusic() {
     if (!DOM.bgMusic) return;
 
-    const interactionEvents = ['click', 'touchstart', 'pointerdown', 'keydown', 'wheel'];
+    DOM.bgMusic.loop = true;
+    DOM.bgMusic.volume = MUSIC_VOLUME;
+    DOM.bgMusic.setAttribute('playsinline', '');
+    DOM.bgMusic.setAttribute('webkit-playsinline', '');
+    DOM.bgMusic.load();
 
-    interactionEvents.forEach((eventName) => {
+    DOM.bgMusic.addEventListener('canplay', tryAutoPlayMusic, { once: true });
+    DOM.bgMusic.addEventListener('loadeddata', tryAutoPlayMusic, { once: true });
+
+    const unlockEvents = ['touchstart', 'touchend', 'click', 'pointerdown', 'wheel', 'keydown'];
+
+    unlockEvents.forEach((eventName) => {
       document.addEventListener(eventName, unlockMusic, { passive: true });
     });
 
@@ -979,9 +894,15 @@
       window.addEventListener('scroll', unlockMusic, { passive: true });
     }
 
-    initGaplessMusic().then((ready) => {
-      if (!ready) initHtmlAudioFallback();
+    DOM.bgMusic.addEventListener('error', () => {
+      console.warn('Background music failed to load.');
     });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) tryAutoPlayMusic();
+    });
+
+    setTimeout(tryAutoPlayMusic, 200);
   }
 
   /* ═══════════════════════════════════════════════════════════
