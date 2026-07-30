@@ -2600,8 +2600,53 @@ html[dir="rtl"] .story__collage-ornament {
     margin-inline: auto;
   }
 
-  .countdown-glass .countdown {
-    gap: 0.75rem;
+  .countdown-glass {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .countdown-glass__glow,
+  .countdown-glass__border {
+    display: none;
+  }
+
+  .countdown-glass .countdown,
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+    width: 100%;
+    justify-items: center;
+    align-items: end;
+  }
+
+  .countdown__item {
+    min-width: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .countdown__number {
+    font-size: clamp(2.25rem, 11vw, 3.25rem);
+  }
+
+  .countdown__label {
+    font-size: 0.5625rem;
+    letter-spacing: 0.22em;
+  }
+
+  .section--countdown .section__title {
+    font-size: clamp(1.875rem, 8vw, 2.75rem);
+    line-height: 1.1;
+  }
+
+  .section--countdown .section__header {
+    margin-bottom: var(--space-md);
+  }
+
+  .container--editorial {
+    padding-inline: clamp(1rem, 4vw, 1.5rem);
   }
 
   .countdown__separator {
@@ -2646,17 +2691,7 @@ html[dir="rtl"] .story__collage-ornament {
   }
 
   .countdown-wrap {
-    justify-content: flex-start;
-  }
-
-  .countdown__separator {
-    display: none;
-  }
-
-  .countdown {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
+    justify-content: center;
   }
 
   .details-grid {
@@ -2718,6 +2753,21 @@ html[dir="rtl"] .story__collage-ornament {
 
   .details-grid {
     grid-template-columns: 1fr;
+  }
+
+  .countdown-glass .countdown,
+  .countdown {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem 0.25rem;
+  }
+
+  .countdown__number {
+    font-size: clamp(1.65rem, 7.5vw, 2.25rem);
+  }
+
+  .countdown__label {
+    font-size: 0.45rem;
+    letter-spacing: 0.14em;
   }
 }
 
