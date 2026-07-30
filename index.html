@@ -223,32 +223,22 @@
           <div class="countdown-glass__glow" aria-hidden="true"></div>
           <div class="countdown-glass__border" aria-hidden="true"></div>
           <div class="countdown" role="timer" aria-live="polite" aria-atomic="true">
-            <div class="countdown__item">
-              <div class="countdown__flip">
-                <span class="countdown__number" id="countDays">00</span>
+            <div class="countdown__display">
+              <div class="countdown__live">
+                <div class="countdown__time">
+                  <span class="countdown__number" id="countHours">00</span>
+                  <span class="countdown__sep" aria-hidden="true">:</span>
+                  <span class="countdown__number" id="countMinutes">00</span>
+                  <span class="countdown__sep" aria-hidden="true">:</span>
+                  <span class="countdown__number" id="countSeconds">00</span>
+                </div>
               </div>
-              <span class="countdown__label" data-i18n="countdown_days">Days</span>
-            </div>
-            <div class="countdown__separator" aria-hidden="true">·</div>
-            <div class="countdown__item">
-              <div class="countdown__flip">
-                <span class="countdown__number" id="countHours">00</span>
+
+              <div class="countdown__days">
+                <span class="countdown__until" data-i18n="countdown_until">Until our wedding</span>
+                <span class="countdown__number" id="countDays">0</span>
+                <span class="countdown__label" data-i18n="countdown_days">Days</span>
               </div>
-              <span class="countdown__label" data-i18n="countdown_hours">Hours</span>
-            </div>
-            <div class="countdown__separator" aria-hidden="true">·</div>
-            <div class="countdown__item">
-              <div class="countdown__flip">
-                <span class="countdown__number" id="countMinutes">00</span>
-              </div>
-              <span class="countdown__label" data-i18n="countdown_minutes">Minutes</span>
-            </div>
-            <div class="countdown__separator" aria-hidden="true">·</div>
-            <div class="countdown__item">
-              <div class="countdown__flip">
-                <span class="countdown__number" id="countSeconds">00</span>
-              </div>
-              <span class="countdown__label" data-i18n="countdown_seconds">Seconds</span>
             </div>
           </div>
         </div>

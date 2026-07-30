@@ -1274,36 +1274,88 @@ body.scrolled-past-hero .music-btn.is-playing {
 
 .countdown {
   display: flex;
-  align-items: flex-end;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
-.countdown__item {
-  text-align: start;
-  min-width: 88px;
+.countdown__display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+  width: min(100%, 640px);
+  margin-inline: auto;
 }
 
-.countdown__flip {
-  position: relative;
-  margin-bottom: 0.75rem;
+.countdown__live {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.countdown__time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: clamp(0.25rem, 1.5vw, 0.65rem);
+  width: 100%;
 }
 
 .countdown__number {
-  display: block;
+  display: inline-block;
   font-family: var(--font-countdown);
-  font-size: clamp(3.25rem, 9.5vw, 6rem);
+  font-size: clamp(3rem, 10vw, 5rem);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--color-charcoal);
   line-height: 1;
   letter-spacing: 0.04em;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 3px 18px rgba(200, 169, 106, 0.25);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.4s ease;
 }
 
 .countdown__number.is-flipping {
   transform: scale(1.06);
   color: var(--color-gold-dark);
+}
+
+.countdown__sep {
+  font-family: var(--font-countdown);
+  font-size: clamp(2.25rem, 7vw, 3.75rem);
+  font-weight: 600;
+  color: var(--color-gold);
+  opacity: 0.45;
+  line-height: 1;
+  user-select: none;
+  padding-inline: clamp(0.1rem, 0.5vw, 0.25rem);
+}
+
+.countdown__days {
+  text-align: center;
+  padding-top: 0.25rem;
+}
+
+.countdown__until {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gray-light);
+  margin-bottom: 0.65rem;
+}
+
+.countdown__days .countdown__number {
+  display: block;
+}
+
+.countdown__days .countdown__label {
+  display: block;
+  margin-top: 0.5rem;
 }
 
 .countdown__label {
@@ -1315,15 +1367,16 @@ body.scrolled-past-hero .music-btn.is-playing {
   color: var(--color-gray-light);
 }
 
-.countdown__separator {
-  font-family: var(--font-countdown);
-  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
-  font-weight: 600;
-  color: var(--color-gold);
-  opacity: 0.45;
-  align-self: flex-start;
-  margin-top: 0.75rem;
-  line-height: 1;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ─── Wedding Details ─── */
@@ -2232,32 +2285,19 @@ html[dir="rtl"] .story__collage-ornament {
 .countdown-glass .countdown {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: center;
+  width: 100%;
 }
 
-.countdown__item {
-  text-align: center;
-  min-width: clamp(72px, 14vw, 120px);
-}
-
-.countdown__flip {
-  position: relative;
-  margin-bottom: 0.75rem;
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
-}
-
-.countdown__number {
-  display: block;
+.countdown__days .countdown__number {
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 2px 20px rgba(200, 169, 106, 0.2);
 }
 
-.countdown__number.is-flipping {
+.countdown__days .countdown__number.is-flipping {
+  animation: countFlip 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.countdown__time .countdown__number.is-flipping {
   animation: countFlip 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -2265,12 +2305,6 @@ html[dir="rtl"] .story__collage-ornament {
   0% { transform: translateY(0) scale(1); opacity: 1; }
   40% { transform: translateY(-8px) scale(1.08); opacity: 0.6; color: var(--color-gold); }
   100% { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-.countdown__separator {
-  align-self: center;
-  margin-bottom: 1.75rem;
-  opacity: 0.35;
 }
 
 /* ─── Details Premium Cards ─── */
@@ -2613,22 +2647,16 @@ html[dir="rtl"] .story__collage-ornament {
 
   .countdown-glass .countdown,
   .countdown {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem 1rem;
-    width: 100%;
-    justify-items: center;
-    align-items: end;
-  }
-
-  .countdown__item {
-    min-width: 0;
-    text-align: center;
-    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .countdown__number {
-    font-size: clamp(2.25rem, 11vw, 3.25rem);
+    font-size: clamp(2.75rem, 14vw, 4rem);
+  }
+
+  .countdown__sep {
+    font-size: clamp(2rem, 9vw, 3rem);
   }
 
   .countdown__label {
@@ -2647,10 +2675,6 @@ html[dir="rtl"] .story__collage-ornament {
 
   .container--editorial {
     padding-inline: clamp(1rem, 4vw, 1.5rem);
-  }
-
-  .countdown__separator {
-    display: none;
   }
 
   .story__marker {
@@ -2713,10 +2737,6 @@ html[dir="rtl"] .story__collage-ornament {
     text-align: start;
   }
 
-  .countdown__item {
-    min-width: unset;
-  }
-
   .masonry {
     columns: 1;
   }
@@ -2755,14 +2775,12 @@ html[dir="rtl"] .story__collage-ornament {
     grid-template-columns: 1fr;
   }
 
-  .countdown-glass .countdown,
-  .countdown {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.5rem 0.25rem;
+  .countdown__number {
+    font-size: clamp(2.25rem, 12vw, 3rem);
   }
 
-  .countdown__number {
-    font-size: clamp(1.65rem, 7.5vw, 2.25rem);
+  .countdown__sep {
+    font-size: clamp(1.65rem, 8vw, 2.25rem);
   }
 
   .countdown__label {

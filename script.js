@@ -13,6 +13,7 @@
     weddingDate: new Date('2026-09-04T19:30:00+03:00'),
     defaultLang: 'en',
     loaderDuration: 900,
+    timeZone: 'Asia/Damascus',
   };
 
   /* ═══════════════════════════════════════════════════════════
@@ -40,9 +41,7 @@
       countdown_eyebrow: 'Countdown',
       countdown_title: 'Until We Say Yes',
       countdown_days: 'Days',
-      countdown_hours: 'Hours',
-      countdown_minutes: 'Minutes',
-      countdown_seconds: 'Seconds',
+      countdown_until: 'Until our wedding',
       details_eyebrow: 'The Celebration',
       details_title: 'Wedding Details',
       detail_date_title: 'Date',
@@ -80,9 +79,7 @@
       countdown_eyebrow: 'العد التنازلي',
       countdown_title: 'حتى نقول نعم',
       countdown_days: 'أيام',
-      countdown_hours: 'ساعات',
-      countdown_minutes: 'دقائق',
-      countdown_seconds: 'ثوانٍ',
+      countdown_until: 'حتى زفافنا',
       details_eyebrow: 'الاحتفال',
       details_title: 'تفاصيل الزفاف',
       detail_date_title: 'التاريخ',
@@ -131,6 +128,7 @@
     countHours: document.getElementById('countHours'),
     countMinutes: document.getElementById('countMinutes'),
     countSeconds: document.getElementById('countSeconds'),
+    countdownTimer: document.querySelector('.countdown'),
   };
 
   let countdownInterval = null;
@@ -746,7 +744,7 @@
   }
 
   /* ═══════════════════════════════════════════════════════════
-     COUNTDOWN
+     LIVE TIME (DAMASCUS) + WEDDING COUNTDOWN (DAYS)
      ═══════════════════════════════════════════════════════════ */
   function pad(num) {
     return String(num).padStart(2, '0');
@@ -763,43 +761,74 @@
     }, 400);
   }
 
-  function updateCountdown() {
-    const now = new Date();
-    const diff = CONFIG.weddingDate - now;
+  function getDamascusParts(date = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: CONFIG.timeZone,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    }).formatToParts(date);
 
-    if (diff <= 0) {
-      ['Days', 'Hours', 'Minutes', 'Seconds'].forEach((unit) => {
-        const el = DOM[`count${unit}`];
-        if (el) el.textContent = '00';
-      });
-      clearInterval(countdownInterval);
-      return;
+    const read = (type) => Number(parts.find((part) => part.type === type).value);
+
+    return {
+      hour: read('hour') % 24,
+      minute: read('minute'),
+      second: read('second'),
+    };
+  }
+
+  function updateDaysRemaining() {
+    const diff = CONFIG.weddingDate - Date.now();
+    const days = diff > 0 ? Math.floor(diff / 86400000) : 0;
+    const daysText = String(days);
+
+    if (prevCountdown.days !== daysText) {
+      animateCountChange(DOM.countDays, daysText);
+      prevCountdown.days = daysText;
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+    return { diff, days };
+  }
 
-    const values = {
-      days: pad(days),
-      hours: pad(hours),
-      minutes: pad(minutes),
-      seconds: pad(seconds),
-    };
+  function renderLiveClock() {
+    const { hour, minute, second } = getDamascusParts();
+    const { diff, days } = updateDaysRemaining();
 
-    Object.entries(values).forEach(([key, val]) => {
-      if (prevCountdown[key] !== val) {
-        const el = DOM[`count${key.charAt(0).toUpperCase() + key.slice(1)}`];
-        animateCountChange(el, val);
-        prevCountdown[key] = val;
-      }
-    });
+    const hoursText = pad(hour);
+    const minutesText = pad(minute);
+    const secondsText = pad(second);
+
+    if (prevCountdown.hours !== hoursText) {
+      animateCountChange(DOM.countHours, hoursText);
+      prevCountdown.hours = hoursText;
+    }
+
+    if (prevCountdown.minutes !== minutesText) {
+      animateCountChange(DOM.countMinutes, minutesText);
+      prevCountdown.minutes = minutesText;
+    }
+
+    if (prevCountdown.seconds !== secondsText) {
+      animateCountChange(DOM.countSeconds, secondsText);
+      prevCountdown.seconds = secondsText;
+    }
+
+    if (DOM.countdownTimer) {
+      const weddingPart = diff > 0
+        ? `${days} days remaining until the wedding`
+        : 'Wedding day has arrived';
+      DOM.countdownTimer.setAttribute(
+        'aria-label',
+        `Damascus time ${hoursText} hours ${minutesText} minutes ${secondsText} seconds. ${weddingPart}`
+      );
+    }
   }
 
   function initCountdown() {
-    updateCountdown();
-    countdownInterval = setInterval(updateCountdown, 1000);
+    renderLiveClock();
+    countdownInterval = setInterval(renderLiveClock, 1000);
   }
 
   /* ═══════════════════════════════════════════════════════════
