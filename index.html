@@ -53,12 +53,13 @@
         <div class="loader__line-fill"></div>
       </div>
       <p class="loader__text">Loading your invitation</p>
+      <p class="loader__hint">Tap anywhere to enter</p>
     </div>
   </div>
 
   <audio id="bgMusic" autoplay muted preload="auto" loop playsinline webkit-playsinline aria-hidden="true">
-    <source src="assets/music/wedding-music.m4a" type="audio/mp4">
     <source src="assets/music/wedding-music.mp3" type="audio/mpeg">
+    <source src="assets/music/wedding-music.m4a" type="audio/mp4">
   </audio>
   <script>
     (function () {
@@ -67,33 +68,15 @@
 
       audio.volume = 0.45;
       audio.loop = true;
+      audio.muted = true;
 
-      function bootMusic() {
-        audio.muted = true;
-        var playAttempt = audio.play();
-        if (!playAttempt || !playAttempt.then) return;
-
-        playAttempt.then(function () {
-          window.__weddingMusicBooted = true;
-          audio.muted = false;
-          audio.volume = 0.45;
-        }).catch(function () {
-          audio.muted = true;
-          audio.play().catch(function () {});
-        });
+      function bootMuted() {
+        audio.play().catch(function () {});
       }
 
-      bootMusic();
-      audio.addEventListener('canplay', bootMusic, { once: true });
-      audio.addEventListener('loadeddata', bootMusic, { once: true });
-      audio.addEventListener('canplaythrough', bootMusic, { once: true });
-
-      audio.addEventListener('ended', function () {
-        audio.currentTime = 0;
-        bootMusic();
-      });
-
-      window.__weddingBootMusic = bootMusic;
+      bootMuted();
+      audio.addEventListener('canplay', bootMuted, { once: true });
+      audio.addEventListener('loadeddata', bootMuted, { once: true });
     })();
   </script>
 

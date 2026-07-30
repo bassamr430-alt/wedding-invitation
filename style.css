@@ -223,6 +223,7 @@ fieldset {
   justify-content: center;
   background: var(--color-ivory);
   transition: opacity 0.8s ease, visibility 0.8s ease;
+  cursor: pointer;
 }
 
 .loader.is-hidden {
@@ -266,6 +267,22 @@ fieldset {
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--color-gray-light);
+}
+
+.loader__hint {
+  margin-top: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(200, 169, 106, 0.75);
+  animation: loaderHintPulse 2s ease-in-out infinite;
+}
+
+@keyframes loaderHintPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
 }
 
 /* ═══════════════════════════════════════ MUSIC BUTTON */

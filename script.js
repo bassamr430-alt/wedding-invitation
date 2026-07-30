@@ -20,7 +20,7 @@
      ═══════════════════════════════════════════════════════════ */
   let lenis = null;
   let musicShouldPlay = true;
-  let musicIsAudible = false;
+  let loaderFinished = false;
 
   /* ═══════════════════════════════════════════════════════════
      DOM REFERENCES
@@ -51,6 +51,26 @@
   function initLoader() {
     DOM.body.classList.add('is-loading');
 
+    const finishLoader = () => {
+      if (loaderFinished) return;
+      loaderFinished = true;
+      enableMusicSound();
+
+      gsap.to(DOM.loader, {
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          DOM.loader.classList.add('is-hidden');
+          DOM.body.classList.remove('is-loading');
+          initHeroAnimation();
+        },
+      });
+    };
+
+    DOM.loader.addEventListener('click', finishLoader);
+    DOM.loader.addEventListener('touchstart', finishLoader, { passive: true });
+
     gsap.to(DOM.loaderFill, {
       width: '100%',
       duration: CONFIG.loaderDuration / 1000,
@@ -62,20 +82,7 @@
       { opacity: 1, y: 0, duration: 0.55, delay: 0.05, ease: 'power3.out' }
     );
 
-    setTimeout(() => {
-      gsap.to(DOM.loader, {
-        opacity: 0,
-        duration: 0.25,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          DOM.loader.classList.add('is-hidden');
-          DOM.body.classList.remove('is-loading');
-          initHeroAnimation();
-          bootstrapMusic();
-          unmuteMusic();
-        },
-      });
-    }, CONFIG.loaderDuration);
+    setTimeout(finishLoader, CONFIG.loaderDuration);
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -91,7 +98,7 @@
     });
 
     lenis.on('scroll', ({ scroll, progress }) => {
-      unmuteMusic();
+      enableMusicSound();
 
       if (DOM.progressBar) {
         DOM.progressBar.style.width = `${progress * 100}%`;
@@ -703,66 +710,60 @@
   }
 
   /* ═══════════════════════════════════════════════════════════
-     MUSIC — Instant muted boot + auto unmute + loop
+     MUSIC
      ═══════════════════════════════════════════════════════════ */
   const MUSIC_VOLUME = 0.45;
 
-  function bootstrapMusic() {
-    if (!DOM.bgMusic || !musicShouldPlay) return Promise.resolve(false);
+  function isMusicAudible() {
+    return Boolean(
+      DOM.bgMusic
+      && !DOM.bgMusic.paused
+      && !DOM.bgMusic.muted
+      && DOM.bgMusic.readyState >= 2
+    );
+  }
+
+  function playMutedMusic() {
+    if (!DOM.bgMusic || !musicShouldPlay) return Promise.resolve();
 
     DOM.bgMusic.loop = true;
     DOM.bgMusic.volume = MUSIC_VOLUME;
-
-    if (!DOM.bgMusic.paused && !DOM.bgMusic.ended) {
-      return Promise.resolve(true);
-    }
-
     DOM.bgMusic.muted = true;
 
-    return DOM.bgMusic.play()
-      .then(() => true)
-      .catch(() => {
-        if (typeof window.__weddingBootMusic === 'function') {
-          window.__weddingBootMusic();
-        }
-        return false;
-      });
+    if (!DOM.bgMusic.paused) return Promise.resolve();
+
+    return DOM.bgMusic.play().catch(() => Promise.resolve());
   }
 
-  function unmuteMusic() {
-    if (!DOM.bgMusic || !musicShouldPlay || musicIsAudible) return;
+  function enableMusicSound() {
+    if (!DOM.bgMusic || !musicShouldPlay || isMusicAudible()) return;
 
-    const applyUnmute = () => {
-      DOM.bgMusic.muted = false;
-      DOM.bgMusic.volume = MUSIC_VOLUME;
-      musicIsAudible = true;
-    };
+    DOM.bgMusic.loop = true;
+    DOM.bgMusic.volume = MUSIC_VOLUME;
+    DOM.bgMusic.muted = false;
 
-    if (!DOM.bgMusic.paused) {
-      applyUnmute();
+    const start = () => DOM.bgMusic.play().catch(() => {
+      DOM.bgMusic.muted = true;
+      return playMutedMusic();
+    });
+
+    if (DOM.bgMusic.paused || DOM.bgMusic.ended) {
+      start();
       return;
     }
 
-    DOM.bgMusic.muted = false;
-    DOM.bgMusic.volume = MUSIC_VOLUME;
-
-    DOM.bgMusic.play()
-      .then(() => {
-        musicIsAudible = true;
-      })
-      .catch(() => {
-        DOM.bgMusic.muted = true;
-        bootstrapMusic();
-      });
+    start();
   }
 
   function keepMusicAlive() {
     if (!DOM.bgMusic || !musicShouldPlay) return;
 
     if (DOM.bgMusic.paused || DOM.bgMusic.ended) {
-      bootstrapMusic().then(() => {
-        if (musicIsAudible) unmuteMusic();
-      });
+      if (isMusicAudible()) {
+        enableMusicSound();
+      } else {
+        playMutedMusic();
+      }
     }
   }
 
@@ -774,48 +775,45 @@
     DOM.bgMusic.setAttribute('playsinline', '');
     DOM.bgMusic.setAttribute('webkit-playsinline', '');
 
-    bootstrapMusic();
+    playMutedMusic();
 
     ['canplay', 'canplaythrough', 'loadeddata'].forEach((eventName) => {
       DOM.bgMusic.addEventListener(eventName, () => {
-        bootstrapMusic().then(() => unmuteMusic());
+        playMutedMusic();
+        enableMusicSound();
       });
     });
 
     DOM.bgMusic.addEventListener('ended', () => {
       DOM.bgMusic.currentTime = 0;
-      bootstrapMusic().then(() => {
-        if (musicIsAudible) unmuteMusic();
-      });
+      enableMusicSound();
     });
 
     ['touchstart', 'touchend', 'click', 'pointerdown', 'keydown', 'wheel'].forEach((eventName) => {
-      document.addEventListener(eventName, unmuteMusic, { passive: true, once: true });
+      document.addEventListener(eventName, enableMusicSound, { passive: true });
     });
 
-    window.addEventListener('pageshow', () => {
-      bootstrapMusic().then(() => unmuteMusic());
-    });
-
+    window.addEventListener('scroll', enableMusicSound, { passive: true });
+    window.addEventListener('pageshow', enableMusicSound);
     window.addEventListener('focus', () => {
       keepMusicAlive();
-      unmuteMusic();
+      enableMusicSound();
     });
 
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) {
         keepMusicAlive();
-        unmuteMusic();
+        enableMusicSound();
       }
     });
 
-    window.setInterval(keepMusicAlive, 2000);
+    window.setInterval(keepMusicAlive, 1500);
 
-    window.setTimeout(unmuteMusic, 300);
-    window.setTimeout(unmuteMusic, 800);
+    window.setTimeout(enableMusicSound, 400);
+    window.setTimeout(enableMusicSound, 1200);
 
     DOM.bgMusic.addEventListener('error', () => {
-      console.warn('Background music failed to load.');
+      console.warn('Background music file not found. Upload assets/music/wedding-music.mp3 to GitHub.');
     });
   }
 
