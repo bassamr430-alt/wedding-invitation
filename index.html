@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- SEO -->
   <title>AMMAR & RANA — Wedding Invitation | 04 September 2026</title>
   <meta name="description" content="Join AMMAR & RANA as they celebrate their wedding on 04 September 2026 at View Restaurant, Tartous, Syria.">
   <meta name="keywords" content="wedding, invitation, AMMAR, RANA, Tartous, Syria, View Restaurant">
@@ -13,7 +12,6 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://yourusername.github.io/ammar-rana-wedding/">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="AMMAR & RANA — Wedding Invitation">
   <meta property="og:description" content="Together with their families, joyfully invite you to celebrate their wedding on 04 September 2026.">
@@ -22,37 +20,30 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="ar_SY">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AMMAR & RANA — Wedding Invitation">
   <meta name="twitter:description" content="Celebrate with us on 04 September 2026 at View Restaurant, Tartous.">
   <meta name="twitter:image" content="assets/images/og-image.png">
 
-  <!-- Favicon & Manifest -->
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
   <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#C8A96A">
 
-  <!-- Typography: Editorial luxury stack -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Amiri:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&family=Noto+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yellowtail&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Mouse Glow -->
   <div class="mouse-glow" aria-hidden="true"></div>
 
-  <!-- Scroll Progress -->
   <div class="scroll-progress" aria-hidden="true">
     <div class="scroll-progress__bar"></div>
   </div>
 
-  <!-- Loading Screen -->
   <div class="loader" id="loader" aria-live="polite" aria-label="Loading">
     <div class="loader__inner">
       <div class="loader__monogram">A & R</div>
@@ -63,20 +54,19 @@
     </div>
   </div>
 
-  <!-- Language Switcher -->
   <nav class="lang-switcher" aria-label="Language selection">
     <button type="button" class="lang-switcher__btn is-active" data-lang="en" aria-pressed="true">EN</button>
     <span class="lang-switcher__divider" aria-hidden="true"></span>
     <button type="button" class="lang-switcher__btn" data-lang="ar" aria-pressed="false">ع</button>
   </nav>
 
-  <audio id="bgMusic" loop preload="auto" aria-hidden="true">
+  <audio id="bgMusic" loop preload="auto" playsinline aria-hidden="true">
     <source src="assets/music/wedding-music.m4a" type="audio/mp4">
   </audio>
 
   <main id="main">
 
-    <!-- ═══════════════════════════════════════ HERO -->
+    <!-- ═══ HERO — Cinematic -->
     <section class="hero" id="hero" aria-label="Wedding invitation hero">
       <div class="hero__bg">
         <picture>
@@ -89,10 +79,14 @@
           >
         </picture>
         <div class="hero__overlay"></div>
+        <div class="hero__vignette" aria-hidden="true"></div>
+        <div class="hero__light hero__light--warm" aria-hidden="true"></div>
+        <div class="hero__lens-flare" aria-hidden="true"></div>
+        <canvas class="hero__bokeh" aria-hidden="true"></canvas>
       </div>
 
       <div class="hero__content">
-        <p class="hero__prelude" data-i18n="hero_prelude">Together with their families</p>
+        <p class="hero__prelude" data-i18n="hero_prelude" data-reveal-text>Together with their families</p>
 
         <h1 class="hero__title">
           <span class="hero__name hero__name--groom" data-split>AMMAR</span>
@@ -100,19 +94,19 @@
           <span class="hero__name hero__name--bride" data-split>RANA</span>
         </h1>
 
-        <p class="hero__subtitle" data-i18n="hero_subtitle">
+        <p class="hero__subtitle" data-i18n="hero_subtitle" data-reveal-text>
           joyfully invite you to celebrate their wedding
         </p>
       </div>
 
       <div class="hero__bottom">
         <div class="hero__meta">
-          <div class="hero__meta-item">
+          <div class="hero__meta-card">
             <span class="hero__meta-label" data-i18n="hero_date_label">Wedding Date</span>
             <time class="hero__meta-value" datetime="2026-09-04" data-i18n="hero_date">04 September 2026</time>
           </div>
           <div class="hero__meta-divider" aria-hidden="true"></div>
-          <div class="hero__meta-item">
+          <div class="hero__meta-card">
             <span class="hero__meta-label" data-i18n="hero_venue_label">Venue</span>
             <address class="hero__meta-value hero__meta-value--venue">
               <span data-i18n="hero_venue_name">View Restaurant</span>
@@ -122,170 +116,146 @@
         </div>
 
         <a href="#story" class="scroll-indicator" aria-label="Scroll to our story">
-          <span class="scroll-indicator__line"></span>
-          <span class="scroll-indicator__chevron" aria-hidden="true"></span>
+          <span class="scroll-indicator__text" data-i18n="scroll_down">Scroll</span>
+          <span class="scroll-indicator__track">
+            <span class="scroll-indicator__line"></span>
+            <span class="scroll-indicator__dot"></span>
+          </span>
         </a>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════ OUR STORY -->
+    <!-- ═══ OUR STORY — Timeline -->
     <section class="section section--story" id="story" aria-labelledby="story-heading">
-      <!-- Luxury background decor -->
       <div class="story__canvas" aria-hidden="true">
         <div class="story__bg-base"></div>
+        <div class="story__bg-vignette"></div>
         <div class="story__bg-light story__bg-light--tl"></div>
         <div class="story__bg-light story__bg-light--br"></div>
+        <div class="story__bg-light story__bg-light--tr"></div>
         <div class="story__bg-fog"></div>
         <div class="story__bg-texture"></div>
+        <div class="story__bg-texture story__bg-texture--linen"></div>
 
-        <!-- Corner waves -->
-        <svg class="story__wave story__wave--tl" viewBox="0 0 400 400" fill="none" data-story-drift="slow">
-          <path d="M0 120 Q100 80 200 120 T400 100" stroke="#C8A96A" stroke-width="0.5" opacity="0.12"/>
-          <path d="M0 160 Q120 120 240 160 T400 140" stroke="#E6D7B8" stroke-width="0.4" opacity="0.1"/>
-          <path d="M0 200 Q80 170 160 200 T320 190" stroke="#C8A96A" stroke-width="0.3" opacity="0.08"/>
-        </svg>
-        <svg class="story__wave story__wave--br" viewBox="0 0 400 400" fill="none" data-story-drift="slow">
-          <path d="M0 280 Q100 320 200 280 T400 300" stroke="#C8A96A" stroke-width="0.5" opacity="0.12"/>
-          <path d="M0 240 Q120 280 240 240 T400 260" stroke="#E6D7B8" stroke-width="0.4" opacity="0.1"/>
-        </svg>
+        <svg class="story__corner story__corner--tl" viewBox="0 0 120 120" fill="none"><path d="M8 8 H72 M8 8 V72" stroke="#C8A96A" stroke-width="0.6" opacity="0.14"/><path d="M16 16 H56 M16 16 V56" stroke="#E6D7B8" stroke-width="0.35" opacity="0.1"/></svg>
+        <svg class="story__corner story__corner--tr" viewBox="0 0 120 120" fill="none"><path d="M112 8 H48 M112 8 V72" stroke="#C8A96A" stroke-width="0.6" opacity="0.14"/><path d="M104 16 H64 M104 16 V56" stroke="#E6D7B8" stroke-width="0.35" opacity="0.1"/></svg>
+        <svg class="story__corner story__corner--bl" viewBox="0 0 120 120" fill="none"><path d="M8 112 H72 M8 112 V48" stroke="#C8A96A" stroke-width="0.6" opacity="0.14"/><path d="M16 104 H56 M16 104 V64" stroke="#E6D7B8" stroke-width="0.35" opacity="0.1"/></svg>
+        <svg class="story__corner story__corner--br" viewBox="0 0 120 120" fill="none"><path d="M112 112 H48 M112 112 V48" stroke="#C8A96A" stroke-width="0.6" opacity="0.14"/><path d="M104 104 H64 M104 104 V64" stroke="#E6D7B8" stroke-width="0.35" opacity="0.1"/></svg>
 
-        <!-- Thin gold lines -->
-        <svg class="story__lines story__lines--left" viewBox="0 0 200 600" fill="none" data-story-parallax="0.04">
-          <line x1="40" y1="0" x2="40" y2="600" stroke="#C8A96A" stroke-width="0.4" opacity="0.1"/>
-          <line x1="60" y1="80" x2="120" y2="200" stroke="#E6D7B8" stroke-width="0.3" opacity="0.08"/>
-          <line x1="30" y1="400" x2="90" y2="520" stroke="#C8A96A" stroke-width="0.3" opacity="0.07"/>
-        </svg>
-        <svg class="story__lines story__lines--right" viewBox="0 0 200 600" fill="none" data-story-parallax="0.06">
-          <line x1="160" y1="0" x2="160" y2="600" stroke="#C8A96A" stroke-width="0.4" opacity="0.1"/>
-          <line x1="140" y1="120" x2="80" y2="280" stroke="#E6D7B8" stroke-width="0.3" opacity="0.08"/>
-        </svg>
-
-        <!-- Minimal branches -->
-        <svg class="story__branch story__branch--tl" viewBox="0 0 180 220" fill="none" data-story-parallax="0.05">
-          <path d="M20 200 Q40 140 30 80 Q50 100 70 60 Q55 90 80 40 Q60 80 100 20" stroke="#C8A96A" stroke-width="0.5" opacity="0.11"/>
-          <path d="M70 60 Q90 55 100 45 M55 100 Q75 95 85 88" stroke="#C8A96A" stroke-width="0.35" opacity="0.08"/>
-        </svg>
-        <svg class="story__branch story__branch--br" viewBox="0 0 180 220" fill="none" data-story-parallax="0.07">
-          <path d="M160 200 Q140 130 150 70 Q130 95 110 50 Q125 85 80 25" stroke="#C8A96A" stroke-width="0.5" opacity="0.11"/>
-          <path d="M110 55 Q95 48 85 42 M125 90 Q108 84 98 78" stroke="#C8A96A" stroke-width="0.35" opacity="0.08"/>
-        </svg>
-
-        <!-- Butterflies — gold line art -->
-        <svg class="story__butterfly story__butterfly--1" viewBox="0 0 90 70" fill="none" data-story-float="1">
-          <path d="M45 35 C30 15 12 18 8 32 C22 35 35 35 45 35 C55 35 68 35 82 32 C78 18 60 15 45 35Z" stroke="#C8A96A" stroke-width="0.55"/>
-          <path d="M45 35 C30 55 12 52 8 38 C22 35 35 35 45 35Z" stroke="#C8A96A" stroke-width="0.55"/>
-          <path d="M45 35 C60 55 78 52 82 38 C68 35 55 35 45 35Z" stroke="#C8A96A" stroke-width="0.55"/>
-          <path d="M45 28 L45 42" stroke="#C8A96A" stroke-width="0.4"/>
-          <path d="M45 28 L42 22 M45 28 L48 22" stroke="#C8A96A" stroke-width="0.35"/>
-        </svg>
-        <svg class="story__butterfly story__butterfly--2" viewBox="0 0 60 45" fill="none" data-story-float="2">
-          <path d="M30 22 C20 8 8 10 6 20 C16 22 24 22 30 22 C36 22 44 22 54 20 C52 10 40 8 30 22Z" stroke="#E6D7B8" stroke-width="0.45"/>
-          <path d="M30 22 C20 36 8 34 6 26 C16 22 24 22 30 22Z" stroke="#E6D7B8" stroke-width="0.45"/>
-          <path d="M30 22 C40 36 52 34 54 26 C44 22 36 22 30 22Z" stroke="#E6D7B8" stroke-width="0.45"/>
-          <path d="M30 18 L30 26" stroke="#E6D7B8" stroke-width="0.35"/>
-        </svg>
-        <svg class="story__butterfly story__butterfly--3" viewBox="0 0 50 38" fill="none" data-story-float="3">
-          <path d="M25 19 C17 8 6 9 4 17 C13 19 19 19 25 19 C31 19 37 19 46 17 C44 9 33 8 25 19Z" stroke="#C8A96A" stroke-width="0.4"/>
-          <path d="M25 19 C17 30 6 28 4 21 C13 19 19 19 25 19Z" stroke="#C8A96A" stroke-width="0.4"/>
-          <path d="M25 19 C33 30 44 28 46 21 C37 19 31 19 25 19Z" stroke="#C8A96A" stroke-width="0.4"/>
-        </svg>
-
-        <!-- Hearts — outline only -->
-        <svg class="story__heart story__heart--1" viewBox="0 0 24 22" fill="none" data-story-float="h1">
-          <path d="M12 20 C12 20 2 13 2 7 C2 3 5 1 8 3 C10 1 14 1 16 3 C19 1 22 3 22 7 C22 13 12 20 12 20Z" stroke="#C8A96A" stroke-width="0.5"/>
-        </svg>
-        <svg class="story__heart story__heart--2" viewBox="0 0 24 22" fill="none" data-story-float="h2">
-          <path d="M12 20 C12 20 2 13 2 7 C2 3 5 1 8 3 C10 1 14 1 16 3 C19 1 22 3 22 7 C22 13 12 20 12 20Z" stroke="#E6D7B8" stroke-width="0.45"/>
-        </svg>
-        <svg class="story__heart story__heart--3" viewBox="0 0 24 22" fill="none" data-story-float="h3">
-          <path d="M12 20 C12 20 2 13 2 7 C2 3 5 1 8 3 C10 1 14 1 16 3 C19 1 22 3 22 7 C22 13 12 20 12 20Z" stroke="#C8A96A" stroke-width="0.4"/>
-        </svg>
-        <svg class="story__heart story__heart--4" viewBox="0 0 24 22" fill="none" data-story-float="h4">
-          <path d="M12 20 C12 20 2 13 2 7 C2 3 5 1 8 3 C10 1 14 1 16 3 C19 1 22 3 22 7 C22 13 12 20 12 20Z" stroke="#E6D7B8" stroke-width="0.4"/>
-        </svg>
-        <svg class="story__heart story__heart--5" viewBox="0 0 24 22" fill="none" data-story-float="h5">
-          <path d="M12 20 C12 20 2 13 2 7 C2 3 5 1 8 3 C10 1 14 1 16 3 C19 1 22 3 22 7 C22 13 12 20 12 20Z" stroke="#C8A96A" stroke-width="0.35"/>
-        </svg>
-
-        <!-- Gold particles -->
+        <svg class="story__butterfly story__butterfly--1" viewBox="0 0 90 70" fill="none" data-story-float="1"><path d="M45 35 C30 15 12 18 8 32 C22 35 35 35 45 35 C55 35 68 35 82 32 C78 18 60 15 45 35Z" stroke="#C8A96A" stroke-width="0.55"/><path d="M45 35 C30 55 12 52 8 38 C22 35 35 35 45 35Z" stroke="#C8A96A" stroke-width="0.55"/><path d="M45 35 C60 55 78 52 82 38 C68 35 55 35 45 35Z" stroke="#C8A96A" stroke-width="0.55"/></svg>
+        <svg class="story__butterfly story__butterfly--2" viewBox="0 0 60 45" fill="none" data-story-float="2"><path d="M30 22 C20 8 8 10 6 20 C16 22 24 22 30 22 C36 22 44 22 54 20 C52 10 40 8 30 22Z" stroke="#E6D7B8" stroke-width="0.45"/><path d="M30 22 C20 36 8 34 6 26 C16 22 24 22 30 22Z" stroke="#E6D7B8" stroke-width="0.45"/><path d="M30 22 C40 36 52 34 54 26 C44 22 36 22 30 22Z" stroke="#E6D7B8" stroke-width="0.45"/></svg>
         <span class="story__particle" style="--x:8%;--y:18%;--s:3px"></span>
         <span class="story__particle" style="--x:92%;--y:22%;--s:2px"></span>
-        <span class="story__particle" style="--x:5%;--y:72%;--s:2px"></span>
         <span class="story__particle" style="--x:88%;--y:68%;--s:3px"></span>
         <span class="story__particle" style="--x:15%;--y:45%;--s:2px"></span>
-        <span class="story__particle" style="--x:85%;--y:42%;--s:2px"></span>
-        <span class="story__particle" style="--x:10%;--y:88%;--s:2px"></span>
-        <span class="story__particle" style="--x:94%;--y:85%;--s:2px"></span>
-        <span class="story__particle" style="--x:78%;--y:12%;--s:2px"></span>
-        <span class="story__particle" style="--x:22%;--y:8%;--s:3px"></span>
       </div>
+
+      <div class="story__hearts-layer" aria-hidden="true"></div>
 
       <div class="story__inner">
         <div class="container container--editorial">
-          <div class="story__layout">
-            <aside class="story__marker" data-reveal="blur">
-              <span class="section__eyebrow" data-i18n="story_eyebrow">Our Story</span>
-              <span class="section__index" aria-hidden="true">01</span>
-            </aside>
-            <div class="story__content story__content--frame">
-              <p class="story__lead" id="story-heading" data-reveal="fade" data-i18n="story_lead">
-                Every love story is beautiful, but ours is our favorite.
-              </p>
-              <p class="story__body" data-reveal="fade" data-i18n="story_body">
-                What began with a simple hello became a journey filled with love, laughter and unforgettable memories.
-              </p>
-              <p class="story__closing" data-reveal="fade" data-i18n="story_closing">
-                Today we invite you to celebrate the beginning of our forever.
-              </p>
+          <header class="story__header" data-reveal="blur">
+            <span class="section__eyebrow" data-i18n="story_eyebrow">Our Story</span>
+            <span class="section__index" aria-hidden="true">01</span>
+          </header>
+
+          <blockquote class="story__quote glass-card" data-reveal="fade">
+            <span class="story__quote-mark" aria-hidden="true">"</span>
+            <p class="story__quote-text" data-i18n="story_lead" id="story-heading">
+              Every love story is beautiful, but ours is our favorite.
+            </p>
+          </blockquote>
+
+          <div class="story__grid">
+            <div class="story__timeline" data-reveal="fade">
+              <article class="timeline__item">
+                <div class="timeline__node" aria-hidden="true"></div>
+                <div class="timeline__content">
+                  <h3 class="timeline__title" data-i18n="timeline_1_title">How It Started</h3>
+                  <p class="timeline__text" data-i18n="story_body">
+                    What began with a simple hello became a journey filled with love, laughter and unforgettable memories.
+                  </p>
+                </div>
+              </article>
+              <article class="timeline__item">
+                <div class="timeline__node" aria-hidden="true"></div>
+                <div class="timeline__content">
+                  <h3 class="timeline__title" data-i18n="timeline_2_title">Growing Together</h3>
+                  <p class="timeline__text" data-i18n="timeline_2_text">
+                    Through every season, our bond grew deeper — woven with trust, joy, and endless devotion.
+                  </p>
+                </div>
+              </article>
+              <article class="timeline__item">
+                <div class="timeline__node" aria-hidden="true"></div>
+                <div class="timeline__content">
+                  <h3 class="timeline__title" data-i18n="timeline_3_title">Our Forever</h3>
+                  <p class="timeline__text" data-i18n="story_closing">
+                    Today we invite you to celebrate the beginning of our forever.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <div class="story__collage" data-reveal="scale">
+              <div class="story__photo story__photo--main">
+                <img src="assets/images/story-main.jpg" alt="AMMAR and RANA" loading="lazy" width="400" height="500">
+              </div>
+              <div class="story__photo story__photo--accent">
+                <img src="assets/images/story-accent.jpg" alt="AMMAR and RANA at View Restaurant" loading="lazy" width="200" height="260">
+              </div>
+              <div class="story__collage-ornament" aria-hidden="true"></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════ COUNTDOWN -->
+    <!-- ═══ COUNTDOWN — Glass Luxury -->
     <section class="section section--countdown" id="countdown" aria-labelledby="countdown-heading">
       <div class="container container--editorial">
         <header class="section__header section__header--editorial" data-reveal="blur">
           <span class="section__eyebrow" data-i18n="countdown_eyebrow">Countdown</span>
-          <h2 class="section__title" id="countdown-heading" data-i18n="countdown_title">Until We Say I Do</h2>
+          <h2 class="section__title" id="countdown-heading" data-i18n="countdown_title">Until We Say Yes</h2>
         </header>
 
-        <div class="countdown-wrap">
+        <div class="countdown-glass" data-reveal="zoom">
+          <div class="countdown-glass__glow" aria-hidden="true"></div>
+          <div class="countdown-glass__border" aria-hidden="true"></div>
           <div class="countdown" role="timer" aria-live="polite" aria-atomic="true">
-          <div class="countdown__item" data-reveal="zoom">
-            <div class="countdown__flip">
-              <span class="countdown__number" id="countDays">00</span>
+            <div class="countdown__item">
+              <div class="countdown__flip">
+                <span class="countdown__number" id="countDays">00</span>
+              </div>
+              <span class="countdown__label" data-i18n="countdown_days">Days</span>
             </div>
-            <span class="countdown__label" data-i18n="countdown_days">Days</span>
-          </div>
-          <div class="countdown__separator" aria-hidden="true">:</div>
-          <div class="countdown__item" data-reveal="zoom">
-            <div class="countdown__flip">
-              <span class="countdown__number" id="countHours">00</span>
+            <div class="countdown__separator" aria-hidden="true">·</div>
+            <div class="countdown__item">
+              <div class="countdown__flip">
+                <span class="countdown__number" id="countHours">00</span>
+              </div>
+              <span class="countdown__label" data-i18n="countdown_hours">Hours</span>
             </div>
-            <span class="countdown__label" data-i18n="countdown_hours">Hours</span>
-          </div>
-          <div class="countdown__separator" aria-hidden="true">:</div>
-          <div class="countdown__item" data-reveal="zoom">
-            <div class="countdown__flip">
-              <span class="countdown__number" id="countMinutes">00</span>
+            <div class="countdown__separator" aria-hidden="true">·</div>
+            <div class="countdown__item">
+              <div class="countdown__flip">
+                <span class="countdown__number" id="countMinutes">00</span>
+              </div>
+              <span class="countdown__label" data-i18n="countdown_minutes">Minutes</span>
             </div>
-            <span class="countdown__label" data-i18n="countdown_minutes">Minutes</span>
-          </div>
-          <div class="countdown__separator" aria-hidden="true">:</div>
-          <div class="countdown__item" data-reveal="zoom">
-            <div class="countdown__flip">
-              <span class="countdown__number" id="countSeconds">00</span>
+            <div class="countdown__separator" aria-hidden="true">·</div>
+            <div class="countdown__item">
+              <div class="countdown__flip">
+                <span class="countdown__number" id="countSeconds">00</span>
+              </div>
+              <span class="countdown__label" data-i18n="countdown_seconds">Seconds</span>
             </div>
-            <span class="countdown__label" data-i18n="countdown_seconds">Seconds</span>
-          </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════ WEDDING DETAILS -->
+    <!-- ═══ WEDDING DETAILS — Premium Cards -->
     <section class="section section--details" id="details" aria-labelledby="details-heading">
       <div class="container container--editorial">
         <header class="section__header section__header--editorial" data-reveal="blur">
@@ -294,7 +264,8 @@
         </header>
 
         <div class="details-grid">
-          <article class="detail-card" data-reveal="slide">
+          <article class="detail-card glass-card" data-reveal="slide">
+            <div class="detail-card__shine" aria-hidden="true"></div>
             <div class="detail-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
             </div>
@@ -302,15 +273,17 @@
             <p class="detail-card__value" data-i18n="detail_date_value">04 September 2026</p>
           </article>
 
-          <article class="detail-card" data-reveal="slide">
+          <article class="detail-card glass-card" data-reveal="slide">
+            <div class="detail-card__shine" aria-hidden="true"></div>
             <div class="detail-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </div>
             <h3 class="detail-card__title" data-i18n="detail_time_title">Time</h3>
-            <p class="detail-card__value" data-i18n="detail_time_value">7:00 PM</p>
+            <p class="detail-card__value" data-i18n="detail_time_value">7:30 PM</p>
           </article>
 
-          <article class="detail-card" data-reveal="slide">
+          <article class="detail-card glass-card" data-reveal="slide">
+            <div class="detail-card__shine" aria-hidden="true"></div>
             <div class="detail-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
             </div>
@@ -321,7 +294,7 @@
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════ VENUE -->
+    <!-- ═══ LOCATION — Luxury Frame -->
     <section class="section section--venue" id="venue" aria-labelledby="venue-heading">
       <div class="container container--editorial">
         <header class="section__header section__header--editorial" data-reveal="blur">
@@ -329,37 +302,54 @@
           <h2 class="section__title" id="venue-heading" data-i18n="venue_title">Find Us</h2>
         </header>
 
-        <div class="venue__wrapper" data-reveal="fade">
-          <div class="venue__map">
-            <iframe
-              title="View Restaurant location on Google Maps"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.5!2d35.8778682!3d34.8892273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15217f1de47c6677%3A0x16392ceb06ac6e66!2sView%20Restaurant!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+        <div class="venue__layout">
+          <div class="venue__visual" data-reveal="fade">
+            <div class="venue__image-frame">
+              <img src="assets/images/hero.png" alt="View Restaurant, Tartous" loading="lazy" class="venue__image">
+              <div class="venue__image-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="venue__info glass-card">
+              <h3 class="venue__info-name" data-i18n="hero_venue_name">View Restaurant</h3>
+              <p class="venue__info-city" data-i18n="hero_venue_city">Tartous, Syria</p>
+              <p class="venue__info-date" data-i18n="hero_date">04 September 2026</p>
+            </div>
           </div>
-          <a
-            href="https://www.google.com/maps/place/View+Restaurant/@34.8892273,35.8778682,17z"
-            class="btn btn--luxury venue__btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-i18n="venue_maps_btn"
-          >
-            Open in Google Maps
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </a>
+
+          <div class="venue__map-wrap" data-reveal="scale">
+            <div class="venue__map-frame">
+              <div class="venue__map">
+                <iframe
+                  title="View Restaurant location on Google Maps"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.5!2d35.8778682!3d34.8892273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15217f1de47c6677%3A0x16392ceb06ac6e66!2sView%20Restaurant!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
+                  width="100%"
+                  height="100%"
+                  style="border:0;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+            <a
+              href="https://www.google.com/maps/place/View+Restaurant/@34.8892273,35.8778682,17z"
+              class="btn btn--luxury venue__btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="venue_maps_btn"
+            >
+              Open in Google Maps
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════ THANK YOU -->
+    <!-- ═══ THANK YOU -->
     <section class="section section--thanks" id="thanks" aria-labelledby="thanks-heading">
       <div class="container container--editorial">
-        <div class="thanks__layout" data-reveal="blur">
+        <div class="thanks__layout glass-card" data-reveal="blur">
+          <div class="thanks__glow" aria-hidden="true"></div>
           <h2 class="thanks__title" id="thanks-heading" data-i18n="thanks_title">Thank You</h2>
           <div class="thanks__text">
             <p class="thanks__body" data-i18n="thanks_body">
@@ -373,14 +363,17 @@
 
   </main>
 
-  <!-- ═══════════════════════════════════════ FOOTER -->
+  <!-- ═══ FOOTER — Dark Luxury -->
   <footer class="footer">
-    <div class="footer__monogram">AMMAR <span class="footer__heart" aria-hidden="true">❤</span> RANA</div>
-    <p class="footer__tagline" data-i18n="footer_tagline">Made with Love</p>
-    <p class="footer__year">&copy; 2026</p>
+    <canvas class="footer__stars" aria-hidden="true"></canvas>
+    <div class="footer__glow" aria-hidden="true"></div>
+    <div class="footer__inner">
+      <div class="footer__monogram">AMMAR <span class="footer__heart" aria-hidden="true">♥</span> RANA</div>
+      <p class="footer__tagline" data-i18n="footer_tagline">Made with Love</p>
+      <p class="footer__year">&copy; 2026</p>
+    </div>
   </footer>
 
-  <!-- GSAP + ScrollTrigger + Lenis -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
