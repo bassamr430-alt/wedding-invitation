@@ -811,7 +811,7 @@
     }
 
     if (prevCountdown.seconds !== secondsText) {
-      animateCountChange(DOM.countSeconds, secondsText);
+      if (DOM.countSeconds) DOM.countSeconds.textContent = secondsText;
       prevCountdown.seconds = secondsText;
     }
 
