@@ -2649,6 +2649,41 @@ html[dir="rtl"] .story__collage-ornament {
   .countdown {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+
+  .countdown__display {
+    align-items: center;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .countdown__time {
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .countdown__days {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section--countdown .section__header--editorial {
+    text-align: center;
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .section--countdown .container--editorial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .countdown-glass {
+    width: 100%;
   }
 
   .countdown__number {
@@ -2733,8 +2768,14 @@ html[dir="rtl"] .story__collage-ornament {
 
   .footer {
     flex-direction: column;
-    align-items: flex-start;
-    text-align: start;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer__inner {
+    width: 100%;
+    align-items: center;
   }
 
   .masonry {
@@ -2775,12 +2816,16 @@ html[dir="rtl"] .story__collage-ornament {
     grid-template-columns: 1fr;
   }
 
+  .countdown__time {
+    gap: clamp(0.15rem, 1vw, 0.35rem);
+  }
+
   .countdown__number {
-    font-size: clamp(2.25rem, 12vw, 3rem);
+    font-size: clamp(2.25rem, 11vw, 3rem);
   }
 
   .countdown__sep {
-    font-size: clamp(1.65rem, 8vw, 2.25rem);
+    font-size: clamp(1.65rem, 7.5vw, 2.25rem);
   }
 
   .countdown__label {
