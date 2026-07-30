@@ -813,7 +813,7 @@
     window.setTimeout(enableMusicSound, 1200);
 
     DOM.bgMusic.addEventListener('error', () => {
-      console.warn('Background music file not found. Upload assets/music/wedding-music.mp3 to GitHub.');
+      console.warn('Background music file not found. Add assets/music/.m4a');
     });
   }
 
