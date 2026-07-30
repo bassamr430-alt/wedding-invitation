@@ -35,6 +35,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yellowtail&display=swap" rel="stylesheet">
 
   <link rel="preload" href="assets/music/wedding-music.m4a" as="fetch" type="audio/mp4">
+  <link rel="preload" href="assets/music/wedding-music.mp3" as="fetch" type="audio/mpeg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -55,8 +56,9 @@
     </div>
   </div>
 
-  <audio id="bgMusic" autoplay preload="auto" loop playsinline webkit-playsinline aria-hidden="true">
+  <audio id="bgMusic" autoplay muted preload="auto" loop playsinline webkit-playsinline aria-hidden="true">
     <source src="assets/music/wedding-music.m4a" type="audio/mp4">
+    <source src="assets/music/wedding-music.mp3" type="audio/mpeg">
   </audio>
   <script>
     (function () {
@@ -64,29 +66,34 @@
       if (!audio) return;
 
       audio.volume = 0.45;
-      audio.muted = false;
       audio.loop = true;
 
-      function playNow() {
-        audio.play().catch(function () {});
+      function bootMusic() {
+        audio.muted = true;
+        var playAttempt = audio.play();
+        if (!playAttempt || !playAttempt.then) return;
+
+        playAttempt.then(function () {
+          window.__weddingMusicBooted = true;
+          audio.muted = false;
+          audio.volume = 0.45;
+        }).catch(function () {
+          audio.muted = true;
+          audio.play().catch(function () {});
+        });
       }
 
-      playNow();
-
-      if (audio.readyState < 2) {
-        audio.addEventListener('canplay', playNow);
-        audio.addEventListener('loadeddata', playNow);
-        audio.addEventListener('canplaythrough', playNow);
-      }
+      bootMusic();
+      audio.addEventListener('canplay', bootMusic, { once: true });
+      audio.addEventListener('loadeddata', bootMusic, { once: true });
+      audio.addEventListener('canplaythrough', bootMusic, { once: true });
 
       audio.addEventListener('ended', function () {
         audio.currentTime = 0;
-        playNow();
+        bootMusic();
       });
 
-      audio.addEventListener('pause', function () {
-        window.setTimeout(playNow, 120);
-      });
+      window.__weddingBootMusic = bootMusic;
     })();
   </script>
 

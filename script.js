@@ -20,6 +20,7 @@
      ═══════════════════════════════════════════════════════════ */
   let lenis = null;
   let musicShouldPlay = true;
+  let musicIsAudible = false;
 
   /* ═══════════════════════════════════════════════════════════
      DOM REFERENCES
@@ -70,7 +71,8 @@
           DOM.loader.classList.add('is-hidden');
           DOM.body.classList.remove('is-loading');
           initHeroAnimation();
-          startMusic();
+          bootstrapMusic();
+          unmuteMusic();
         },
       });
     }, CONFIG.loaderDuration);
@@ -89,6 +91,8 @@
     });
 
     lenis.on('scroll', ({ scroll, progress }) => {
+      unmuteMusic();
+
       if (DOM.progressBar) {
         DOM.progressBar.style.width = `${progress * 100}%`;
       }
@@ -699,21 +703,67 @@
   }
 
   /* ═══════════════════════════════════════════════════════════
-     MUSIC — Autoplay on open + seamless loop
+     MUSIC — Instant muted boot + auto unmute + loop
      ═══════════════════════════════════════════════════════════ */
   const MUSIC_VOLUME = 0.45;
 
-  function startMusic() {
+  function bootstrapMusic() {
+    if (!DOM.bgMusic || !musicShouldPlay) return Promise.resolve(false);
+
+    DOM.bgMusic.loop = true;
+    DOM.bgMusic.volume = MUSIC_VOLUME;
+
+    if (!DOM.bgMusic.paused && !DOM.bgMusic.ended) {
+      return Promise.resolve(true);
+    }
+
+    DOM.bgMusic.muted = true;
+
+    return DOM.bgMusic.play()
+      .then(() => true)
+      .catch(() => {
+        if (typeof window.__weddingBootMusic === 'function') {
+          window.__weddingBootMusic();
+        }
+        return false;
+      });
+  }
+
+  function unmuteMusic() {
+    if (!DOM.bgMusic || !musicShouldPlay || musicIsAudible) return;
+
+    const applyUnmute = () => {
+      DOM.bgMusic.muted = false;
+      DOM.bgMusic.volume = MUSIC_VOLUME;
+      musicIsAudible = true;
+    };
+
+    if (!DOM.bgMusic.paused) {
+      applyUnmute();
+      return;
+    }
+
+    DOM.bgMusic.muted = false;
+    DOM.bgMusic.volume = MUSIC_VOLUME;
+
+    DOM.bgMusic.play()
+      .then(() => {
+        musicIsAudible = true;
+      })
+      .catch(() => {
+        DOM.bgMusic.muted = true;
+        bootstrapMusic();
+      });
+  }
+
+  function keepMusicAlive() {
     if (!DOM.bgMusic || !musicShouldPlay) return;
 
-    DOM.bgMusic.volume = MUSIC_VOLUME;
-    DOM.bgMusic.muted = false;
-    DOM.bgMusic.loop = true;
-
-    if (!DOM.bgMusic.paused && !DOM.bgMusic.ended) return;
-
-    const playPromise = DOM.bgMusic.play();
-    if (playPromise) playPromise.catch(() => {});
+    if (DOM.bgMusic.paused || DOM.bgMusic.ended) {
+      bootstrapMusic().then(() => {
+        if (musicIsAudible) unmuteMusic();
+      });
+    }
   }
 
   function initMusic() {
@@ -721,39 +771,48 @@
 
     DOM.bgMusic.loop = true;
     DOM.bgMusic.volume = MUSIC_VOLUME;
-    DOM.bgMusic.muted = false;
     DOM.bgMusic.setAttribute('playsinline', '');
     DOM.bgMusic.setAttribute('webkit-playsinline', '');
 
-    startMusic();
+    bootstrapMusic();
 
     ['canplay', 'canplaythrough', 'loadeddata'].forEach((eventName) => {
-      DOM.bgMusic.addEventListener(eventName, startMusic);
+      DOM.bgMusic.addEventListener(eventName, () => {
+        bootstrapMusic().then(() => unmuteMusic());
+      });
     });
 
     DOM.bgMusic.addEventListener('ended', () => {
       DOM.bgMusic.currentTime = 0;
-      startMusic();
+      bootstrapMusic().then(() => {
+        if (musicIsAudible) unmuteMusic();
+      });
     });
 
-    DOM.bgMusic.addEventListener('pause', () => {
-      if (musicShouldPlay) {
-        window.setTimeout(startMusic, 120);
-      }
+    ['touchstart', 'touchend', 'click', 'pointerdown', 'keydown', 'wheel'].forEach((eventName) => {
+      document.addEventListener(eventName, unmuteMusic, { passive: true, once: true });
     });
 
-    window.addEventListener('pageshow', startMusic);
-    window.addEventListener('focus', startMusic);
+    window.addEventListener('pageshow', () => {
+      bootstrapMusic().then(() => unmuteMusic());
+    });
+
+    window.addEventListener('focus', () => {
+      keepMusicAlive();
+      unmuteMusic();
+    });
 
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) startMusic();
+      if (!document.hidden) {
+        keepMusicAlive();
+        unmuteMusic();
+      }
     });
 
-    window.setInterval(() => {
-      if (musicShouldPlay && DOM.bgMusic && (DOM.bgMusic.paused || DOM.bgMusic.ended)) {
-        startMusic();
-      }
-    }, 2000);
+    window.setInterval(keepMusicAlive, 2000);
+
+    window.setTimeout(unmuteMusic, 300);
+    window.setTimeout(unmuteMusic, 800);
 
     DOM.bgMusic.addEventListener('error', () => {
       console.warn('Background music failed to load.');
