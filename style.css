@@ -22,7 +22,7 @@
   --color-glass: rgba(255, 255, 255, 0.14);
   --color-glass-border: rgba(200, 169, 106, 0.28);
 
-  /* Typography — Playfair · Roboto · Yellowtail (EN) · Cairo (AR) */
+  /* Typography — Playfair · Roboto · Yellowtail */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-editorial: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-countdown: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -69,7 +69,6 @@
   /* Z-index layers */
   --z-loader: 9999;
   --z-progress: 9998;
-  --z-lang: 1000;
   --z-music: 999;
   --z-lightbox: 900;
   --z-ambient: 0;
@@ -154,145 +153,6 @@ fieldset {
   border: none;
 }
 
-/* RTL — Arabic typography (Cairo) */
-html[dir="rtl"] {
-  --font-display: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
-  --font-editorial: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
-  --font-countdown: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
-  --font-body: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
-  --font-accent: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
-  --font-luxury: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
-  --font-serif: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
-  --tracking-label: 0;
-  --tracking-display: 0;
-}
-
-html[dir="rtl"] body {
-  font-family: var(--font-body);
-  letter-spacing: 0;
-  word-spacing: normal;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'kern' 1, 'calt' 1;
-  font-variant-ligatures: contextual;
-}
-
-html[dir="rtl"] :where(
-  p, span, h1, h2, h3, h4, h5, h6,
-  time, address, label, li, dt, dd, figcaption, blockquote
-) {
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-html[dir="rtl"] :where(
-  [data-i18n],
-  .section__eyebrow,
-  .section__title,
-  .section__lead,
-  .hero__prelude,
-  .hero__subtitle,
-  .hero__meta-label,
-  .hero__meta-value,
-  .scroll-indicator__text,
-  .story__eyebrow,
-  .story__lead,
-  .story__body,
-  .story__closing,
-  .story__quote-text,
-  .timeline__title,
-  .timeline__text,
-  .countdown__label,
-  .countdown__until,
-  .detail-card__title,
-  .detail-card__value,
-  .venue__text,
-  .thanks__title,
-  .thanks__body,
-  .thanks__closing,
-  .footer__tagline,
-  .loader__text
-) {
-  font-family: var(--font-body);
-  letter-spacing: 0;
-  text-transform: none;
-  word-spacing: normal;
-}
-
-html[dir="rtl"] :where(
-  .section__title,
-  .story__lead,
-  .thanks__title,
-  .hero__subtitle
-) {
-  font-family: var(--font-editorial);
-  font-weight: 600;
-  line-height: 1.75;
-}
-
-html[dir="rtl"] .countdown__number {
-  font-family: var(--font-countdown);
-  font-weight: 700;
-  letter-spacing: 0;
-  font-variant-numeric: tabular-nums;
-}
-
-html[dir="rtl"] .hero__name,
-html[dir="rtl"] .hero__char,
-html[dir="rtl"] .loader__monogram,
-html[dir="rtl"] .footer__monogram {
-  font-family: var(--font-display);
-  letter-spacing: var(--tracking-name);
-  text-transform: uppercase;
-}
-
-html[dir="rtl"] [data-reveal] {
-  filter: none !important;
-  -webkit-filter: none !important;
-}
-
-/* Override EN luxury letter-spacing that breaks Arabic joins */
-html[dir="rtl"] .story__header .section__eyebrow,
-html[dir="rtl"] .scroll-indicator__text,
-html[dir="rtl"] .hero__meta-value,
-html[dir="rtl"] .hero__meta-value--venue span,
-html[dir="rtl"] .detail-card__value,
-html[dir="rtl"] .detail-card__title,
-html[dir="rtl"] .section__title,
-html[dir="rtl"] .section__eyebrow,
-html[dir="rtl"] .thanks__title,
-html[dir="rtl"] .story__quote-text,
-html[dir="rtl"] .venue__address,
-html[dir="rtl"] .btn--luxury {
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  font-family: var(--font-body) !important;
-}
-
-html[dir="rtl"] .lang-switcher {
-  left: var(--space-md);
-  right: auto;
-}
-
-html[dir="rtl"] .music-btn {
-  left: var(--space-md);
-  right: auto;
-}
-
-html[dir="rtl"] .hero__meta-value--venue span {
-  display: block;
-}
-
-html[dir="rtl"] .countdown-wrap {
-  justify-content: flex-start;
-}
-
-html[dir="rtl"] .story__lead,
-html[dir="rtl"] .story__body,
-html[dir="rtl"] .thanks__body {
-  max-width: none;
-}
-
 /* ─── Utility ─── */
 .container {
   width: 100%;
@@ -353,10 +213,6 @@ html[dir="rtl"] .thanks__body {
   transform-origin: left;
 }
 
-html[dir="rtl"] .scroll-progress__bar {
-  transform-origin: right;
-}
-
 /* ═══════════════════════════════════════ LOADER */
 .loader {
   position: fixed;
@@ -410,70 +266,6 @@ html[dir="rtl"] .scroll-progress__bar {
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--color-gray-light);
-}
-
-/* ═══════════════════════════════════════ LANGUAGE SWITCHER */
-.lang-switcher {
-  position: fixed;
-  top: var(--space-md);
-  right: var(--space-md);
-  z-index: var(--z-lang);
-  display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 0.35rem 0.5rem;
-  background: var(--color-glass);
-  backdrop-filter: var(--blur-glass);
-  -webkit-backdrop-filter: var(--blur-glass);
-  border: 1px solid var(--color-glass-border);
-  border-radius: 100px;
-  box-shadow: var(--shadow-soft);
-}
-
-.lang-switcher__btn {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.7);
-  padding: 0.4rem 0.75rem;
-  border-radius: 100px;
-  transition: var(--transition-fast);
-}
-
-.lang-switcher__btn.is-active {
-  color: var(--color-gold);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.lang-switcher__btn:hover:not(.is-active) {
-  color: var(--color-white);
-}
-
-.lang-switcher__divider {
-  width: 1px;
-  height: 14px;
-  background: rgba(200, 169, 106, 0.3);
-}
-
-/* Dark sections override */
-.section:not(.hero) ~ .lang-switcher,
-body.scrolled-past-hero .lang-switcher {
-  /* handled via JS class on body */
-}
-
-body.scrolled-past-hero .lang-switcher {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(200, 169, 106, 0.3);
-}
-
-body.scrolled-past-hero .lang-switcher__btn {
-  color: var(--color-gray);
-}
-
-body.scrolled-past-hero .lang-switcher__btn.is-active {
-  color: var(--color-gold-dark);
-  background: rgba(200, 169, 106, 0.12);
 }
 
 /* ═══════════════════════════════════════ MUSIC BUTTON */
@@ -1714,11 +1506,6 @@ body.scrolled-past-hero .music-btn.is-playing {
   color: var(--color-gold);
 }
 
-html[dir="rtl"] .lightbox__close {
-  right: auto;
-  left: var(--space-md);
-}
-
 .lightbox__nav {
   position: absolute;
   top: 50%;
@@ -1745,9 +1532,6 @@ html[dir="rtl"] .lightbox__close {
 
 .lightbox__nav--prev { left: var(--space-md); }
 .lightbox__nav--next { right: var(--space-md); }
-
-html[dir="rtl"] .lightbox__nav--prev { left: auto; right: var(--space-md); }
-html[dir="rtl"] .lightbox__nav--next { right: auto; left: var(--space-md); }
 
 /* ─── RSVP ─── */
 .section--rsvp {
@@ -1804,12 +1588,6 @@ html[dir="rtl"] .lightbox__nav--next { right: auto; left: var(--space-md); }
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
-}
-
-html[dir="rtl"] .form-select {
-  background-position: left 1rem center;
-  padding-right: 1.25rem;
-  padding-left: 2.5rem;
 }
 
 .form-textarea {
@@ -1926,10 +1704,6 @@ html[dir="rtl"] .form-select {
   transform-origin: left;
   transition: transform var(--transition-luxury);
   z-index: 0;
-}
-
-html[dir="rtl"] .btn--luxury::before {
-  transform-origin: right;
 }
 
 .btn--luxury span,
@@ -2219,11 +1993,6 @@ html[dir="rtl"] .btn--luxury::before {
   pointer-events: none;
 }
 
-html[dir="rtl"] .story__quote-mark {
-  left: auto;
-  right: 1.25rem;
-}
-
 .story__quote-text {
   font-family: var(--font-editorial);
   font-size: clamp(1.75rem, 4vw, 2.75rem);
@@ -2323,11 +2092,6 @@ html[dir="rtl"] .story__quote-mark {
   border: 1px solid rgba(200, 169, 106, 0.25);
 }
 
-html[dir="rtl"] .story__photo--main {
-  right: auto;
-  left: 0;
-}
-
 .story__photo--accent {
   bottom: 0;
   left: 0;
@@ -2335,11 +2099,6 @@ html[dir="rtl"] .story__photo--main {
   height: 52%;
   border: 3px solid var(--color-pearl);
   z-index: 1;
-}
-
-html[dir="rtl"] .story__photo--accent {
-  left: auto;
-  right: 0;
 }
 
 .story__collage:hover .story__photo img {
@@ -2354,11 +2113,6 @@ html[dir="rtl"] .story__photo--accent {
   height: 80px;
   border: 1px solid rgba(200, 169, 106, 0.3);
   pointer-events: none;
-}
-
-html[dir="rtl"] .story__collage-ornament {
-  right: auto;
-  left: -4%;
 }
 
 /* ─── Countdown Glass ─── */
@@ -2651,18 +2405,6 @@ html[dir="rtl"] .story__collage-ornament {
 }
 
 /* ─── Micro-interactions ─── */
-.lang-switcher__btn {
-  transition: transform var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
-}
-
-.lang-switcher__btn:hover:not(.is-active) {
-  transform: scale(1.05);
-}
-
-.lang-switcher__btn:active {
-  transform: scale(0.96);
-}
-
 .detail-card,
 .glass-card,
 .hero__meta-card,
@@ -2892,24 +2634,11 @@ html[dir="rtl"] .story__collage-ornament {
     grid-column: auto;
   }
 
-  .lang-switcher {
-    top: var(--space-sm);
-    right: var(--space-sm);
-  }
-
-  html[dir="rtl"] .lang-switcher {
-    left: var(--space-sm);
-  }
-
   .music-btn {
     bottom: var(--space-sm);
     right: var(--space-sm);
     width: 46px;
     height: 46px;
-  }
-
-  html[dir="rtl"] .music-btn {
-    left: var(--space-sm);
   }
 }
 
@@ -2982,7 +2711,6 @@ html[dir="rtl"] .story__collage-ornament {
 /* ─── Print ─── */
 @media print {
   .loader,
-  .lang-switcher,
   .music-btn,
   .mouse-glow,
   .scroll-progress,

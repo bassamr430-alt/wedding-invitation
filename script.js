@@ -11,100 +11,15 @@
      ═══════════════════════════════════════════════════════════ */
   const CONFIG = {
     weddingDate: new Date('2026-09-04T19:30:00+03:00'),
-    defaultLang: 'en',
     loaderDuration: 550,
     timeZone: 'Asia/Damascus',
   };
 
   /* ═══════════════════════════════════════════════════════════
-     TRANSLATIONS
-     ═══════════════════════════════════════════════════════════ */
-  const i18n = {
-    en: {
-      loader: 'Loading your invitation',
-      hero_prelude: 'Together with their families',
-      hero_subtitle: 'joyfully invite you to celebrate their wedding',
-      hero_date_label: 'Wedding Date',
-      hero_date: '04 September 2026',
-      hero_venue_label: 'Venue',
-      hero_venue_name: 'View Restaurant',
-      hero_venue_city: 'Tartous, Syria',
-      scroll_down: 'Scroll',
-      story_eyebrow: 'Our Story',
-      story_lead: 'Every love story is beautiful, but ours is our favorite.',
-      story_body: 'What began with a simple hello became a journey filled with love, laughter and unforgettable memories.',
-      story_closing: 'Today we invite you to celebrate the beginning of our forever.',
-      timeline_1_title: 'How It Started',
-      timeline_2_title: 'Growing Together',
-      timeline_2_text: 'Through every season, our bond grew deeper — woven with trust, joy, and endless devotion.',
-      timeline_3_title: 'Our Forever',
-      countdown_eyebrow: 'Countdown',
-      countdown_title: 'Until We Say Yes',
-      countdown_days: 'Days',
-      countdown_until: 'Until our wedding',
-      details_eyebrow: 'The Celebration',
-      details_title: 'Wedding Details',
-      detail_date_title: 'Date',
-      detail_date_value: '04 September 2026',
-      detail_time_title: 'Time',
-      detail_time_value: '7:30 PM',
-      detail_venue_title: 'Venue',
-      detail_venue_value: 'View Restaurant<br>Tartous, Syria',
-      venue_eyebrow: 'Location',
-      venue_title: 'Find Us',
-      venue_maps_btn: 'Open in Google Maps',
-      thanks_title: 'Thank You',
-      thanks_body: 'Your presence is the greatest gift we could ask for.',
-      thanks_closing: 'See you on our special day.',
-      footer_tagline: 'Made with Love',
-    },
-    ar: {
-      loader: 'جاري تحميل دعوتكم',
-      hero_prelude: 'مع ذويهما الكرام',
-      hero_subtitle: 'يسعدهم دعوتكم للاحتفال بزفافهما',
-      hero_date_label: 'تاريخ الزفاف',
-      hero_date: '04 سبتمبر 2026',
-      hero_venue_label: 'المكان',
-      hero_venue_name: 'مطعم View',
-      hero_venue_city: 'طرطوس، سوريا',
-      scroll_down: 'تمرير',
-      story_eyebrow: 'قصتنا',
-      story_lead: 'كل قصة حب جميلة، لكن قصتنا هي الأجمل.',
-      story_body: 'ما بدأ بـ"مرحباً" بسيط تحوّل إلى رحلة مليئة بالحب والضحك وذكريات لا تُنسى.',
-      story_closing: 'اليوم ندعوكم للاحتفال ببداية أبديتنا معاً.',
-      timeline_1_title: 'البداية',
-      timeline_2_title: 'نمونا معاً',
-      timeline_2_text: 'مع كل موسم، عمق رابطنا — منسوجاً بالثقة والفرح والإخلاص.',
-      timeline_3_title: 'أبديتنا',
-      countdown_eyebrow: 'العد التنازلي',
-      countdown_title: 'حتى نقول نعم',
-      countdown_days: 'أيام',
-      countdown_until: 'حتى زفافنا',
-      details_eyebrow: 'الاحتفال',
-      details_title: 'تفاصيل الزفاف',
-      detail_date_title: 'التاريخ',
-      detail_date_value: '04 سبتمبر 2026',
-      detail_time_title: 'الوقت',
-      detail_time_value: '7:30 مساءً',
-      detail_venue_title: 'المكان',
-      detail_venue_value: 'مطعم View<br>طرطوس، سوريا',
-      venue_eyebrow: 'الموقع',
-      venue_title: 'موقعنا',
-      venue_maps_btn: 'فتح في خرائط Google',
-      thanks_title: 'شكراً لكم',
-      thanks_body: 'حضوركم أجمل هدية يمكننا تلقيها.',
-      thanks_closing: 'نراكم في يومنا المميز.',
-      footer_tagline: 'صُنع بحب',
-    },
-  };
-
-  /* ═══════════════════════════════════════════════════════════
      STATE
      ═══════════════════════════════════════════════════════════ */
-  let currentLang = CONFIG.defaultLang;
   let lenis = null;
-  let musicStarted = false;
-  let musicUnlocked = false;
+  let musicShouldPlay = true;
 
   /* ═══════════════════════════════════════════════════════════
      DOM REFERENCES
@@ -117,7 +32,6 @@
     progressBar: document.querySelector('.scroll-progress__bar'),
     mouseGlow: document.querySelector('.mouse-glow'),
     bgMusic: document.getElementById('bgMusic'),
-    langBtns: document.querySelectorAll('.lang-switcher__btn'),
     hero: document.getElementById('hero'),
     heroImage: document.querySelector('.hero__image'),
     countDays: document.getElementById('countDays'),
@@ -131,67 +45,10 @@
   let prevCountdown = { days: '', hours: '', minutes: '', seconds: '' };
 
   /* ═══════════════════════════════════════════════════════════
-     LANGUAGE SYSTEM
-     ═══════════════════════════════════════════════════════════ */
-  function setLanguage(lang) {
-    if (!i18n[lang]) return;
-    currentLang = lang;
-
-    DOM.html.lang = lang;
-    DOM.html.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-    document.querySelectorAll('[data-i18n]').forEach((el) => {
-      const key = el.dataset.i18n;
-      if (i18n[lang][key]) {
-        const value = i18n[lang][key];
-        if (value.includes('<')) {
-          el.innerHTML = value;
-        } else {
-          el.textContent = value;
-        }
-      }
-    });
-
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      el.style.filter = 'none';
-      el.style.webkitFilter = 'none';
-    });
-
-    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
-      const key = el.dataset.i18nPlaceholder;
-      if (i18n[lang][key]) {
-        el.placeholder = i18n[lang][key];
-      }
-    });
-
-    DOM.langBtns.forEach((btn) => {
-      const isActive = btn.dataset.lang === lang;
-      btn.classList.toggle('is-active', isActive);
-      btn.setAttribute('aria-pressed', isActive);
-    });
-
-    localStorage.setItem('wedding-lang', lang);
-  }
-
-  function initLanguage() {
-    const saved = localStorage.getItem('wedding-lang');
-    const browserLang = navigator.language.startsWith('ar') ? 'ar' : 'en';
-    setLanguage(saved || browserLang);
-
-    DOM.langBtns.forEach((btn) => {
-      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-    });
-  }
-
-  /* ═══════════════════════════════════════════════════════════
      LOADER
      ═══════════════════════════════════════════════════════════ */
   function initLoader() {
     DOM.body.classList.add('is-loading');
-
-    const earlyUnlock = () => unlockMusic();
-    DOM.loader.addEventListener('click', earlyUnlock, { once: true });
-    DOM.loader.addEventListener('touchstart', earlyUnlock, { once: true, passive: true });
 
     gsap.to(DOM.loaderFill, {
       width: '100%',
@@ -213,8 +70,7 @@
           DOM.loader.classList.add('is-hidden');
           DOM.body.classList.remove('is-loading');
           initHeroAnimation();
-          tryAutoPlayMusic();
-          attemptAudibleMusic();
+          startMusic();
         },
       });
     }, CONFIG.loaderDuration);
@@ -233,8 +89,6 @@
     });
 
     lenis.on('scroll', ({ scroll, progress }) => {
-      unlockMusic();
-
       if (DOM.progressBar) {
         DOM.progressBar.style.width = `${progress * 100}%`;
       }
@@ -680,19 +534,13 @@
     });
 
     document.querySelectorAll('[data-reveal="blur"]').forEach((el) => {
-      const isRtl = document.documentElement.dir === 'rtl';
-      const fromState = isRtl
-        ? { opacity: 0, y: 24 }
-        : { opacity: 0, y: 30, filter: 'blur(8px)' };
-      const toState = isRtl
-        ? { opacity: 1, y: 0, clearProps: 'filter' }
-        : { opacity: 1, y: 0, filter: 'blur(0px)' };
-
       gsap.fromTo(
         el,
-        fromState,
+        { opacity: 0, y: 30, filter: 'blur(8px)' },
         {
-          ...toState,
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
           duration: 1.4,
           ease: 'power3.out',
           scrollTrigger: {
@@ -851,71 +699,21 @@
   }
 
   /* ═══════════════════════════════════════════════════════════
-     MUSIC — Autoplay (muted) then unmute on first interaction
+     MUSIC — Autoplay on open + seamless loop
      ═══════════════════════════════════════════════════════════ */
   const MUSIC_VOLUME = 0.45;
 
-  function tryAutoPlayMusic() {
-    if (!DOM.bgMusic || musicStarted) return;
+  function startMusic() {
+    if (!DOM.bgMusic || !musicShouldPlay) return;
 
     DOM.bgMusic.volume = MUSIC_VOLUME;
-    DOM.bgMusic.muted = true;
+    DOM.bgMusic.muted = false;
+    DOM.bgMusic.loop = true;
 
-    if (!DOM.bgMusic.paused) {
-      musicStarted = true;
-      return;
-    }
+    if (!DOM.bgMusic.paused && !DOM.bgMusic.ended) return;
 
     const playPromise = DOM.bgMusic.play();
-    if (!playPromise) return;
-
-    playPromise
-      .then(() => {
-        musicStarted = true;
-      })
-      .catch(() => {});
-  }
-
-  function attemptAudibleMusic() {
-    if (!DOM.bgMusic || musicUnlocked) return;
-
-    DOM.bgMusic.muted = false;
-    DOM.bgMusic.volume = MUSIC_VOLUME;
-
-    if (!DOM.bgMusic.paused) {
-      musicUnlocked = true;
-      musicStarted = true;
-      return;
-    }
-
-    DOM.bgMusic.play()
-      .then(() => {
-        musicUnlocked = true;
-        musicStarted = true;
-      })
-      .catch(() => {
-        DOM.bgMusic.muted = true;
-      });
-  }
-
-  function unlockMusic() {
-    if (musicUnlocked || !DOM.bgMusic) return;
-
-    DOM.bgMusic.muted = false;
-    DOM.bgMusic.volume = MUSIC_VOLUME;
-
-    if (DOM.bgMusic.paused) {
-      DOM.bgMusic.play()
-        .then(() => {
-          musicUnlocked = true;
-          musicStarted = true;
-        })
-        .catch(() => {});
-      return;
-    }
-
-    musicUnlocked = true;
-    musicStarted = true;
+    if (playPromise) playPromise.catch(() => {});
   }
 
   function initMusic() {
@@ -923,31 +721,42 @@
 
     DOM.bgMusic.loop = true;
     DOM.bgMusic.volume = MUSIC_VOLUME;
+    DOM.bgMusic.muted = false;
     DOM.bgMusic.setAttribute('playsinline', '');
     DOM.bgMusic.setAttribute('webkit-playsinline', '');
 
-    tryAutoPlayMusic();
+    startMusic();
 
-    DOM.bgMusic.addEventListener('canplaythrough', tryAutoPlayMusic, { once: true });
-    DOM.bgMusic.addEventListener('canplay', tryAutoPlayMusic, { once: true });
-
-    const unlockEvents = ['touchstart', 'touchend', 'click', 'pointerdown', 'wheel', 'keydown'];
-
-    unlockEvents.forEach((eventName) => {
-      document.addEventListener(eventName, unlockMusic, { passive: true });
+    ['canplay', 'canplaythrough', 'loadeddata'].forEach((eventName) => {
+      DOM.bgMusic.addEventListener(eventName, startMusic);
     });
 
-    window.addEventListener('scroll', unlockMusic, { passive: true });
+    DOM.bgMusic.addEventListener('ended', () => {
+      DOM.bgMusic.currentTime = 0;
+      startMusic();
+    });
+
+    DOM.bgMusic.addEventListener('pause', () => {
+      if (musicShouldPlay) {
+        window.setTimeout(startMusic, 120);
+      }
+    });
+
+    window.addEventListener('pageshow', startMusic);
+    window.addEventListener('focus', startMusic);
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) startMusic();
+    });
+
+    window.setInterval(() => {
+      if (musicShouldPlay && DOM.bgMusic && (DOM.bgMusic.paused || DOM.bgMusic.ended)) {
+        startMusic();
+      }
+    }, 2000);
 
     DOM.bgMusic.addEventListener('error', () => {
       console.warn('Background music failed to load.');
-    });
-
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        tryAutoPlayMusic();
-        if (!musicUnlocked) attemptAudibleMusic();
-      }
     });
   }
 
@@ -1271,7 +1080,6 @@
 
   function init() {
     initMusic();
-    initLanguage();
     initHeroBokeh();
     initLoader();
     initLenis();
