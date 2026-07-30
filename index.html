@@ -32,8 +32,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yellowtail&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yellowtail&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yellowtail&display=swap" rel="stylesheet">
 
+  <link rel="preload" href="assets/music/wedding-music.m4a" as="fetch" type="audio/mp4">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -63,6 +65,27 @@
   <audio id="bgMusic" preload="auto" loop playsinline webkit-playsinline aria-hidden="true">
     <source src="assets/music/wedding-music.m4a" type="audio/mp4">
   </audio>
+  <script>
+    (function () {
+      var audio = document.getElementById('bgMusic');
+      if (!audio) return;
+
+      audio.volume = 0.45;
+      audio.muted = true;
+      audio.loop = true;
+
+      function startMutedPlayback() {
+        audio.play().catch(function () {});
+      }
+
+      if (audio.readyState >= 2) {
+        startMutedPlayback();
+      } else {
+        audio.addEventListener('canplay', startMutedPlayback, { once: true });
+        audio.addEventListener('loadeddata', startMutedPlayback, { once: true });
+      }
+    })();
+  </script>
 
   <main id="main">
 

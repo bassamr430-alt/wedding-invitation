@@ -12,7 +12,7 @@
   const CONFIG = {
     weddingDate: new Date('2026-09-04T19:30:00+03:00'),
     defaultLang: 'en',
-    loaderDuration: 900,
+    loaderDuration: 550,
     timeZone: 'Asia/Damascus',
   };
 
@@ -143,8 +143,18 @@
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.dataset.i18n;
       if (i18n[lang][key]) {
-        el.innerHTML = i18n[lang][key];
+        const value = i18n[lang][key];
+        if (value.includes('<')) {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
       }
+    });
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      el.style.filter = 'none';
+      el.style.webkitFilter = 'none';
     });
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
@@ -179,6 +189,10 @@
   function initLoader() {
     DOM.body.classList.add('is-loading');
 
+    const earlyUnlock = () => unlockMusic();
+    DOM.loader.addEventListener('click', earlyUnlock, { once: true });
+    DOM.loader.addEventListener('touchstart', earlyUnlock, { once: true, passive: true });
+
     gsap.to(DOM.loaderFill, {
       width: '100%',
       duration: CONFIG.loaderDuration / 1000,
@@ -193,13 +207,14 @@
     setTimeout(() => {
       gsap.to(DOM.loader, {
         opacity: 0,
-        duration: 0.35,
+        duration: 0.25,
         ease: 'power2.inOut',
         onComplete: () => {
           DOM.loader.classList.add('is-hidden');
           DOM.body.classList.remove('is-loading');
           initHeroAnimation();
           tryAutoPlayMusic();
+          attemptAudibleMusic();
         },
       });
     }, CONFIG.loaderDuration);
@@ -218,6 +233,8 @@
     });
 
     lenis.on('scroll', ({ scroll, progress }) => {
+      unlockMusic();
+
       if (DOM.progressBar) {
         DOM.progressBar.style.width = `${progress * 100}%`;
       }
@@ -663,13 +680,19 @@
     });
 
     document.querySelectorAll('[data-reveal="blur"]').forEach((el) => {
+      const isRtl = document.documentElement.dir === 'rtl';
+      const fromState = isRtl
+        ? { opacity: 0, y: 24 }
+        : { opacity: 0, y: 30, filter: 'blur(8px)' };
+      const toState = isRtl
+        ? { opacity: 1, y: 0, clearProps: 'filter' }
+        : { opacity: 1, y: 0, filter: 'blur(0px)' };
+
       gsap.fromTo(
         el,
-        { opacity: 0, y: 30, filter: 'blur(8px)' },
+        fromState,
         {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
+          ...toState,
           duration: 1.4,
           ease: 'power3.out',
           scrollTrigger: {
@@ -838,6 +861,11 @@
     DOM.bgMusic.volume = MUSIC_VOLUME;
     DOM.bgMusic.muted = true;
 
+    if (!DOM.bgMusic.paused) {
+      musicStarted = true;
+      return;
+    }
+
     const playPromise = DOM.bgMusic.play();
     if (!playPromise) return;
 
@@ -845,8 +873,28 @@
       .then(() => {
         musicStarted = true;
       })
+      .catch(() => {});
+  }
+
+  function attemptAudibleMusic() {
+    if (!DOM.bgMusic || musicUnlocked) return;
+
+    DOM.bgMusic.muted = false;
+    DOM.bgMusic.volume = MUSIC_VOLUME;
+
+    if (!DOM.bgMusic.paused) {
+      musicUnlocked = true;
+      musicStarted = true;
+      return;
+    }
+
+    DOM.bgMusic.play()
+      .then(() => {
+        musicUnlocked = true;
+        musicStarted = true;
+      })
       .catch(() => {
-        DOM.bgMusic.muted = false;
+        DOM.bgMusic.muted = true;
       });
   }
 
@@ -877,10 +925,11 @@
     DOM.bgMusic.volume = MUSIC_VOLUME;
     DOM.bgMusic.setAttribute('playsinline', '');
     DOM.bgMusic.setAttribute('webkit-playsinline', '');
-    DOM.bgMusic.load();
 
+    tryAutoPlayMusic();
+
+    DOM.bgMusic.addEventListener('canplaythrough', tryAutoPlayMusic, { once: true });
     DOM.bgMusic.addEventListener('canplay', tryAutoPlayMusic, { once: true });
-    DOM.bgMusic.addEventListener('loadeddata', tryAutoPlayMusic, { once: true });
 
     const unlockEvents = ['touchstart', 'touchend', 'click', 'pointerdown', 'wheel', 'keydown'];
 
@@ -888,21 +937,18 @@
       document.addEventListener(eventName, unlockMusic, { passive: true });
     });
 
-    if (lenis) {
-      lenis.on('scroll', unlockMusic);
-    } else {
-      window.addEventListener('scroll', unlockMusic, { passive: true });
-    }
+    window.addEventListener('scroll', unlockMusic, { passive: true });
 
     DOM.bgMusic.addEventListener('error', () => {
       console.warn('Background music failed to load.');
     });
 
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) tryAutoPlayMusic();
+      if (!document.hidden) {
+        tryAutoPlayMusic();
+        if (!musicUnlocked) attemptAudibleMusic();
+      }
     });
-
-    setTimeout(tryAutoPlayMusic, 200);
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -1224,6 +1270,7 @@
   }
 
   function init() {
+    initMusic();
     initLanguage();
     initHeroBokeh();
     initLoader();
@@ -1235,7 +1282,6 @@
     initAmbientDecor();
     initCountdown();
     initMouseGlow();
-    initMusic();
     initFooterStars();
     initFooterClosing();
   }

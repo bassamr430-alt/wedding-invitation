@@ -22,7 +22,7 @@
   --color-glass: rgba(255, 255, 255, 0.14);
   --color-glass-border: rgba(200, 169, 106, 0.28);
 
-  /* Typography — Playfair · Roboto · Yellowtail (EN) · Tajawal · Noto Naskh (AR) */
+  /* Typography — Playfair · Roboto · Yellowtail (EN) · Cairo (AR) */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-editorial: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-countdown: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -154,59 +154,119 @@ fieldset {
   border: none;
 }
 
-/* RTL — High-quality Arabic typography */
+/* RTL — Arabic typography (Cairo) */
 html[dir="rtl"] {
-  --font-display: 'Noto Naskh Arabic', 'Tajawal', serif;
-  --font-editorial: 'Noto Naskh Arabic', 'Tajawal', serif;
-  --font-countdown: 'Noto Naskh Arabic', 'Tajawal', serif;
-  --font-body: 'Tajawal', 'Segoe UI', sans-serif;
-  --font-accent: 'Tajawal', sans-serif;
-  --font-luxury: 'Noto Naskh Arabic', 'Tajawal', serif;
-  --font-serif: 'Noto Naskh Arabic', 'Tajawal', serif;
+  --font-display: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+  --font-editorial: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+  --font-countdown: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+  --font-body: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+  --font-accent: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+  --font-luxury: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+  --font-serif: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+  --tracking-label: 0;
+  --tracking-display: 0;
 }
 
 html[dir="rtl"] body {
   font-family: var(--font-body);
   letter-spacing: 0;
+  word-spacing: normal;
   text-rendering: optimizeLegibility;
-  font-feature-settings: 'kern' 1;
-  font-variant-ligatures: common-ligatures;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'kern' 1, 'calt' 1;
+  font-variant-ligatures: contextual;
 }
 
-html[dir="rtl"] [data-i18n],
-html[dir="rtl"] .section__eyebrow,
-html[dir="rtl"] .section__title,
-html[dir="rtl"] .hero__subtitle,
-html[dir="rtl"] .hero__prelude,
-html[dir="rtl"] .countdown__label,
-html[dir="rtl"] .countdown__until,
-html[dir="rtl"] .detail-card__title,
-html[dir="rtl"] .footer__tagline,
-html[dir="rtl"] .scroll-indicator__text,
-html[dir="rtl"] .hero__meta-label,
-html[dir="rtl"] .loader__text,
-html[dir="rtl"] .thanks__body,
-html[dir="rtl"] .story__body,
-html[dir="rtl"] .story__lead,
-html[dir="rtl"] .story__closing,
-html[dir="rtl"] .timeline__text,
-html[dir="rtl"] .timeline__title {
+html[dir="rtl"] :where(
+  p, span, h1, h2, h3, h4, h5, h6,
+  time, address, label, li, dt, dd, figcaption, blockquote
+) {
   letter-spacing: 0;
   text-transform: none;
 }
 
-html[dir="rtl"] .section__title,
-html[dir="rtl"] .hero__subtitle,
-html[dir="rtl"] .story__lead {
+html[dir="rtl"] :where(
+  [data-i18n],
+  .section__eyebrow,
+  .section__title,
+  .section__lead,
+  .hero__prelude,
+  .hero__subtitle,
+  .hero__meta-label,
+  .hero__meta-value,
+  .scroll-indicator__text,
+  .story__eyebrow,
+  .story__lead,
+  .story__body,
+  .story__closing,
+  .story__quote-text,
+  .timeline__title,
+  .timeline__text,
+  .countdown__label,
+  .countdown__until,
+  .detail-card__title,
+  .detail-card__value,
+  .venue__text,
+  .thanks__title,
+  .thanks__body,
+  .thanks__closing,
+  .footer__tagline,
+  .loader__text
+) {
+  font-family: var(--font-body);
+  letter-spacing: 0;
+  text-transform: none;
+  word-spacing: normal;
+}
+
+html[dir="rtl"] :where(
+  .section__title,
+  .story__lead,
+  .thanks__title,
+  .hero__subtitle
+) {
   font-family: var(--font-editorial);
   font-weight: 600;
-  line-height: 1.65;
+  line-height: 1.75;
 }
 
 html[dir="rtl"] .countdown__number {
   font-family: var(--font-countdown);
   font-weight: 700;
   letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+html[dir="rtl"] .hero__name,
+html[dir="rtl"] .hero__char,
+html[dir="rtl"] .loader__monogram,
+html[dir="rtl"] .footer__monogram {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-name);
+  text-transform: uppercase;
+}
+
+html[dir="rtl"] [data-reveal] {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+/* Override EN luxury letter-spacing that breaks Arabic joins */
+html[dir="rtl"] .story__header .section__eyebrow,
+html[dir="rtl"] .scroll-indicator__text,
+html[dir="rtl"] .hero__meta-value,
+html[dir="rtl"] .hero__meta-value--venue span,
+html[dir="rtl"] .detail-card__value,
+html[dir="rtl"] .detail-card__title,
+html[dir="rtl"] .section__title,
+html[dir="rtl"] .section__eyebrow,
+html[dir="rtl"] .thanks__title,
+html[dir="rtl"] .story__quote-text,
+html[dir="rtl"] .venue__address,
+html[dir="rtl"] .btn--luxury {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  font-family: var(--font-body) !important;
 }
 
 html[dir="rtl"] .lang-switcher {
