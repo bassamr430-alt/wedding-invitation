@@ -1281,8 +1281,28 @@
     );
   }
 
+  function initArabicFont() {
+    if (!('FontFace' in window)) return;
+
+    const sources = [
+      'assets/fonts/HSN Shahd Regular Regular.ttf',
+      'assets/fonts/HSN-Shahd-Regular.ttf',
+    ];
+
+    sources.forEach((src) => {
+      const font = new FontFace('HSN Shahd', `url("${src}")`);
+      font.load()
+        .then((loaded) => {
+          document.fonts.add(loaded);
+          document.documentElement.classList.add('font-shahd-ready');
+        })
+        .catch(() => {});
+    });
+  }
+
   function init() {
     initLanguage();
+    initArabicFont();
     initMusic();
     initHeroBokeh();
     initLoader();
