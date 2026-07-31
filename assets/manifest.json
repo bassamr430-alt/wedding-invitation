@@ -1,0 +1,19 @@
+{
+  "name": "AMMAR & RANA — Wedding Invitation",
+  "short_name": "A&R Wedding",
+  "description": "Luxury wedding invitation for AMMAR & RANA — 04 September 2026",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F7F5F1",
+  "theme_color": "#C8A96A",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
