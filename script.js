@@ -244,6 +244,11 @@
   /* ═══════════════════════════════════════════════════════════
      LENIS SMOOTH SCROLL
      ═══════════════════════════════════════════════════════════ */
+  function updateHeroScrollState(scrollY = 0) {
+    const heroHeight = DOM.hero ? DOM.hero.offsetHeight : 0;
+    DOM.body.classList.toggle('scrolled-past-hero', scrollY > heroHeight * 0.5);
+  }
+
   function initLenis() {
     lenis = new Lenis({
       duration: 1.4,
@@ -260,9 +265,18 @@
         DOM.progressBar.style.width = `${progress * 100}%`;
       }
 
-      const heroHeight = DOM.hero ? DOM.hero.offsetHeight : 0;
-      DOM.body.classList.toggle('scrolled-past-hero', scroll > heroHeight * 0.5);
+      updateHeroScrollState(scroll);
     });
+
+    updateHeroScrollState(lenis.scroll);
+
+    window.addEventListener('resize', () => {
+      updateHeroScrollState(lenis.scroll);
+    }, { passive: true });
+
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => updateHeroScrollState(lenis.scroll), 150);
+    }, { passive: true });
 
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
