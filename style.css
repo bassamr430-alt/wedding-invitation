@@ -171,6 +171,8 @@ html[dir="rtl"] {
   --font-body: 'HSN Shahd', 'Roboto', sans-serif;
   --font-luxury: 'HSN Shahd', 'Playfair Display', Georgia, serif;
   --font-serif: 'HSN Shahd', 'Playfair Display', Georgia, serif;
+  --font-countdown: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-numeric: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --tracking-label: 0.06em;
   --tracking-display: 0;
 }
@@ -268,11 +270,23 @@ html[dir="rtl"] .venue__notice-text--ar {
   text-transform: none !important;
 }
 
-/* Western digits (0–9) — same look in EN & AR */
+/* Western digits (0–9) — never use Arabic numeral shapes */
+.nums-en,
+.countdown__number,
+.countdown__sep {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings: 'lnum' 1, 'tnum' 1 !important;
+  font-style: normal;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.nums-en {
+  unicode-bidi: isolate;
+}
+
 :where(
-  .nums-en,
-  .countdown__number,
-  .countdown__sep,
   .details-grid .detail-card:nth-child(2) .detail-card__value,
   .section__index,
   .footer__year
@@ -281,10 +295,6 @@ html[dir="rtl"] .venue__notice-text--ar {
   font-variant-numeric: lining-nums tabular-nums;
   font-feature-settings: 'lnum' 1, 'tnum' 1;
   font-style: normal;
-}
-
-.nums-en {
-  unicode-bidi: isolate;
 }
 
 html[dir="rtl"] .story__header .section__eyebrow {

@@ -33,7 +33,7 @@
       timeline_1_title: 'How It Started',
       timeline_1_text: 'What began with a simple hello became a journey filled with love, laughter and unforgettable memories.',
       timeline_2_title: 'Growing Together',
-      timeline_2_text: 'Through every season, our bond grew deeper — woven with trust, joy, and endless devotion.',
+      timeline_2_text: 'Through every season, our bond grew deeper, woven with trust, joy, and endless devotion.',
       timeline_3_title: 'Our Forever',
       timeline_3_text: 'Today we invite you to celebrate the beginning of our forever.',
       countdown_eyebrow: 'Countdown',
@@ -178,7 +178,15 @@
 
     if (DOM.countDays && prevCountdown.days !== '') {
       DOM.countDays.textContent = formatCountNumber(prevCountdown.days);
+      DOM.countDays.setAttribute('lang', 'en');
+      DOM.countDays.setAttribute('dir', 'ltr');
     }
+
+    [DOM.countHours, DOM.countMinutes, DOM.countSeconds].forEach((el) => {
+      if (!el) return;
+      el.setAttribute('lang', 'en');
+      el.setAttribute('dir', 'ltr');
+    });
 
     localStorage.setItem('wedding-lang', lang);
   }
@@ -813,7 +821,11 @@
     const daysText = formatCountNumber(days);
 
     if (prevCountdown.days !== String(days)) {
-      if (DOM.countDays) DOM.countDays.textContent = daysText;
+      if (DOM.countDays) {
+        DOM.countDays.textContent = daysText;
+        DOM.countDays.setAttribute('lang', 'en');
+        DOM.countDays.setAttribute('dir', 'ltr');
+      }
       prevCountdown.days = String(days);
     }
 
