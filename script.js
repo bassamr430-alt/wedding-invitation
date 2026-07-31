@@ -23,7 +23,7 @@
       hero_prelude: 'Together with their families',
       hero_subtitle: 'joyfully invite you to celebrate their wedding',
       hero_date_label: 'Wedding Date',
-      hero_date: '04 September 2026',
+      hero_date: '<span class="nums-en">04</span> September <span class="nums-en">2026</span>',
       hero_venue_label: 'Venue',
       hero_venue_name: 'View Restaurant',
       hero_venue_city: 'Tartous, Syria',
@@ -43,7 +43,7 @@
       details_eyebrow: 'The Celebration',
       details_title: 'Wedding Details',
       detail_date_title: 'Date',
-      detail_date_value: '04 September 2026',
+      detail_date_value: '<span class="nums-en">04</span> September <span class="nums-en">2026</span>',
       detail_time_title: 'Time',
       detail_time_value: '7:30 PM',
       detail_venue_title: 'Venue',
@@ -64,7 +64,7 @@
       hero_prelude: 'برفقة عائلتيهما',
       hero_subtitle: 'يسرّهما دعوتكم لمشاركة فرحة حفل زفافهما',
       hero_date_label: 'تاريخ الزفاف',
-      hero_date: '04 سبتمبر 2026',
+      hero_date: '<span class="nums-en">04</span> سبتمبر <span class="nums-en">2026</span>',
       hero_venue_label: 'مكان الحفل',
       hero_venue_name: 'مطعم فيو',
       hero_venue_city: 'طرطوس، سوريا',
@@ -84,9 +84,9 @@
       details_eyebrow: 'موعد الاحتفال',
       details_title: 'تفاصيل حفل الزفاف',
       detail_date_title: 'التاريخ',
-      detail_date_value: '04 سبتمبر 2026',
+      detail_date_value: '<span class="nums-en">04</span> سبتمبر <span class="nums-en">2026</span>',
       detail_time_title: 'الوقت',
-      detail_time_value: '7:30 مساءً',
+      detail_time_value: '7:30 PM',
       detail_venue_title: 'مكان الحفل',
       detail_venue_value: 'مطعم فيو<br>طرطوس، سوريا',
       venue_eyebrow: 'مكان الحفل',
@@ -133,11 +133,14 @@
   let countdownInterval = null;
   let prevCountdown = { days: '', hours: '', minutes: '', seconds: '' };
 
+  function toWesternDigits(value) {
+    return String(value)
+      .replace(/[٠-٩]/g, (digit) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(digit)))
+      .replace(/[۰-۹]/g, (digit) => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(digit)));
+  }
+
   function formatCountNumber(value) {
-    if (currentLang === 'ar') {
-      return Number(value).toLocaleString('ar-SY');
-    }
-    return String(value);
+    return toWesternDigits(String(value));
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -154,10 +157,11 @@
       const key = el.dataset.i18n;
       const value = i18n[lang][key];
       if (!value) return;
-      if (value.includes('<')) {
-        el.innerHTML = value;
+      const normalized = toWesternDigits(value);
+      if (normalized.includes('<')) {
+        el.innerHTML = normalized;
       } else {
-        el.textContent = value;
+        el.textContent = normalized;
       }
     });
 
@@ -771,7 +775,7 @@
      LIVE TIME (DAMASCUS) + WEDDING COUNTDOWN (DAYS)
      ═══════════════════════════════════════════════════════════ */
   function pad(num) {
-    return String(num).padStart(2, '0');
+    return toWesternDigits(String(num).padStart(2, '0'));
   }
 
   function animateCountChange(element, newValue) {

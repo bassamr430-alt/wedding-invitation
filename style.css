@@ -30,6 +30,7 @@
   --font-accent: 'Yellowtail', cursive;
   --font-luxury: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-numeric: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
   /* Type scale */
   --text-body: 1.0625rem;
@@ -243,17 +244,16 @@ html[dir="rtl"] .section__title,
 html[dir="rtl"] .hero__prelude,
 html[dir="rtl"] .hero__subtitle,
 html[dir="rtl"] .hero__meta-label,
-html[dir="rtl"] .hero__meta-value,
+html[dir="rtl"] .hero__meta-value--venue,
 html[dir="rtl"] .scroll-indicator__text,
 html[dir="rtl"] .timeline__title,
 html[dir="rtl"] .timeline__text,
 html[dir="rtl"] .countdown__until,
 html[dir="rtl"] .countdown__label,
 html[dir="rtl"] .detail-card__title,
-html[dir="rtl"] .detail-card__value,
+html[dir="rtl"] .detail-card:nth-child(3) .detail-card__value,
 html[dir="rtl"] .venue__info-name,
 html[dir="rtl"] .venue__info-city,
-html[dir="rtl"] .venue__info-date,
 html[dir="rtl"] .thanks__title,
 html[dir="rtl"] .thanks__body,
 html[dir="rtl"] .thanks__closing,
@@ -266,6 +266,25 @@ html[dir="rtl"] .venue__notice-text--ar {
   font-style: normal !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
+}
+
+/* Western digits (0–9) — same look in EN & AR */
+:where(
+  .nums-en,
+  .countdown__number,
+  .countdown__sep,
+  .details-grid .detail-card:nth-child(2) .detail-card__value,
+  .section__index,
+  .footer__year
+) {
+  font-family: var(--font-numeric) !important;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+  font-style: normal;
+}
+
+.nums-en {
+  unicode-bidi: isolate;
 }
 
 html[dir="rtl"] .story__header .section__eyebrow {
@@ -363,6 +382,8 @@ html[dir="rtl"] .story__header .section__eyebrow {
   color: var(--color-gold);
   margin-bottom: var(--space-md);
   letter-spacing: 0.12em;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .loader__line {
@@ -745,6 +766,8 @@ body.scrolled-past-hero .music-btn.is-playing {
   align-items: center;
   gap: 0.15rem;
   margin-bottom: var(--space-md);
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .hero__name {
@@ -754,6 +777,8 @@ body.scrolled-past-hero .music-btn.is-playing {
   letter-spacing: var(--tracking-name);
   line-height: var(--leading-tight);
   text-transform: uppercase;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .hero__amp {
@@ -765,6 +790,8 @@ body.scrolled-past-hero .music-btn.is-playing {
   line-height: 1;
   margin: 0.35rem 0;
   letter-spacing: 0.06em;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .hero__subtitle {
@@ -1412,7 +1439,8 @@ body.scrolled-past-hero .music-btn.is-playing {
   font-family: var(--font-countdown);
   font-size: clamp(3rem, 10vw, 5rem);
   font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
   color: var(--color-charcoal);
   line-height: 1;
   letter-spacing: 0.04em;
@@ -2003,6 +2031,8 @@ body.scrolled-past-hero .music-btn.is-playing {
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--color-white);
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .footer__heart {
@@ -2113,6 +2143,8 @@ body.scrolled-past-hero .music-btn.is-playing {
   display: inline-block;
   opacity: 0;
   transform: translateY(1.1em);
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .hero__meta-card {
