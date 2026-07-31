@@ -79,7 +79,9 @@
 /* ─── Fonts ─── */
 @font-face {
   font-family: 'HSN Shahd';
-  src: url('assets/fonts/HSN-Shahd-Regular.ttf') format('truetype');
+  src:
+    url('assets/fonts/HSN-Shahd-Regular.ttf') format('truetype'),
+    url('assets/fonts/HSN%20Shahd%20Regular%20Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -235,6 +237,41 @@ html[dir="rtl"] .scroll-progress__bar {
 
 html[dir="rtl"] .section--venue .venue__info {
   text-align: center;
+}
+
+html[dir="rtl"] .story__quote-text,
+html[dir="rtl"] .section__eyebrow,
+html[dir="rtl"] .section__title,
+html[dir="rtl"] .hero__prelude,
+html[dir="rtl"] .hero__subtitle,
+html[dir="rtl"] .hero__meta-label,
+html[dir="rtl"] .hero__meta-value,
+html[dir="rtl"] .scroll-indicator__text,
+html[dir="rtl"] .timeline__title,
+html[dir="rtl"] .timeline__text,
+html[dir="rtl"] .countdown__until,
+html[dir="rtl"] .countdown__label,
+html[dir="rtl"] .detail-card__title,
+html[dir="rtl"] .detail-card__value,
+html[dir="rtl"] .venue__info-name,
+html[dir="rtl"] .venue__info-city,
+html[dir="rtl"] .venue__info-date,
+html[dir="rtl"] .thanks__title,
+html[dir="rtl"] .thanks__body,
+html[dir="rtl"] .thanks__closing,
+html[dir="rtl"] .loader__text,
+html[dir="rtl"] .loader__hint,
+html[dir="rtl"] .footer__tagline,
+html[dir="rtl"] .btn--luxury,
+html[dir="rtl"] .venue__notice-text--ar {
+  font-family: 'HSN Shahd', 'Segoe UI', Tahoma, sans-serif !important;
+  font-style: normal !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+html[dir="rtl"] .story__header .section__eyebrow {
+  font-family: 'HSN Shahd', 'Segoe UI', Tahoma, sans-serif !important;
 }
 
 /* ─── Utility ─── */
