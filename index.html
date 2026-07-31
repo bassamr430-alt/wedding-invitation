@@ -18,6 +18,7 @@
   <meta property="og:image" content="assets/images/og-image.png">
   <meta property="og:url" content="https://yourusername.github.io/ammar-rana-wedding/">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_SY">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AMMAR & RANA — Wedding Invitation">
@@ -51,10 +52,16 @@
       <div class="loader__line">
         <div class="loader__line-fill"></div>
       </div>
-      <p class="loader__text">Loading your invitation</p>
-      <p class="loader__hint">Tap anywhere to enter</p>
+      <p class="loader__text" data-i18n="loader">Loading your invitation</p>
+      <p class="loader__hint" data-i18n="loader_hint">Tap anywhere to enter</p>
     </div>
   </div>
+
+  <nav class="lang-switcher" aria-label="Language selection">
+    <button type="button" class="lang-switcher__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+    <span class="lang-switcher__divider" aria-hidden="true"></span>
+    <button type="button" class="lang-switcher__btn" data-lang="ar" aria-pressed="false">ع</button>
+  </nav>
 
   <audio id="bgMusic" autoplay muted preload="auto" loop playsinline webkit-playsinline aria-hidden="true">
     <source src="assets/music/wedding-music.m4a?v=2" type="audio/mp4">
@@ -100,7 +107,7 @@
       </div>
 
       <div class="hero__content">
-        <p class="hero__prelude" data-reveal-text>Together with their families</p>
+        <p class="hero__prelude" data-i18n="hero_prelude" data-reveal-text>Together with their families</p>
 
         <h1 class="hero__title">
           <span class="hero__name hero__name--groom" data-split>AMMAR</span>
@@ -108,7 +115,7 @@
           <span class="hero__name hero__name--bride" data-split>RANA</span>
         </h1>
 
-        <p class="hero__subtitle" data-reveal-text>
+        <p class="hero__subtitle" data-i18n="hero_subtitle" data-reveal-text>
           joyfully invite you to celebrate their wedding
         </p>
       </div>
@@ -116,21 +123,21 @@
       <div class="hero__bottom">
         <div class="hero__meta">
           <div class="hero__meta-card">
-            <span class="hero__meta-label">Wedding Date</span>
-            <time class="hero__meta-value" datetime="2026-09-04">04 September 2026</time>
+            <span class="hero__meta-label" data-i18n="hero_date_label">Wedding Date</span>
+            <time class="hero__meta-value" datetime="2026-09-04" data-i18n="hero_date">04 September 2026</time>
           </div>
           <div class="hero__meta-divider" aria-hidden="true"></div>
           <div class="hero__meta-card">
-            <span class="hero__meta-label">Venue</span>
+            <span class="hero__meta-label" data-i18n="hero_venue_label">Venue</span>
             <address class="hero__meta-value hero__meta-value--venue">
-              <span>View Restaurant</span>
-              <span>Tartous, Syria</span>
+              <span data-i18n="hero_venue_name">View Restaurant</span>
+              <span data-i18n="hero_venue_city">Tartous, Syria</span>
             </address>
           </div>
         </div>
 
         <a href="#story" class="scroll-indicator" aria-label="Scroll to our story">
-          <span class="scroll-indicator__text">Scroll</span>
+          <span class="scroll-indicator__text" data-i18n="scroll_down">Scroll</span>
           <span class="scroll-indicator__track">
             <span class="scroll-indicator__line"></span>
             <span class="scroll-indicator__dot"></span>
@@ -169,13 +176,13 @@
       <div class="story__inner">
         <div class="container container--editorial">
           <header class="story__header" data-reveal="blur">
-            <span class="section__eyebrow">Our Story</span>
+            <span class="section__eyebrow" data-i18n="story_eyebrow">Our Story</span>
             <span class="section__index" aria-hidden="true">01</span>
           </header>
 
           <blockquote class="story__quote glass-card" data-reveal="fade">
             <span class="story__quote-mark" aria-hidden="true">"</span>
-            <p class="story__quote-text" id="story-heading">
+            <p class="story__quote-text" data-i18n="story_lead" id="story-heading">
               Every love story is beautiful, but ours is our favorite.
             </p>
           </blockquote>
@@ -185,8 +192,8 @@
               <article class="timeline__item">
                 <div class="timeline__node" aria-hidden="true"></div>
                 <div class="timeline__content">
-                  <h3 class="timeline__title">How It Started</h3>
-                  <p class="timeline__text">
+                  <h3 class="timeline__title" data-i18n="timeline_1_title">How It Started</h3>
+                  <p class="timeline__text" data-i18n="timeline_1_text">
                     What began with a simple hello became a journey filled with love, laughter and unforgettable memories.
                   </p>
                 </div>
@@ -194,8 +201,8 @@
               <article class="timeline__item">
                 <div class="timeline__node" aria-hidden="true"></div>
                 <div class="timeline__content">
-                  <h3 class="timeline__title">Growing Together</h3>
-                  <p class="timeline__text">
+                  <h3 class="timeline__title" data-i18n="timeline_2_title">Growing Together</h3>
+                  <p class="timeline__text" data-i18n="timeline_2_text">
                     Through every season, our bond grew deeper — woven with trust, joy, and endless devotion.
                   </p>
                 </div>
@@ -203,8 +210,8 @@
               <article class="timeline__item">
                 <div class="timeline__node" aria-hidden="true"></div>
                 <div class="timeline__content">
-                  <h3 class="timeline__title">Our Forever</h3>
-                  <p class="timeline__text">
+                  <h3 class="timeline__title" data-i18n="timeline_3_title">Our Forever</h3>
+                  <p class="timeline__text" data-i18n="timeline_3_text">
                     Today we invite you to celebrate the beginning of our forever.
                   </p>
                 </div>
@@ -229,8 +236,8 @@
     <section class="section section--countdown" id="countdown" aria-labelledby="countdown-heading">
       <div class="container container--editorial">
         <header class="section__header section__header--editorial" data-reveal="blur">
-          <span class="section__eyebrow">Countdown</span>
-          <h2 class="section__title" id="countdown-heading">Until We Say Yes</h2>
+          <span class="section__eyebrow" data-i18n="countdown_eyebrow">Countdown</span>
+          <h2 class="section__title" id="countdown-heading" data-i18n="countdown_title">Until We Say Yes</h2>
         </header>
 
         <div class="countdown-glass" data-reveal="zoom">
@@ -249,9 +256,9 @@
               </div>
 
               <div class="countdown__days">
-                <span class="countdown__until">Until our wedding</span>
+                <span class="countdown__until" data-i18n="countdown_until">Until our wedding</span>
                 <span class="countdown__number" id="countDays">0</span>
-                <span class="countdown__label">Days</span>
+                <span class="countdown__label" data-i18n="countdown_days">Days</span>
               </div>
             </div>
           </div>
@@ -263,8 +270,8 @@
     <section class="section section--details" id="details" aria-labelledby="details-heading">
       <div class="container container--editorial">
         <header class="section__header section__header--editorial" data-reveal="blur">
-          <span class="section__eyebrow">The Celebration</span>
-          <h2 class="section__title" id="details-heading">Wedding Details</h2>
+          <span class="section__eyebrow" data-i18n="details_eyebrow">The Celebration</span>
+          <h2 class="section__title" id="details-heading" data-i18n="details_title">Wedding Details</h2>
         </header>
 
         <div class="details-grid">
@@ -273,8 +280,8 @@
             <div class="detail-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
             </div>
-            <h3 class="detail-card__title">Date</h3>
-            <p class="detail-card__value">04 September 2026</p>
+            <h3 class="detail-card__title" data-i18n="detail_date_title">Date</h3>
+            <p class="detail-card__value" data-i18n="detail_date_value">04 September 2026</p>
           </article>
 
           <article class="detail-card glass-card" data-reveal="slide">
@@ -282,8 +289,8 @@
             <div class="detail-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </div>
-            <h3 class="detail-card__title">Time</h3>
-            <p class="detail-card__value">7:30 PM</p>
+            <h3 class="detail-card__title" data-i18n="detail_time_title">Time</h3>
+            <p class="detail-card__value" data-i18n="detail_time_value">7:30 PM</p>
           </article>
 
           <article class="detail-card glass-card" data-reveal="slide">
@@ -291,8 +298,8 @@
             <div class="detail-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
             </div>
-            <h3 class="detail-card__title">Venue</h3>
-            <p class="detail-card__value">View Restaurant<br>Tartous, Syria</p>
+            <h3 class="detail-card__title" data-i18n="detail_venue_title">Venue</h3>
+            <p class="detail-card__value" data-i18n="detail_venue_value">View Restaurant<br>Tartous, Syria</p>
           </article>
         </div>
       </div>
@@ -301,17 +308,17 @@
     <!-- ═══ LOCATION — Luxury Frame -->
     <section class="section section--venue" id="venue" aria-labelledby="venue-heading">
       <div class="container container--editorial">
-        <header class="section__header section__header--editorial" data-reveal="blur">
-          <span class="section__eyebrow">Location</span>
-          <h2 class="section__title" id="venue-heading">Find Us</h2>
+        <header class="section__header section__header--editorial section__header--centered" data-reveal="blur">
+          <span class="section__eyebrow" data-i18n="venue_eyebrow">Location</span>
+          <h2 class="section__title" id="venue-heading" data-i18n="venue_title">Find Us</h2>
         </header>
 
         <div class="venue__layout">
           <div class="venue__map-wrap" data-reveal="scale">
             <div class="venue__info glass-card">
-              <h3 class="venue__info-name">View Restaurant</h3>
-              <p class="venue__info-city">Tartous, Syria</p>
-              <p class="venue__info-date">04 September 2026</p>
+              <h3 class="venue__info-name" data-i18n="hero_venue_name">View Restaurant</h3>
+              <p class="venue__info-city" data-i18n="hero_venue_city">Tartous, Syria</p>
+              <p class="venue__info-date" data-i18n="hero_date">04 September 2026</p>
             </div>
 
             <div class="venue__map-frame">
@@ -333,13 +340,25 @@
               class="btn btn--luxury venue__btn"
               target="_blank"
               rel="noopener noreferrer"
-             
             >
-              Open in Google Maps
+              <span data-i18n="venue_maps_btn">Open in Google Maps</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
           </div>
         </div>
+
+        <aside class="venue__notice glass-card" data-reveal="fade" aria-label="Guest notice">
+          <div class="venue__notice-frame" aria-hidden="true"></div>
+          <p class="venue__notice-text venue__notice-text--ar" lang="ar" dir="rtl" data-i18n="notice_ar">
+            حرصًا على راحتكم واستمتاع الجميع، نرجو أن تقتصر الدعوة على البالغين. شاكرين لكم حسن تفهّمكم.
+          </p>
+          <div class="venue__notice-divider" aria-hidden="true">
+            <span></span>
+          </div>
+          <p class="venue__notice-text venue__notice-text--en" lang="en" dir="ltr" data-i18n="notice_en">
+            For the comfort and enjoyment of all our guests, we kindly request that this celebration be adults only. Thank you for your understanding.
+          </p>
+        </aside>
       </div>
     </section>
 
@@ -348,12 +367,12 @@
       <div class="container container--editorial">
         <div class="thanks__layout glass-card" data-reveal="blur">
           <div class="thanks__glow" aria-hidden="true"></div>
-          <h2 class="thanks__title" id="thanks-heading">Thank You</h2>
+          <h2 class="thanks__title" id="thanks-heading" data-i18n="thanks_title">Thank You</h2>
           <div class="thanks__text">
-            <p class="thanks__body">
+            <p class="thanks__body" data-i18n="thanks_body">
               Your presence is the greatest gift we could ask for.
             </p>
-            <p class="thanks__closing">See you on our special day.</p>
+            <p class="thanks__closing" data-i18n="thanks_closing">See you on our special day.</p>
           </div>
         </div>
       </div>
@@ -367,7 +386,7 @@
     <div class="footer__glow" aria-hidden="true"></div>
     <div class="footer__inner">
       <div class="footer__monogram">AMMAR <span class="footer__heart" aria-hidden="true">♥</span> RANA</div>
-      <p class="footer__tagline">Made with Love</p>
+      <p class="footer__tagline" data-i18n="footer_tagline">Made with Love</p>
       <p class="footer__year">&copy; 2026</p>
     </div>
   </footer>

@@ -11,13 +11,100 @@
      ═══════════════════════════════════════════════════════════ */
   const CONFIG = {
     weddingDate: new Date('2026-09-04T19:30:00+03:00'),
+    defaultLang: 'en',
     loaderDuration: 550,
     timeZone: 'Asia/Damascus',
+  };
+
+  const i18n = {
+    en: {
+      loader: 'Loading your invitation',
+      loader_hint: 'Tap anywhere to enter',
+      hero_prelude: 'Together with their families',
+      hero_subtitle: 'joyfully invite you to celebrate their wedding',
+      hero_date_label: 'Wedding Date',
+      hero_date: '04 September 2026',
+      hero_venue_label: 'Venue',
+      hero_venue_name: 'View Restaurant',
+      hero_venue_city: 'Tartous, Syria',
+      scroll_down: 'Scroll',
+      story_eyebrow: 'Our Story',
+      story_lead: 'Every love story is beautiful, but ours is our favorite.',
+      timeline_1_title: 'How It Started',
+      timeline_1_text: 'What began with a simple hello became a journey filled with love, laughter and unforgettable memories.',
+      timeline_2_title: 'Growing Together',
+      timeline_2_text: 'Through every season, our bond grew deeper — woven with trust, joy, and endless devotion.',
+      timeline_3_title: 'Our Forever',
+      timeline_3_text: 'Today we invite you to celebrate the beginning of our forever.',
+      countdown_eyebrow: 'Countdown',
+      countdown_title: 'Until We Say Yes',
+      countdown_until: 'Until our wedding',
+      countdown_days: 'Days',
+      details_eyebrow: 'The Celebration',
+      details_title: 'Wedding Details',
+      detail_date_title: 'Date',
+      detail_date_value: '04 September 2026',
+      detail_time_title: 'Time',
+      detail_time_value: '7:30 PM',
+      detail_venue_title: 'Venue',
+      detail_venue_value: 'View Restaurant<br>Tartous, Syria',
+      venue_eyebrow: 'Location',
+      venue_title: 'Find Us',
+      venue_maps_btn: 'Open in Google Maps',
+      notice_ar: 'حرصًا على راحتكم واستمتاع الجميع، نرجو أن تقتصر الدعوة على البالغين. شاكرين لكم حسن تفهّمكم.',
+      notice_en: 'For the comfort and enjoyment of all our guests, we kindly request that this celebration be adults only. Thank you for your understanding.',
+      thanks_title: 'Thank You',
+      thanks_body: 'Your presence is the greatest gift we could ask for.',
+      thanks_closing: 'See you on our special day.',
+      footer_tagline: 'Made with Love',
+    },
+    ar: {
+      loader: 'جاري تحميل دعوتكم',
+      loader_hint: 'المس الشاشة للدخول',
+      hero_prelude: 'برفقة عائلتيهما',
+      hero_subtitle: 'يسرّهما دعوتكم لمشاركة فرحة حفل زفافهما',
+      hero_date_label: 'تاريخ الزفاف',
+      hero_date: '04 سبتمبر 2026',
+      hero_venue_label: 'مكان الحفل',
+      hero_venue_name: 'مطعم فيو',
+      hero_venue_city: 'طرطوس، سوريا',
+      scroll_down: 'مرر للأسفل',
+      story_eyebrow: 'قصتنا',
+      story_lead: 'كل قصة حب جميلة، لكن قصتنا هي الأجمل بالنسبة لنا.',
+      timeline_1_title: 'البداية',
+      timeline_1_text: 'ما بدأ بـ«مرحباً» بسيطاً تحوّل إلى رحلة مليئة بالحب والضحك وذكريات لا تُنسى.',
+      timeline_2_title: 'ننمو معًا',
+      timeline_2_text: 'ومع كل مرحلة من حياتنا، ازدادت علاقتنا عمقًا، وازدانت بالثقة والفرح والإخلاص الذي لا ينتهي.',
+      timeline_3_title: 'بداية الأبد',
+      timeline_3_text: 'واليوم، ندعوكم لمشاركتنا الاحتفال ببداية رحلتنا التي ستدوم إلى الأبد.',
+      countdown_eyebrow: 'العدّ التنازلي',
+      countdown_title: 'حتى نقول نعم',
+      countdown_until: 'حتى موعد زفافنا',
+      countdown_days: 'يومًا',
+      details_eyebrow: 'موعد الاحتفال',
+      details_title: 'تفاصيل حفل الزفاف',
+      detail_date_title: 'التاريخ',
+      detail_date_value: '04 سبتمبر 2026',
+      detail_time_title: 'الوقت',
+      detail_time_value: '7:30 مساءً',
+      detail_venue_title: 'مكان الحفل',
+      detail_venue_value: 'مطعم فيو<br>طرطوس، سوريا',
+      venue_eyebrow: 'مكان الحفل',
+      venue_title: 'موقع الاحتفال',
+      venue_maps_btn: 'فتح في خرائط Google',
+      notice_ar: 'حرصًا على راحتكم واستمتاع الجميع، نرجو أن تقتصر الدعوة على البالغين. شاكرين لكم حسن تفهّمكم.',
+      notice_en: 'For the comfort and enjoyment of all our guests, we kindly request that this celebration be adults only. Thank you for your understanding.',
+      thanks_title: 'شكرًا لكم',
+      thanks_body: 'حضوركم سيجعل فرحتنا أكثر جمالًا، ومشاركتكم ستبقى ذكرى نعتز بها دائمًا.',
+      thanks_closing: 'نلقاكم في يومنا المميز.',
+      footer_tagline: 'صُنع بحب',
+    },
   };
 
   /* ═══════════════════════════════════════════════════════════
      STATE
      ═══════════════════════════════════════════════════════════ */
+  let currentLang = CONFIG.defaultLang;
   let lenis = null;
   let musicShouldPlay = true;
   let loaderFinished = false;
@@ -33,6 +120,7 @@
     progressBar: document.querySelector('.scroll-progress__bar'),
     mouseGlow: document.querySelector('.mouse-glow'),
     bgMusic: document.getElementById('bgMusic'),
+    langBtns: document.querySelectorAll('.lang-switcher__btn'),
     hero: document.getElementById('hero'),
     heroImage: document.querySelector('.hero__image'),
     countDays: document.getElementById('countDays'),
@@ -44,6 +132,62 @@
 
   let countdownInterval = null;
   let prevCountdown = { days: '', hours: '', minutes: '', seconds: '' };
+
+  function formatCountNumber(value) {
+    if (currentLang === 'ar') {
+      return Number(value).toLocaleString('ar-SY');
+    }
+    return String(value);
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     LANGUAGE
+     ═══════════════════════════════════════════════════════════ */
+  function setLanguage(lang) {
+    if (!i18n[lang]) return;
+    currentLang = lang;
+
+    DOM.html.lang = lang;
+    DOM.html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.dataset.i18n;
+      const value = i18n[lang][key];
+      if (!value) return;
+      if (value.includes('<')) {
+        el.innerHTML = value;
+      } else {
+        el.textContent = value;
+      }
+    });
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      el.style.filter = 'none';
+      el.style.webkitFilter = 'none';
+    });
+
+    DOM.langBtns.forEach((btn) => {
+      const isActive = btn.dataset.lang === lang;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-pressed', isActive);
+    });
+
+    if (DOM.countDays && prevCountdown.days !== '') {
+      DOM.countDays.textContent = formatCountNumber(prevCountdown.days);
+    }
+
+    localStorage.setItem('wedding-lang', lang);
+  }
+
+  function initLanguage() {
+    const saved = localStorage.getItem('wedding-lang');
+    const browserLang = navigator.language.startsWith('ar') ? 'ar' : 'en';
+    setLanguage(saved || browserLang);
+
+    DOM.langBtns.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+  }
 
   /* ═══════════════════════════════════════════════════════════
      LOADER
@@ -545,22 +689,24 @@
     });
 
     document.querySelectorAll('[data-reveal="blur"]').forEach((el) => {
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: 30, filter: 'blur(8px)' },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: 1.4,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+      const isRtl = document.documentElement.dir === 'rtl';
+      const fromState = isRtl
+        ? { opacity: 0, y: 24 }
+        : { opacity: 0, y: 30, filter: 'blur(8px)' };
+      const toState = isRtl
+        ? { opacity: 1, y: 0, clearProps: 'filter' }
+        : { opacity: 1, y: 0, filter: 'blur(0px)' };
+
+      gsap.fromTo(el, fromState, {
+        ...toState,
+        duration: 1.4,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      });
     });
 
     document.querySelectorAll('[data-reveal="slide"]').forEach((el, i) => {
@@ -660,11 +806,11 @@
   function updateDaysRemaining() {
     const diff = CONFIG.weddingDate - Date.now();
     const days = diff > 0 ? Math.floor(diff / 86400000) : 0;
-    const daysText = String(days);
+    const daysText = formatCountNumber(days);
 
-    if (prevCountdown.days !== daysText) {
-      animateCountChange(DOM.countDays, daysText);
-      prevCountdown.days = daysText;
+    if (prevCountdown.days !== String(days)) {
+      if (DOM.countDays) DOM.countDays.textContent = daysText;
+      prevCountdown.days = String(days);
     }
 
     return { diff, days };
@@ -1136,6 +1282,7 @@
   }
 
   function init() {
+    initLanguage();
     initMusic();
     initHeroBokeh();
     initLoader();

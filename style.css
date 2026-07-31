@@ -69,10 +69,20 @@
   /* Z-index layers */
   --z-loader: 9999;
   --z-progress: 9998;
+  --z-lang: 1000;
   --z-music: 999;
   --z-lightbox: 900;
   --z-ambient: 0;
   --z-glow: 1;
+}
+
+/* ─── Fonts ─── */
+@font-face {
+  font-family: 'HSN Shahd';
+  src: url('assets/fonts/HSN-Shahd-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* ─── Reset & Base ─── */
@@ -151,6 +161,80 @@ address {
 
 fieldset {
   border: none;
+}
+
+/* ─── Arabic / RTL ─── */
+html[dir="rtl"] {
+  --font-display: 'HSN Shahd', 'Playfair Display', Georgia, serif;
+  --font-editorial: 'HSN Shahd', 'Playfair Display', Georgia, serif;
+  --font-body: 'HSN Shahd', 'Roboto', sans-serif;
+  --font-luxury: 'HSN Shahd', 'Playfair Display', Georgia, serif;
+  --font-serif: 'HSN Shahd', 'Playfair Display', Georgia, serif;
+  --tracking-label: 0.06em;
+  --tracking-display: 0;
+}
+
+html[dir="rtl"] body {
+  letter-spacing: 0;
+  font-feature-settings: 'kern' 1;
+}
+
+html[dir="rtl"] :where(
+  [data-i18n],
+  .section__eyebrow,
+  .section__title,
+  .hero__prelude,
+  .hero__subtitle,
+  .hero__meta-label,
+  .hero__meta-value,
+  .scroll-indicator__text,
+  .story__quote-text,
+  .timeline__title,
+  .timeline__text,
+  .countdown__label,
+  .countdown__until,
+  .detail-card__title,
+  .detail-card__value,
+  .venue__info-name,
+  .venue__info-city,
+  .venue__info-date,
+  .venue__notice-text,
+  .thanks__title,
+  .thanks__body,
+  .thanks__closing,
+  .footer__tagline,
+  .loader__text,
+  .loader__hint
+) {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[dir="rtl"] .hero__name,
+html[dir="rtl"] .hero__char,
+html[dir="rtl"] .loader__monogram,
+html[dir="rtl"] .footer__monogram {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-name);
+  text-transform: uppercase;
+}
+
+html[dir="rtl"] [data-reveal] {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+html[dir="rtl"] .lang-switcher {
+  left: var(--space-md);
+  right: auto;
+}
+
+html[dir="rtl"] .scroll-progress__bar {
+  transform-origin: right;
+}
+
+html[dir="rtl"] .section--venue .venue__info {
+  text-align: center;
 }
 
 /* ─── Utility ─── */
@@ -283,6 +367,63 @@ fieldset {
 @keyframes loaderHintPulse {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════ LANGUAGE SWITCHER */
+.lang-switcher {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: var(--z-lang);
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0.5rem;
+  background: var(--color-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 100px;
+  box-shadow: var(--shadow-soft);
+}
+
+.lang-switcher__btn {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.4rem 0.75rem;
+  border-radius: 100px;
+  transition: var(--transition-fast);
+}
+
+.lang-switcher__btn.is-active {
+  color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-switcher__btn:hover:not(.is-active) {
+  color: var(--color-white);
+}
+
+.lang-switcher__divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(200, 169, 106, 0.3);
+}
+
+body.scrolled-past-hero .lang-switcher {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(200, 169, 106, 0.3);
+}
+
+body.scrolled-past-hero .lang-switcher__btn {
+  color: var(--color-gray);
+}
+
+body.scrolled-past-hero .lang-switcher__btn.is-active {
+  color: var(--color-gold-dark);
+  background: rgba(200, 169, 106, 0.12);
 }
 
 /* ═══════════════════════════════════════ MUSIC BUTTON */
@@ -765,6 +906,17 @@ body.scrolled-past-hero .music-btn.is-playing {
 .section__header--editorial {
   text-align: start;
   max-width: 36rem;
+}
+
+.section__header--centered {
+  text-align: center;
+  max-width: none;
+  margin-inline: auto;
+}
+
+.section__header--centered .section__title,
+.section__header--centered .section__eyebrow {
+  margin-inline: auto;
 }
 
 .section__eyebrow {
@@ -2302,7 +2454,7 @@ body.scrolled-past-hero .music-btn.is-playing {
 
 .venue__info {
   padding: 1.75rem 2rem;
-  text-align: start;
+  text-align: center;
 }
 
 .venue__info-name {
@@ -2351,6 +2503,57 @@ body.scrolled-past-hero .music-btn.is-playing {
 .venue__btn {
   width: 100%;
   padding: 1.35rem 2rem;
+}
+
+.venue__notice {
+  position: relative;
+  max-width: 720px;
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+  padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.75rem);
+  text-align: center;
+  overflow: hidden;
+}
+
+.venue__notice-frame {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(200, 169, 106, 0.22);
+  pointer-events: none;
+}
+
+.venue__notice-text {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 2.2vw, 1.0625rem);
+  line-height: 1.85;
+  color: var(--color-gray);
+}
+
+.venue__notice-text--ar {
+  font-family: 'HSN Shahd', var(--font-body);
+  color: var(--color-charcoal);
+}
+
+.venue__notice-text--en {
+  font-style: italic;
+  color: var(--color-gray-light);
+}
+
+.venue__notice-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.25rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.venue__notice-divider span {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
 
 /* ─── Thank You Glass ─── */
@@ -2658,6 +2861,16 @@ body.scrolled-past-hero .music-btn.is-playing {
     grid-column: auto;
   }
 
+  .lang-switcher {
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+
+  html[dir="rtl"] .lang-switcher {
+    left: var(--space-sm);
+    right: auto;
+  }
+
   .music-btn {
     bottom: var(--space-sm);
     right: var(--space-sm);
@@ -2735,6 +2948,7 @@ body.scrolled-past-hero .music-btn.is-playing {
 /* ─── Print ─── */
 @media print {
   .loader,
+  .lang-switcher,
   .music-btn,
   .mouse-glow,
   .scroll-progress,
