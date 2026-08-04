@@ -186,8 +186,8 @@ html[dir="rtl"] :where(
   [data-i18n],
   .section__eyebrow,
   .section__title,
-  .hero__prelude,
-  .hero__subtitle,
+  .hero__line,
+  .hero__person-label,
   .hero__meta-label,
   .hero__meta-value,
   .scroll-indicator__text,
@@ -218,8 +218,8 @@ html[dir="rtl"] .hero__char,
 html[dir="rtl"] .loader__monogram,
 html[dir="rtl"] .footer__monogram {
   font-family: var(--font-display);
-  letter-spacing: var(--tracking-name);
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 html[dir="rtl"] [data-reveal] {
@@ -243,8 +243,8 @@ html[dir="rtl"] .section--venue .venue__info {
 html[dir="rtl"] .story__quote-text,
 html[dir="rtl"] .section__eyebrow,
 html[dir="rtl"] .section__title,
-html[dir="rtl"] .hero__prelude,
-html[dir="rtl"] .hero__subtitle,
+html[dir="rtl"] .hero__line,
+html[dir="rtl"] .hero__person-label,
 html[dir="rtl"] .hero__meta-label,
 html[dir="rtl"] .hero__meta-value--venue,
 html[dir="rtl"] .scroll-indicator__text,
@@ -595,7 +595,7 @@ body.scrolled-past-hero .music-btn.is-playing {
   z-index: 2;
   text-align: center;
   color: var(--color-white);
-  padding: clamp(5rem, 12vh, 7rem) var(--space-md) 0;
+  padding: clamp(4.5rem, 10vh, 6rem) var(--space-md) 0;
   max-width: 900px;
   flex: 1;
   display: flex;
@@ -761,23 +761,100 @@ body.scrolled-past-hero .music-btn.is-playing {
   );
 }
 
-.hero__prelude,
-.hero__amp,
-.hero__subtitle,
+.hero__line,
+.hero__person-label,
 .hero__meta-card,
 .scroll-indicator {
   opacity: 0;
 }
 
-.hero__prelude {
+.hero__invitation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.3rem, 1vh, 0.5rem);
+  max-width: 44rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.hero__line {
   font-family: var(--font-body);
-  font-size: 0.6875rem;
+  font-size: clamp(0.9375rem, 2.8vw, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.hero__line--opening {
+  font-size: clamp(1.0625rem, 3.2vw, 1.375rem);
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.hero__line--honor {
+  font-size: clamp(1.0625rem, 3.2vw, 1.375rem);
+  color: rgba(255, 255, 255, 0.96);
+  margin-bottom: clamp(0.2rem, 0.8vh, 0.4rem);
+}
+
+.hero__families {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: clamp(0.65rem, 3.5vw, 2rem);
+  width: 100%;
+  max-width: 40rem;
+  margin-block: clamp(0.25rem, 1vh, 0.5rem);
+}
+
+.hero__line--family {
+  font-size: clamp(0.9375rem, 2.6vw, 1.125rem);
+  line-height: 1.55;
+  text-align: center;
+}
+
+.hero__line--invite {
+  font-size: clamp(1rem, 2.9vw, 1.25rem);
+  margin-top: clamp(0.1rem, 0.6vh, 0.25rem);
+}
+
+.hero__line--event {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 3.4vw, 1.5625rem);
   font-weight: 500;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
-  margin-top: clamp(1.5rem, 4vh, 2.5rem);
-  margin-bottom: var(--space-md);
+  color: var(--color-gold-light);
+  letter-spacing: 0.03em;
+  margin-bottom: clamp(0.1rem, 0.6vh, 0.25rem);
+}
+
+.hero__couple {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: clamp(0.85rem, 4.5vw, 2.5rem);
+  width: 100%;
+  max-width: 40rem;
+  margin-top: clamp(0.35rem, 1.2vh, 0.65rem);
+}
+
+.hero__person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.hero__person-label {
+  font-family: var(--font-body);
+  font-size: clamp(0.8125rem, 2.4vw, 1.0625rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-gold);
+  text-transform: none;
 }
 
 .hero__title {
@@ -792,7 +869,7 @@ body.scrolled-past-hero .music-btn.is-playing {
 
 .hero__name {
   font-family: var(--font-editorial);
-  font-size: var(--text-hero-name);
+  font-size: clamp(2.25rem, 8.5vw, 4.25rem);
   font-weight: 400;
   letter-spacing: var(--tracking-name);
   line-height: var(--leading-tight);
@@ -801,29 +878,26 @@ body.scrolled-past-hero .music-btn.is-playing {
   unicode-bidi: isolate;
 }
 
-.hero__amp {
-  font-family: var(--font-editorial);
-  font-size: clamp(2.75rem, 6vw, 4.5rem);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--color-gold);
-  line-height: 1;
-  margin: 0.35rem 0;
-  letter-spacing: 0.06em;
-  direction: ltr;
-  unicode-bidi: isolate;
+.hero__name.hero__name--whole {
+  opacity: 0;
+  transform: translateY(1.1em);
+  display: block;
+  text-transform: none;
+  letter-spacing: 0;
+  direction: rtl;
+  unicode-bidi: plaintext;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-size: clamp(2rem, 9.5vw, 3.75rem);
+  line-height: 1.2;
 }
 
-.hero__subtitle {
-  font-family: var(--font-display);
-  font-size: clamp(1.125rem, 2.4vw, 1.5rem);
-  font-weight: 400;
-  font-style: normal;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0;
-  line-height: var(--leading-snug);
-  letter-spacing: 0.04em;
-  max-width: 28ch;
+html[dir="rtl"] .hero__name:not(.hero__name--whole) {
+  direction: ltr;
+}
+
+html[dir="rtl"] .hero__name.hero__name--whole {
+  direction: rtl;
+  font-family: 'HSN Shahd', 'Playfair Display', Georgia, serif;
 }
 
 /* ═══════════════════════════════════════ SECTIONS */
@@ -2643,6 +2717,84 @@ body.scrolled-past-hero .music-btn.is-playing {
   background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
 
+.venue__regret {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.25rem;
+}
+
+.venue__regret-text {
+  font-family: 'HSN Shahd', var(--font-body);
+  font-size: clamp(0.9375rem, 2.2vw, 1.0625rem);
+  line-height: 1.85;
+  color: var(--color-charcoal);
+  margin: 0 0 0.65rem;
+}
+
+html[dir="ltr"] .venue__regret-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--color-gray);
+}
+
+.venue__regret-hint {
+  font-family: 'HSN Shahd', var(--font-body);
+  font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+  color: var(--color-gold-dark);
+  margin: 0 0 1.1rem;
+}
+
+html[dir="ltr"] .venue__regret-hint {
+  font-family: var(--font-body);
+  font-style: normal;
+}
+
+.venue__regret-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.venue__wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 7.5rem;
+  padding: 0.8rem 1.35rem;
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  border-radius: 100px;
+  background: rgba(37, 211, 102, 0.08);
+  color: #1b7a43;
+  font-family: 'HSN Shahd', var(--font-body);
+  font-size: clamp(0.9375rem, 2.2vw, 1.0625rem);
+  line-height: 1;
+  transition: var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.venue__wa-btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+.venue__wa-btn:hover,
+.venue__wa-btn:focus-visible {
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.28);
+}
+
+html[dir="rtl"] .venue__regret-text,
+html[dir="rtl"] .venue__regret-hint,
+html[dir="rtl"] .venue__wa-btn {
+  font-family: 'HSN Shahd', 'Segoe UI', Tahoma, sans-serif !important;
+}
+
 /* ─── Thank You Glass ─── */
 .section--thanks {
   background: linear-gradient(165deg, #1A1A1A 0%, #121110 100%);
@@ -2743,6 +2895,92 @@ body.scrolled-past-hero .music-btn.is-playing {
     --space-2xl: 5rem;
     --space-xl: 3.5rem;
     --space-lg: 2.5rem;
+  }
+
+  .hero {
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hero__content {
+    padding-top: clamp(3.25rem, 7vh, 4.25rem);
+    justify-content: flex-start;
+    flex: 0 0 auto;
+  }
+
+  .hero__line {
+    font-size: clamp(0.9375rem, 4vw, 1.125rem);
+    line-height: 1.55;
+  }
+
+  .hero__line--opening,
+  .hero__line--honor {
+    font-size: clamp(1rem, 4.5vw, 1.25rem);
+  }
+
+  .hero__line--family {
+    font-size: clamp(0.875rem, 3.8vw, 1.0625rem);
+  }
+
+  .hero__line--invite {
+    font-size: clamp(0.975rem, 4.2vw, 1.1875rem);
+  }
+
+  .hero__line--event {
+    font-size: clamp(1.0625rem, 5vw, 1.4375rem);
+  }
+
+  .hero__line--families,
+  .hero__families {
+    max-width: none;
+    padding-inline: 0.15rem;
+  }
+
+  .hero__families,
+  .hero__couple {
+    gap: clamp(0.5rem, 2.5vw, 1rem);
+  }
+
+  .hero__name {
+    font-size: clamp(1.875rem, 10vw, 2.875rem);
+  }
+
+  .hero__name.hero__name--whole {
+    font-size: clamp(1.75rem, 11vw, 2.75rem);
+  }
+
+  .hero__person-label {
+    font-size: clamp(0.8125rem, 3.6vw, 1rem);
+  }
+
+  .hero__couple {
+    gap: 0.55rem;
+    margin-top: 0.35rem;
+  }
+
+  .hero__bottom {
+    flex-shrink: 0;
+    padding-bottom: 0.65rem;
+    gap: 0.65rem;
+  }
+
+  .hero__meta-card {
+    padding: 0.85rem 1.1rem;
+  }
+
+  .hero__meta-label {
+    font-size: 0.5625rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .hero__meta-value {
+    font-size: clamp(0.9375rem, 3.5vw, 1.125rem);
+  }
+
+  .scroll-indicator {
+    transform: scale(0.9);
   }
 
   .hero__meta-divider {
@@ -2978,7 +3216,29 @@ body.scrolled-past-hero .music-btn.is-playing {
 
 @media (max-width: 480px) {
   .hero__name {
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
+    font-size: clamp(1.75rem, 11vw, 2.5rem);
+  }
+
+  .hero__name.hero__name--whole {
+    font-size: clamp(1.65rem, 12vw, 2.35rem);
+  }
+
+  html[dir="rtl"] .hero__name {
+    letter-spacing: 0;
+  }
+
+  .hero__line--opening,
+  .hero__line--honor {
+    font-size: clamp(0.975rem, 4.8vw, 1.1875rem);
+  }
+
+  .hero__line--family {
+    font-size: clamp(0.8125rem, 4vw, 1rem);
+  }
+
+  .hero__line--event {
+    font-size: clamp(1rem, 5.2vw, 1.3125rem);
   }
 
   .details-grid {

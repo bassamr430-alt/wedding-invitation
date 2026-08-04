@@ -14,19 +14,33 @@
     defaultLang: 'en',
     loaderDuration: 550,
     timeZone: 'Asia/Damascus',
+    whatsapp: {
+      ammar: '963934127948',
+      rana: '963992047772',
+      messageAr: 'مرحباً، أود الاعتذار عن حضور حفل الزفاف. شكراً لتفهمكم.',
+      messageEn: 'Hello, I would like to regretfully decline attending the wedding. Thank you for your understanding.',
+    },
   };
 
   const i18n = {
     en: {
       loader: 'Loading your invitation',
       loader_hint: 'Tap anywhere to enter',
-      hero_prelude: 'Together with their families',
-      hero_subtitle: 'joyfully invite you to celebrate their wedding',
+      hero_opening: 'Because our joy is not complete without you',
+      hero_honor: 'have the honor',
+      hero_family_groom: 'the family of the late Ramzi Rahmoun',
+      hero_family_bride: 'and the family of Mr. Haitham Ali',
+      hero_invite: 'of inviting you to attend',
+      hero_event: 'the wedding celebration of their children',
+      hero_groom_label: 'The Groom',
+      hero_groom_name: 'AMMAR RAHMOUN',
+      hero_bride_label: 'The Bride',
+      hero_bride_name: 'RANA ALI',
       hero_date_label: 'Wedding Date',
       hero_date: '<span class="nums-en">04</span> September <span class="nums-en">2026</span>',
       hero_venue_label: 'Venue',
       hero_venue_name: 'View Restaurant',
-      hero_venue_city: 'Tartous, Syria',
+      hero_venue_city: 'Tartous',
       scroll_down: 'Scroll',
       story_eyebrow: 'Our Story',
       story_lead: 'Every love story is beautiful, but ours is our favorite.',
@@ -47,12 +61,16 @@
       detail_time_title: 'Time',
       detail_time_value: '7:30 PM',
       detail_venue_title: 'Venue',
-      detail_venue_value: 'View Restaurant<br>Tartous, Syria',
+      detail_venue_value: 'View Restaurant<br>Tartous',
       venue_eyebrow: 'Location',
       venue_title: 'Find Us',
       venue_maps_btn: 'Open in Google Maps',
       notice_ar: 'حرصًا على راحتكم واستمتاع الجميع، نرجو أن تقتصر الدعوة على البالغين. شاكرين لكم حسن تفهّمكم.',
       notice_en: 'For the comfort and enjoyment of all our guests, we kindly request that this celebration be adults only. Thank you for your understanding.',
+      regret_text: 'To decline, please send your regrets at least 5 days before the wedding.',
+      regret_hint: 'Please tap here',
+      regret_btn_ammar: 'Ammar',
+      regret_btn_rana: 'Rana',
       thanks_title: 'Thank You',
       thanks_body: 'Your presence is the greatest gift we could ask for.',
       thanks_closing: 'See you on our special day.',
@@ -61,13 +79,21 @@
     ar: {
       loader: 'جاري تحميل دعوتكم',
       loader_hint: 'المس الشاشة للدخول',
-      hero_prelude: 'برفقة عائلتيهما',
-      hero_subtitle: 'يسرّهما دعوتكم لمشاركة فرحة حفل زفافهما',
+      hero_opening: 'لأن الفرح لا يكتمل إلا بوجودكم',
+      hero_honor: 'تتشرف',
+      hero_family_groom: 'عائلة المرحوم رمزي رحمون',
+      hero_family_bride: 'وعائلة السيد هيثم علي',
+      hero_invite: 'بدعوتكم لحضور',
+      hero_event: 'حفل زفاف ولديهما',
+      hero_groom_label: 'الشاب',
+      hero_groom_name: 'عمار رحمون',
+      hero_bride_label: 'الآنسة المهندسة',
+      hero_bride_name: 'رنا علي',
       hero_date_label: 'تاريخ الزفاف',
       hero_date: '<span class="nums-en">04</span> سبتمبر <span class="nums-en">2026</span>',
       hero_venue_label: 'مكان الحفل',
       hero_venue_name: 'مطعم فيو',
-      hero_venue_city: 'طرطوس، سوريا',
+      hero_venue_city: 'طرطوس',
       scroll_down: 'مرر للأسفل',
       story_eyebrow: 'قصتنا',
       story_lead: 'كل قصة حب جميلة، لكن قصتنا هي الأجمل بالنسبة لنا.',
@@ -88,12 +114,16 @@
       detail_time_title: 'الوقت',
       detail_time_value: '7:30 PM',
       detail_venue_title: 'مكان الحفل',
-      detail_venue_value: 'مطعم فيو<br>طرطوس، سوريا',
+      detail_venue_value: 'مطعم فيو<br>طرطوس',
       venue_eyebrow: 'مكان الحفل',
       venue_title: 'موقع الاحتفال',
       venue_maps_btn: 'فتح في خرائط Google',
       notice_ar: 'حرصًا على راحتكم واستمتاع الجميع، نرجو أن تقتصر الدعوة على البالغين. شاكرين لكم حسن تفهّمكم.',
       notice_en: 'For the comfort and enjoyment of all our guests, we kindly request that this celebration be adults only. Thank you for your understanding.',
+      regret_text: 'للاعتذار، يرجى الاعتذار عن الحضور قبل 5 أيام من موعد الحفل.',
+      regret_hint: 'يرجى الضغط هنا',
+      regret_btn_ammar: 'عمار',
+      regret_btn_rana: 'رنا',
       thanks_title: 'شكرًا لكم',
       thanks_body: 'حضوركم سيجعل فرحتنا أكثر جمالًا، ومشاركتكم ستبقى ذكرى نعتز بها دائمًا.',
       thanks_closing: 'نلقاكم في يومنا المميز.',
@@ -156,13 +186,17 @@
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.dataset.i18n;
       const value = i18n[lang][key];
-      if (!value) return;
+      if (!value || el.hasAttribute('data-split')) return;
       const normalized = toWesternDigits(value);
       if (normalized.includes('<')) {
         el.innerHTML = normalized;
       } else {
         el.textContent = normalized;
       }
+    });
+
+    document.querySelectorAll('[data-split]').forEach((el) => {
+      rebuildHeroNameSplit(el, loaderFinished);
     });
 
     document.querySelectorAll('[data-reveal]').forEach((el) => {
@@ -189,6 +223,24 @@
     });
 
     localStorage.setItem('wedding-lang', lang);
+
+    initWhatsAppButtons();
+  }
+
+  function initWhatsAppButtons() {
+    const message = encodeURIComponent(
+      currentLang === 'ar' ? CONFIG.whatsapp.messageAr : CONFIG.whatsapp.messageEn
+    );
+    const ammarBtn = document.getElementById('waAmmar');
+    const ranaBtn = document.getElementById('waRana');
+
+    if (ammarBtn && CONFIG.whatsapp.ammar) {
+      ammarBtn.href = `https://wa.me/${CONFIG.whatsapp.ammar}?text=${message}`;
+    }
+
+    if (ranaBtn && CONFIG.whatsapp.rana) {
+      ranaBtn.href = `https://wa.me/${CONFIG.whatsapp.rana}?text=${message}`;
+    }
   }
 
   function initLanguage() {
@@ -299,15 +351,43 @@
      ═══════════════════════════════════════════════════════════ */
   function initHeroSplitText() {
     document.querySelectorAll('[data-split]').forEach((el) => {
-      const text = el.textContent.trim();
-      el.textContent = '';
-      text.split('').forEach((char) => {
-        const span = document.createElement('span');
-        span.className = 'hero__char';
-        span.textContent = char;
-        el.appendChild(span);
-      });
+      rebuildHeroNameSplit(el, loaderFinished);
     });
+  }
+
+  function rebuildHeroNameSplit(el, showImmediately = false) {
+    const key = el.dataset.i18n;
+    const raw = (key && i18n[currentLang][key]) ? i18n[currentLang][key] : el.textContent;
+    const text = toWesternDigits(String(raw).replace(/<[^>]*>/g, '')).trim();
+    const isArabic = currentLang === 'ar';
+
+    el.textContent = '';
+    el.classList.toggle('hero__name--whole', isArabic);
+    el.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+    el.setAttribute('lang', isArabic ? 'ar' : 'en');
+
+    if (isArabic) {
+      el.textContent = text;
+      if (showImmediately) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+      return;
+    }
+
+    text.split('').forEach((char) => {
+      const span = document.createElement('span');
+      span.className = 'hero__char';
+      span.textContent = char;
+      el.appendChild(span);
+    });
+
+    if (showImmediately) {
+      el.querySelectorAll('.hero__char').forEach((charEl) => {
+        charEl.style.opacity = '1';
+        charEl.style.transform = 'none';
+      });
+    }
   }
 
   function initHeroBokeh() {
@@ -475,24 +555,35 @@
     tl.fromTo('.hero__overlay', { opacity: 0 }, { opacity: 1, duration: 1.8 })
       .fromTo('.hero__vignette', { opacity: 0 }, { opacity: 1, duration: 2 }, '-=1.4')
       .fromTo('.hero__lens-flare', { opacity: 0 }, { opacity: 0.7, duration: 2.5 }, '-=1.8')
-      .fromTo('.hero__prelude', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1 }, '-=1')
-      .to('.hero__name--groom .hero__char', {
+      .fromTo('.hero__line', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.85, stagger: 0.1 }, '-=1')
+      .fromTo('.hero__person-label', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.75, stagger: 0.12 }, '-=0.55')
+      .to('.hero__name--groom:not(.hero__name--whole) .hero__char', {
         opacity: 1,
         y: 0,
         duration: 0.9,
-        stagger: 0.06,
+        stagger: 0.05,
         ease: 'power4.out',
-      }, '-=0.6')
-      .fromTo('.hero__amp', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.9 }, '-=0.5')
-      .to('.hero__name--bride .hero__char', {
+      }, '-=0.45')
+      .fromTo('.hero__name--groom.hero__name--whole', { opacity: 0, y: '1.1em' }, {
         opacity: 1,
         y: 0,
         duration: 0.9,
-        stagger: 0.06,
         ease: 'power4.out',
-      }, '-=0.5')
-      .fromTo('.hero__subtitle', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 }, '-=0.4')
-      .fromTo('.hero__meta-card', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.12 }, '-=0.5')
+      }, '-=0.45')
+      .to('.hero__name--bride:not(.hero__name--whole) .hero__char', {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.05,
+        ease: 'power4.out',
+      }, '-=0.65')
+      .fromTo('.hero__name--bride.hero__name--whole', { opacity: 0, y: '1.1em' }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'power4.out',
+      }, '-=0.65')
+      .fromTo('.hero__meta-card', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.12 }, '-=0.45')
       .fromTo('.scroll-indicator', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.9 }, '-=0.4');
 
     if (DOM.heroImage) {
@@ -1346,6 +1437,7 @@
     initMouseGlow();
     initFooterStars();
     initFooterClosing();
+    initWhatsAppButtons();
   }
 
   if (document.readyState === 'loading') {
