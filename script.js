@@ -361,32 +361,14 @@
     const text = toWesternDigits(String(raw).replace(/<[^>]*>/g, '')).trim();
     const isArabic = currentLang === 'ar';
 
-    el.textContent = '';
-    el.classList.toggle('hero__name--whole', isArabic);
+    el.textContent = text;
+    el.classList.add('hero__name--whole');
     el.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
     el.setAttribute('lang', isArabic ? 'ar' : 'en');
 
-    if (isArabic) {
-      el.textContent = text;
-      if (showImmediately) {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      }
-      return;
-    }
-
-    text.split('').forEach((char) => {
-      const span = document.createElement('span');
-      span.className = 'hero__char';
-      span.textContent = char;
-      el.appendChild(span);
-    });
-
     if (showImmediately) {
-      el.querySelectorAll('.hero__char').forEach((charEl) => {
-        charEl.style.opacity = '1';
-        charEl.style.transform = 'none';
-      });
+      el.style.opacity = '1';
+      el.style.transform = 'none';
     }
   }
 
@@ -557,27 +539,13 @@
       .fromTo('.hero__lens-flare', { opacity: 0 }, { opacity: 0.7, duration: 2.5 }, '-=1.8')
       .fromTo('.hero__line', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.85, stagger: 0.1 }, '-=1')
       .fromTo('.hero__person-label', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.75, stagger: 0.12 }, '-=0.55')
-      .to('.hero__name--groom:not(.hero__name--whole) .hero__char', {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        stagger: 0.05,
-        ease: 'power4.out',
-      }, '-=0.45')
-      .fromTo('.hero__name--groom.hero__name--whole', { opacity: 0, y: '1.1em' }, {
+      .fromTo('.hero__name--groom', { opacity: 0, y: '1.1em' }, {
         opacity: 1,
         y: 0,
         duration: 0.9,
         ease: 'power4.out',
       }, '-=0.45')
-      .to('.hero__name--bride:not(.hero__name--whole) .hero__char', {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        stagger: 0.05,
-        ease: 'power4.out',
-      }, '-=0.65')
-      .fromTo('.hero__name--bride.hero__name--whole', { opacity: 0, y: '1.1em' }, {
+      .fromTo('.hero__name--bride', { opacity: 0, y: '1.1em' }, {
         opacity: 1,
         y: 0,
         duration: 0.9,

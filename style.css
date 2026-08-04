@@ -867,36 +867,36 @@ body.scrolled-past-hero .music-btn.is-playing {
   unicode-bidi: isolate;
 }
 
-.hero__name {
+.hero__name,
+.hero__name.hero__name--whole {
   font-family: var(--font-editorial);
-  font-size: clamp(2.25rem, 8.5vw, 4.25rem);
+  font-size: clamp(1.35rem, 5vw, 3rem);
   font-weight: 400;
-  letter-spacing: var(--tracking-name);
-  line-height: var(--leading-tight);
+  line-height: 1.15;
+  display: block;
+  opacity: 0;
+  transform: translateY(1.1em);
+  text-wrap: balance;
+  hyphens: none;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.hero__name[lang="en"],
+html[dir="ltr"] .hero__name {
   text-transform: uppercase;
+  letter-spacing: 0.05em;
   direction: ltr;
   unicode-bidi: isolate;
 }
 
-.hero__name.hero__name--whole {
-  opacity: 0;
-  transform: translateY(1.1em);
-  display: block;
+.hero__name[lang="ar"],
+html[dir="rtl"] .hero__name {
   text-transform: none;
   letter-spacing: 0;
   direction: rtl;
   unicode-bidi: plaintext;
   font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
-  font-size: clamp(2rem, 9.5vw, 3.75rem);
-  line-height: 1.2;
-}
-
-html[dir="rtl"] .hero__name:not(.hero__name--whole) {
-  direction: ltr;
-}
-
-html[dir="rtl"] .hero__name.hero__name--whole {
-  direction: rtl;
   font-family: 'HSN Shahd', 'Playfair Display', Georgia, serif;
 }
 
@@ -2958,13 +2958,20 @@ html[dir="rtl"] .venue__wa-btn {
     margin-top: 0.4rem;
   }
 
-  .hero__name {
-    font-size: clamp(1.5rem, 8.5vw, 2.25rem);
+  .hero__name,
+  .hero__name.hero__name--whole {
+    font-size: clamp(1rem, 4.5vw, 1.45rem);
+    line-height: 1.12;
   }
 
-  .hero__name.hero__name--whole {
-    font-size: clamp(1.45rem, 9vw, 2.1rem);
-    line-height: 1.15;
+  html[dir="ltr"] .hero__name,
+  .hero__name[lang="en"] {
+    letter-spacing: 0.035em;
+  }
+
+  html[dir="rtl"] .hero__name,
+  .hero__name[lang="ar"] {
+    font-size: clamp(1.1rem, 5vw, 1.65rem);
   }
 
   .hero__person-label {
@@ -3230,17 +3237,20 @@ html[dir="rtl"] .venue__wa-btn {
 }
 
 @media (max-width: 480px) {
-  .hero__name {
-    letter-spacing: 0.04em;
-    font-size: clamp(1.35rem, 8vw, 1.85rem);
-  }
-
+  .hero__name,
   .hero__name.hero__name--whole {
-    font-size: clamp(1.3rem, 8.5vw, 1.75rem);
+    font-size: clamp(0.92rem, 4.2vw, 1.2rem);
   }
 
-  html[dir="rtl"] .hero__name {
+  html[dir="rtl"] .hero__name,
+  .hero__name[lang="ar"] {
+    font-size: clamp(1rem, 4.8vw, 1.35rem);
     letter-spacing: 0;
+  }
+
+  html[dir="ltr"] .hero__name,
+  .hero__name[lang="en"] {
+    letter-spacing: 0.03em;
   }
 
   .hero__line--opening,
