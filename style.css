@@ -801,7 +801,7 @@ body.is-loading .scroll-indicator {
   width: min(100%, 21rem);
   max-width: 100%;
   height: auto;
-  margin: 0 auto clamp(0.35rem, 1.2vh, 0.75rem);
+  margin: 0 auto 0.1rem;
   padding: 0;
   background: none;
   border: none;
@@ -830,8 +830,10 @@ body.is-loading .hero__basmala {
 .hero__line--opening {
   font-size: clamp(1.25rem, 4.2vw, 1.625rem);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.35;
   color: rgba(255, 255, 255, 0.96);
+  margin-top: 0;
+  margin-bottom: 0.05rem;
 }
 
 html[dir="rtl"] .hero__line--opening {
@@ -842,7 +844,7 @@ html[dir="rtl"] .hero__line--opening {
 .hero__line--honor {
   font-size: clamp(1.0625rem, 3.2vw, 1.375rem);
   color: rgba(255, 255, 255, 0.96);
-  margin-bottom: clamp(0.2rem, 0.8vh, 0.4rem);
+  margin-bottom: 0.1rem;
 }
 
 .hero__families {
@@ -852,7 +854,7 @@ html[dir="rtl"] .hero__line--opening {
   gap: clamp(0.65rem, 3.5vw, 2rem);
   width: 100%;
   max-width: 40rem;
-  margin-block: clamp(0.25rem, 1vh, 0.5rem);
+  margin-block: 0.1rem;
 }
 
 .hero__line--family {
@@ -882,7 +884,7 @@ html[dir="rtl"] .hero__line--opening {
   gap: clamp(0.85rem, 4.5vw, 2.5rem);
   width: 100%;
   max-width: 40rem;
-  margin-top: clamp(0.35rem, 1.2vh, 0.65rem);
+  margin-top: 0.2rem;
 }
 
 .hero__person {
@@ -896,11 +898,16 @@ html[dir="rtl"] .hero__line--opening {
 
 .hero__person-label {
   font-family: var(--font-body);
-  font-size: clamp(0.8125rem, 2.4vw, 1.0625rem);
+  font-size: clamp(0.9375rem, 2.8vw, 1.1875rem);
   font-weight: 500;
   letter-spacing: 0.08em;
   color: var(--color-gold);
   text-transform: none;
+}
+
+html[dir="rtl"] .hero__person-label {
+  font-family: 'HSN Shahd', var(--font-body);
+  font-size: clamp(1rem, 3.2vw, 1.25rem);
 }
 
 .hero__title {
@@ -916,9 +923,9 @@ html[dir="rtl"] .hero__line--opening {
 .hero__name,
 .hero__name.hero__name--whole {
   font-family: var(--font-editorial);
-  font-size: clamp(1.35rem, 5vw, 3rem);
+  font-size: clamp(1.5rem, 5.8vw, 3.25rem);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.12;
   display: block;
   opacity: 1;
   transform: none;
@@ -2967,13 +2974,13 @@ html[dir="rtl"] .venue__wa-btn {
     justify-content: center;
     align-items: center;
     overflow: visible;
-    padding: clamp(4.5rem, 13vh, 6.5rem) 0 clamp(1.5rem, 5vh, 2.5rem);
-    padding-top: max(clamp(4.5rem, 13vh, 6.5rem), calc(env(safe-area-inset-top, 0px) + 3.5rem));
-    padding-bottom: max(clamp(1.5rem, 5vh, 2.5rem), env(safe-area-inset-bottom, 0px));
+    padding: clamp(3rem, 9vh, 4.5rem) 0 clamp(1.25rem, 4vh, 2rem);
+    padding-top: max(clamp(3rem, 9vh, 4.5rem), calc(env(safe-area-inset-top, 0px) + 2.5rem));
+    padding-bottom: max(clamp(1.25rem, 4vh, 2rem), env(safe-area-inset-bottom, 0px));
   }
 
   .hero__content {
-    padding: 0 clamp(0.75rem, 4vw, 1.25rem) 0.35rem;
+    padding: 0 clamp(0.75rem, 4vw, 1.25rem) 0.15rem;
     justify-content: flex-start;
     flex: 0 0 auto;
     width: 100%;
@@ -2982,7 +2989,7 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .hero__invitation {
-    gap: 0.35rem;
+    gap: 0.15rem;
     padding-inline: 0.25rem;
     width: 100%;
     max-width: 100%;
@@ -2991,18 +2998,19 @@ html[dir="rtl"] .venue__wa-btn {
 
   .hero__basmala {
     width: min(100%, 19rem);
-    margin-bottom: clamp(0.25rem, 1vh, 0.55rem);
+    margin-bottom: 0.05rem;
   }
 
   .hero__line {
     font-size: clamp(0.875rem, 3.8vw, 1.0625rem);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   .hero__line--opening {
     font-size: clamp(1.125rem, 5.8vw, 1.5rem);
-    line-height: 1.4;
-    margin-bottom: 0.15rem;
+    line-height: 1.3;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   html[dir="rtl"] .hero__line--opening {
@@ -3011,6 +3019,7 @@ html[dir="rtl"] .venue__wa-btn {
 
   .hero__line--honor {
     font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
+    margin-bottom: 0.05rem;
   }
 
   .hero__line--family {
@@ -3032,7 +3041,7 @@ html[dir="rtl"] .venue__wa-btn {
     max-width: 100%;
     width: 100%;
     padding-inline: 0;
-    margin-block: 0.35rem;
+    margin-block: 0.1rem;
   }
 
   .hero__line--family {
@@ -3044,15 +3053,15 @@ html[dir="rtl"] .venue__wa-btn {
   .hero__couple {
     grid-template-columns: 1fr 1fr;
     gap: clamp(0.35rem, 2.5vw, 0.75rem);
-    margin-top: 0.5rem;
+    margin-top: 0.2rem;
     width: 100%;
     max-width: 100%;
   }
 
   .hero__name,
   .hero__name.hero__name--whole {
-    font-size: clamp(1rem, 4.5vw, 1.45rem);
-    line-height: 1.12;
+    font-size: clamp(1.25rem, 5.8vw, 1.85rem);
+    line-height: 1.1;
   }
 
   html[dir="ltr"] .hero__name,
@@ -3062,18 +3071,22 @@ html[dir="rtl"] .venue__wa-btn {
 
   html[dir="rtl"] .hero__name,
   .hero__name[lang="ar"] {
-    font-size: clamp(1.1rem, 5vw, 1.65rem);
+    font-size: clamp(1.4rem, 6.5vw, 2.1rem);
   }
 
   .hero__person-label {
-    font-size: clamp(0.75rem, 3.2vw, 0.875rem);
+    font-size: clamp(0.875rem, 3.8vw, 1.05rem);
+  }
+
+  html[dir="rtl"] .hero__person-label {
+    font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
   }
 
   .hero__bottom {
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
-    padding: 0.75rem clamp(0.75rem, 4vw, 1.25rem) 0;
+    padding: 0.45rem clamp(0.75rem, 4vw, 1.25rem) 0;
     gap: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -3516,12 +3529,16 @@ html[dir="rtl"] .venue__wa-btn {
 
   .hero__name,
   .hero__name.hero__name--whole {
-    font-size: clamp(0.875rem, 4vw, 1.1rem);
+    font-size: clamp(1.1rem, 5.2vw, 1.5rem);
   }
 
   html[dir="rtl"] .hero__name,
   .hero__name[lang="ar"] {
-    font-size: clamp(0.9375rem, 4.5vw, 1.2rem);
+    font-size: clamp(1.2rem, 5.8vw, 1.65rem);
+  }
+
+  html[dir="rtl"] .hero__person-label {
+    font-size: clamp(0.8125rem, 3.6vw, 0.975rem);
   }
 
   .countdown__number {

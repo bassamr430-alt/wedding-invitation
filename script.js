@@ -82,7 +82,7 @@
       hero_opening: 'لأن الفرح لا يكتمل إلا بوجودكم',
       hero_honor: 'تتشرف',
       hero_family_groom: 'عائلة المرحوم رمزي رحمون',
-      hero_family_bride: 'وعائلة السيد هيثم علي',
+      hero_family_bride: 'عائلة السيد هيثم علي',
       hero_invite: 'بدعوتكم لحضور',
       hero_event: 'حفل زفاف ولديهما',
       hero_groom_label: 'الشاب',
