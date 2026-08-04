@@ -98,6 +98,9 @@
 html {
   font-size: 16px;
   scroll-behavior: auto; /* Lenis handles smooth scroll */
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html.lenis,
@@ -128,10 +131,15 @@ body {
   color: var(--color-charcoal);
   background-color: var(--color-ivory);
   line-height: var(--leading-body);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+#main {
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body.is-loading {
@@ -765,6 +773,15 @@ body.scrolled-past-hero .music-btn.is-playing {
 .hero__person-label,
 .hero__meta-card,
 .scroll-indicator {
+  opacity: 1;
+  transform: none;
+}
+
+body.is-loading .hero__line,
+body.is-loading .hero__person-label,
+body.is-loading .hero__name,
+body.is-loading .hero__meta-card,
+body.is-loading .scroll-indicator {
   opacity: 0;
 }
 
@@ -775,6 +792,7 @@ body.scrolled-past-hero .music-btn.is-playing {
   gap: clamp(0.3rem, 1vh, 0.5rem);
   max-width: 44rem;
   width: 100%;
+  min-width: 0;
   margin-inline: auto;
 }
 
@@ -846,6 +864,7 @@ body.scrolled-past-hero .music-btn.is-playing {
   align-items: center;
   gap: 0.35rem;
   text-align: center;
+  min-width: 0;
 }
 
 .hero__person-label {
@@ -874,12 +893,17 @@ body.scrolled-past-hero .music-btn.is-playing {
   font-weight: 400;
   line-height: 1.15;
   display: block;
-  opacity: 0;
-  transform: translateY(1.1em);
+  opacity: 1;
+  transform: none;
   text-wrap: balance;
   hyphens: none;
   word-break: normal;
-  overflow-wrap: normal;
+  overflow-wrap: break-word;
+}
+
+body.is-loading .hero__name {
+  opacity: 0;
+  transform: translateY(1.1em);
 }
 
 .hero__name[lang="en"],
@@ -2250,6 +2274,8 @@ html[dir="rtl"] .hero__name {
   border-radius: 2px;
   text-align: center;
   transition: var(--transition-luxury);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .hero__meta-card:hover {
@@ -2883,6 +2909,15 @@ html[dir="rtl"] .venue__wa-btn {
   opacity: 0;
 }
 
+.hero--revealed .hero__line,
+.hero--revealed .hero__person-label,
+.hero--revealed .hero__name,
+.hero--revealed .hero__meta-card,
+.hero--revealed .scroll-indicator {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ═══════════════════════════════════════ RESPONSIVE */
 @media (max-width: 1024px) {
   .masonry {
@@ -2902,9 +2937,7 @@ html[dir="rtl"] .venue__wa-btn {
     min-height: 100dvh;
     min-height: 100svh;
     justify-content: flex-start;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    overflow: visible;
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
@@ -2954,8 +2987,10 @@ html[dir="rtl"] .venue__wa-btn {
 
   .hero__couple {
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: clamp(0.35rem, 2.5vw, 0.5rem);
     margin-top: 0.4rem;
+    width: 100%;
+    max-width: 100%;
   }
 
   .hero__name,
@@ -2986,29 +3021,54 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .hero__meta {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.55rem;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
     width: 100%;
+    max-width: 22rem;
+    margin-inline: auto;
   }
 
   .hero__meta-card {
-    padding: 0.65rem 0.5rem;
+    padding: 0.9rem 1rem;
+    width: 100%;
+    min-width: 0;
   }
 
   .hero__meta-label {
-    font-size: 0.5rem;
-    letter-spacing: 0.18em;
-    margin-bottom: 0.35rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.45rem;
+  }
+
+  html[dir="rtl"] .hero__meta-label {
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-family: 'HSN Shahd', var(--font-body);
   }
 
   .hero__meta-value {
-    font-size: clamp(0.75rem, 3vw, 0.9375rem);
-    letter-spacing: 0.03em;
+    font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  html[dir="rtl"] .hero__meta-value,
+  html[dir="rtl"] .hero__meta-value--venue span:first-child {
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: 'HSN Shahd', 'Playfair Display', Georgia, serif;
   }
 
   .hero__meta-value--venue span:last-child {
-    font-size: 0.5625rem;
-    letter-spacing: 0.16em;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+  }
+
+  html[dir="rtl"] .hero__meta-value--venue span:last-child {
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: 'HSN Shahd', var(--font-body);
   }
 
   .hero .scroll-indicator {
@@ -3077,7 +3137,7 @@ html[dir="rtl"] .venue__wa-btn {
     justify-content: center;
     align-items: baseline;
     width: fit-content;
-    max-width: calc(100vw - 2rem);
+    max-width: 100%;
     margin-inline: auto;
   }
 
@@ -3160,6 +3220,18 @@ html[dir="rtl"] .venue__wa-btn {
     padding: 1.75rem 1.5rem;
   }
 
+  .story__timeline {
+    padding-inline-start: 1.35rem;
+  }
+
+  .timeline__node {
+    inset-inline-start: -1.35rem;
+  }
+
+  .timeline__text {
+    max-width: none;
+  }
+
   .story__butterfly--3,
   .story__heart--5,
   .story__lines--right {
@@ -3234,6 +3306,70 @@ html[dir="rtl"] .venue__wa-btn {
     width: 46px;
     height: 46px;
   }
+
+  .story__layout,
+  .story__grid,
+  .story__collage {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  .venue__layout,
+  .venue__map-wrap,
+  .venue__map {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .venue__notice {
+    margin-top: var(--space-lg);
+    padding: 1.5rem 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .venue__notice-text,
+  .venue__regret-text {
+    font-size: clamp(0.875rem, 3.8vw, 1rem);
+    line-height: 1.75;
+    text-wrap: balance;
+  }
+
+  .venue__regret-hint {
+    font-size: clamp(0.8125rem, 3.4vw, 0.9375rem);
+    text-wrap: balance;
+  }
+
+  .venue__regret-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    width: 100%;
+    max-width: 20rem;
+    margin-inline: auto;
+  }
+
+  .venue__wa-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 2.75rem;
+    padding: 0.9rem 1.25rem;
+  }
+
+  .venue__btn {
+    min-height: 2.75rem;
+    padding: 1.1rem 1.5rem;
+  }
+
+  .btn--luxury {
+    min-height: 2.75rem;
+  }
+
+  .detail-card,
+  .glass-card {
+    min-width: 0;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -3266,10 +3402,6 @@ html[dir="rtl"] .venue__wa-btn {
     font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
   }
 
-  .hero__meta-value {
-    font-size: 0.72rem;
-  }
-
   .details-grid {
     grid-template-columns: 1fr;
   }
@@ -3287,8 +3419,60 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .countdown__label {
-    font-size: 0.45rem;
-    letter-spacing: 0.14em;
+    font-size: clamp(0.5625rem, 2.8vw, 0.6875rem);
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero__content {
+    padding-inline: 0.75rem;
+  }
+
+  .hero__invitation {
+    padding-inline: 0;
+  }
+
+  .hero__couple {
+    gap: 0.3rem;
+  }
+
+  .hero__name,
+  .hero__name.hero__name--whole {
+    font-size: clamp(0.875rem, 4vw, 1.1rem);
+  }
+
+  html[dir="rtl"] .hero__name,
+  .hero__name[lang="ar"] {
+    font-size: clamp(0.9375rem, 4.5vw, 1.2rem);
+  }
+
+  .countdown__number {
+    font-size: clamp(1.5rem, 7.5vw, 2.25rem);
+  }
+
+  .countdown__sep {
+    font-size: clamp(1.1rem, 5vw, 1.65rem);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .btn--luxury,
+  .venue__wa-btn,
+  .lang-switcher__btn {
+    min-height: 44px;
+  }
+
+  .hero__meta-card:hover,
+  .detail-card:hover,
+  .glass-card:hover {
+    transform: none;
+  }
+
+  .btn--luxury:active,
+  .venue__wa-btn:active,
+  .lang-switcher__btn:active {
+    opacity: 0.88;
   }
 }
 
