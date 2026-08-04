@@ -796,6 +796,26 @@ body.is-loading .scroll-indicator {
   margin-inline: auto;
 }
 
+.hero__basmala {
+  display: block;
+  width: min(100%, 21rem);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto clamp(0.35rem, 1.2vh, 0.75rem);
+  padding: 0;
+  background: none;
+  border: none;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  -webkit-mix-blend-mode: screen;
+  opacity: 1;
+  filter: brightness(1.05);
+}
+
+body.is-loading .hero__basmala {
+  opacity: 0;
+}
+
 .hero__line {
   font-family: var(--font-body);
   font-size: clamp(0.9375rem, 2.8vw, 1.1875rem);
@@ -808,8 +828,15 @@ body.is-loading .scroll-indicator {
 }
 
 .hero__line--opening {
-  font-size: clamp(1.0625rem, 3.2vw, 1.375rem);
+  font-size: clamp(1.25rem, 4.2vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.45;
   color: rgba(255, 255, 255, 0.96);
+}
+
+html[dir="rtl"] .hero__line--opening {
+  font-size: clamp(1.3125rem, 4.8vw, 1.75rem);
+  font-family: 'HSN Shahd', var(--font-body);
 }
 
 .hero__line--honor {
@@ -2909,6 +2936,7 @@ html[dir="rtl"] .venue__wa-btn {
   opacity: 0;
 }
 
+.hero--revealed .hero__basmala,
 .hero--revealed .hero__line,
 .hero--revealed .hero__person-label,
 .hero--revealed .hero__name,
@@ -2961,12 +2989,26 @@ html[dir="rtl"] .venue__wa-btn {
     align-items: center;
   }
 
+  .hero__basmala {
+    width: min(100%, 19rem);
+    margin-bottom: clamp(0.25rem, 1vh, 0.55rem);
+  }
+
   .hero__line {
     font-size: clamp(0.875rem, 3.8vw, 1.0625rem);
     line-height: 1.5;
   }
 
-  .hero__line--opening,
+  .hero__line--opening {
+    font-size: clamp(1.125rem, 5.8vw, 1.5rem);
+    line-height: 1.4;
+    margin-bottom: 0.15rem;
+  }
+
+  html[dir="rtl"] .hero__line--opening {
+    font-size: clamp(1.2rem, 6.2vw, 1.625rem);
+  }
+
   .hero__line--honor {
     font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
   }
@@ -3417,7 +3459,14 @@ html[dir="rtl"] .venue__wa-btn {
     letter-spacing: 0.03em;
   }
 
-  .hero__line--opening,
+  .hero__line--opening {
+    font-size: clamp(1.0625rem, 5.5vw, 1.35rem);
+  }
+
+  html[dir="rtl"] .hero__line--opening {
+    font-size: clamp(1.125rem, 6vw, 1.45rem);
+  }
+
   .hero__line--honor {
     font-size: clamp(0.875rem, 4vw, 1rem);
   }

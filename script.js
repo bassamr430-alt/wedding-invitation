@@ -257,7 +257,7 @@
      LOADER
      ═══════════════════════════════════════════════════════════ */
   function revealHeroContent() {
-    document.querySelectorAll('.hero__line, .hero__person-label, .hero__name, .hero__meta-card, .scroll-indicator').forEach((el) => {
+    document.querySelectorAll('.hero__basmala, .hero__line, .hero__person-label, .hero__name, .hero__meta-card, .scroll-indicator').forEach((el) => {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
@@ -632,7 +632,7 @@
       return;
     }
 
-    gsap.set('.hero__line, .hero__person-label, .hero__meta-card, .scroll-indicator', { opacity: 0, y: 20 });
+    gsap.set('.hero__basmala, .hero__line, .hero__person-label, .hero__meta-card, .scroll-indicator', { opacity: 0, y: 20 });
     gsap.set('.hero__name', { opacity: 0, y: '1.1em' });
 
     const tl = gsap.timeline({
@@ -643,7 +643,8 @@
     tl.fromTo('.hero__overlay', { opacity: 0 }, { opacity: 1, duration: 1.8 })
       .fromTo('.hero__vignette', { opacity: 0 }, { opacity: 1, duration: 2 }, '-=1.4')
       .fromTo('.hero__lens-flare', { opacity: 0 }, { opacity: 0.7, duration: 2.5 }, '-=1.8')
-      .to('.hero__line', { opacity: 1, y: 0, duration: 0.85, stagger: 0.1 }, '-=1')
+      .to('.hero__basmala', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=1.1')
+      .to('.hero__line', { opacity: 1, y: 0, duration: 0.85, stagger: 0.1 }, '-=0.85')
       .to('.hero__person-label', { opacity: 1, y: 0, duration: 0.75, stagger: 0.12 }, '-=0.55')
       .to('.hero__name--groom', {
         opacity: 1,
