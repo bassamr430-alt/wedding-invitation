@@ -701,6 +701,15 @@ html[dir="rtl"] time.hero__meta-value {
   display: inline-block;
 }
 
+.hero__date-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  line-height: 1.25;
+}
+
 .hero__meta-divider {
   width: 1px;
   height: 52px;
