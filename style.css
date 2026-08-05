@@ -763,9 +763,9 @@ body.scrolled-past-hero .music-btn.is-playing {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 8, 6, 0.25) 0%,
-    rgba(10, 8, 6, 0.38) 45%,
-    rgba(10, 8, 6, 0.58) 100%
+    rgba(10, 8, 6, 0.42) 0%,
+    rgba(10, 8, 6, 0.52) 40%,
+    rgba(10, 8, 6, 0.72) 100%
   );
 }
 
@@ -859,8 +859,13 @@ html[dir="rtl"] .hero__line--opening {
 
 .hero__line--family {
   font-size: clamp(0.9375rem, 2.6vw, 1.125rem);
+  font-weight: 500;
   line-height: 1.55;
   text-align: center;
+}
+
+.hero__line[hidden] {
+  display: none !important;
 }
 
 .hero__line--invite {
@@ -933,6 +938,8 @@ html[dir="rtl"] .hero__person-label {
   hyphens: none;
   word-break: normal;
   overflow-wrap: break-word;
+  color: var(--color-champagne);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
 }
 
 body.is-loading .hero__name {
@@ -2226,8 +2233,8 @@ html[dir="rtl"] .hero__name {
 
 .hero__overlay {
   background:
-    linear-gradient(180deg, rgba(10, 8, 6, 0.2) 0%, rgba(10, 8, 6, 0.35) 42%, rgba(10, 8, 6, 0.62) 100%),
-    linear-gradient(135deg, rgba(200, 169, 106, 0.08) 0%, transparent 50%);
+    linear-gradient(180deg, rgba(10, 8, 6, 0.45) 0%, rgba(10, 8, 6, 0.55) 38%, rgba(10, 8, 6, 0.78) 100%),
+    linear-gradient(135deg, rgba(200, 169, 106, 0.06) 0%, transparent 50%);
 }
 
 .hero__vignette {
@@ -2235,8 +2242,8 @@ html[dir="rtl"] .hero__name {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0;
-  background: radial-gradient(ellipse 80% 70% at 50% 45%, transparent 35%, rgba(10, 8, 6, 0.45) 100%);
+  opacity: 0.85;
+  background: radial-gradient(ellipse 80% 70% at 50% 45%, transparent 30%, rgba(10, 8, 6, 0.55) 100%);
 }
 
 .hero__light {
@@ -2969,105 +2976,117 @@ html[dir="rtl"] .venue__wa-btn {
 
   .hero {
     height: auto;
-    min-height: 100dvh;
     min-height: 100svh;
-    justify-content: flex-start;
+    min-height: 100dvh;
+    justify-content: space-between;
     align-items: center;
     overflow: visible;
-    padding-top: max(3.25rem, calc(env(safe-area-inset-top, 0px) + 2rem));
-    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    padding-top: max(2.75rem, calc(env(safe-area-inset-top, 0px) + 1.5rem));
+    padding-bottom: max(0.85rem, env(safe-area-inset-bottom, 0px));
     padding-inline: 0;
   }
 
   .hero__content {
-    padding: 0 clamp(0.75rem, 4vw, 1.25rem) 0;
-    justify-content: flex-start;
-    flex: 0 0 auto;
+    padding: 0.35rem clamp(1.25rem, 5.5vw, 1.5rem) 0;
+    justify-content: center;
+    flex: 1 1 auto;
     width: 100%;
     align-items: center;
-    margin-top: 0;
+    margin-top: 0.15rem;
   }
 
   .hero__invitation {
-    gap: 0.08rem;
-    padding-inline: 0.25rem;
+    gap: 0.28rem;
+    padding-inline: 0;
     width: 100%;
     max-width: 100%;
     align-items: center;
   }
 
   .hero__basmala {
-    width: min(100%, 18.5rem);
-    margin: 0 auto -0.15rem;
+    width: min(100%, 17.5rem);
+    margin: 0 auto 0.05rem;
   }
 
   .hero__line {
-    font-size: clamp(0.875rem, 3.8vw, 1.0625rem);
-    line-height: 1.35;
+    font-size: clamp(1.125rem, 4.2vw, 1.25rem);
+    font-weight: 500;
+    line-height: 1.6;
     margin: 0;
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
   }
 
   .hero__line--opening {
-    font-size: clamp(1.125rem, 5.8vw, 1.5rem);
-    line-height: 1.25;
+    font-size: clamp(1.625rem, 6.2vw, 1.875rem);
+    font-weight: 600;
+    line-height: 1.5;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 0.15rem;
   }
 
   html[dir="rtl"] .hero__line--opening {
-    font-size: clamp(1.25rem, 6.5vw, 1.7rem);
+    font-size: clamp(1.625rem, 6.5vw, 1.875rem);
   }
 
   .hero__line--honor {
-    font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
-    margin-bottom: 0;
+    font-size: clamp(1.25rem, 4.8vw, 1.4375rem);
+    font-weight: 500;
+    line-height: 1.55;
+    margin-bottom: 0.05rem;
   }
 
   .hero__line--family {
-    font-size: clamp(0.8125rem, 3.5vw, 0.975rem);
-    line-height: 1.45;
+    font-size: clamp(0.9375rem, 3.8vw, 1.0625rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+    padding-inline: 0.1rem;
   }
 
   .hero__line--invite {
-    font-size: clamp(0.9rem, 3.8vw, 1.0625rem);
+    font-size: clamp(1.25rem, 4.8vw, 1.4375rem);
+    font-weight: 500;
+    line-height: 1.55;
+    margin-top: 0.2rem;
   }
 
   .hero__line--event {
-    font-size: clamp(1rem, 4.5vw, 1.25rem);
+    font-size: clamp(1.25rem, 4.8vw, 1.4375rem);
+    font-weight: 500;
+    line-height: 1.55;
+    margin-bottom: 0.1rem;
   }
 
   .hero__families {
     grid-template-columns: 1fr 1fr;
-    gap: clamp(0.35rem, 2.5vw, 0.75rem);
+    gap: clamp(0.5rem, 3vw, 0.85rem);
     max-width: 100%;
     width: 100%;
     padding-inline: 0;
-    margin-block: 0.1rem;
-  }
-
-  .hero__line--family {
-    font-size: clamp(0.72rem, 3.2vw, 0.9rem);
-    line-height: 1.4;
-    padding-inline: 0.15rem;
+    margin-block: 0.2rem;
   }
 
   .hero__couple {
     grid-template-columns: 1fr 1fr;
-    gap: clamp(0.35rem, 2.5vw, 0.75rem);
-    margin-top: 0.2rem;
+    gap: clamp(0.5rem, 3vw, 0.85rem);
+    margin-top: 0.35rem;
     width: 100%;
     max-width: 100%;
   }
 
   .hero__name,
   .hero__name.hero__name--whole {
-    font-size: clamp(1.35rem, 6.2vw, 2rem);
-    line-height: 1.08;
+    font-size: clamp(1.25rem, 5.2vw, 1.4375rem);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--color-champagne);
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
   }
 
   html[dir="rtl"] .hero__name,
   .hero__name[lang="ar"] {
-    font-size: clamp(1.5rem, 7vw, 2.25rem);
+    font-size: clamp(1.25rem, 5.5vw, 1.4375rem);
   }
 
   .hero__person-label {
@@ -3082,31 +3101,35 @@ html[dir="rtl"] .venue__wa-btn {
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
-    padding: 0.35rem clamp(0.75rem, 4vw, 1.25rem) 0;
-    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0 clamp(1.25rem, 5.5vw, 1.5rem) 0;
+    gap: 0.35rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
   }
 
   .hero__meta {
     display: grid;
     grid-template-columns: 1fr 1fr;
     direction: ltr;
-    gap: clamp(0.5rem, 2.5vw, 0.75rem);
-    width: min(100%, 21rem);
+    gap: clamp(0.65rem, 3vw, 0.85rem);
+    width: 100%;
+    max-width: 22.5rem;
     margin-inline: auto;
     justify-content: center;
     align-items: stretch;
   }
 
   .hero__meta-card {
-    padding: 0.85rem 0.65rem;
+    padding: 1rem 0.95rem;
     width: 100%;
     min-width: 0;
     text-align: center;
     direction: inherit;
+    background: rgba(10, 8, 6, 0.35);
+    border-color: rgba(200, 169, 106, 0.32);
   }
 
   html[dir="rtl"] .hero__meta-card {
@@ -3114,21 +3137,24 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .hero__meta-label {
-    font-size: 0.5625rem;
-    letter-spacing: 0.14em;
-    margin-bottom: 0.45rem;
+    font-size: clamp(0.75rem, 3vw, 0.875rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    color: var(--color-gold-light);
   }
 
   html[dir="rtl"] .hero__meta-label {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     text-transform: none;
     font-family: 'HSN Shahd', var(--font-body);
   }
 
   .hero__meta-value {
-    font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
-    letter-spacing: 0.04em;
-    line-height: 1.35;
+    font-size: clamp(1.0625rem, 4.2vw, 1.25rem);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    line-height: 1.55;
     text-wrap: balance;
   }
 
@@ -3140,8 +3166,10 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .hero__meta-value--venue span:last-child {
-    font-size: 0.6875rem;
-    letter-spacing: 0.12em;
+    font-size: clamp(0.8125rem, 3.2vw, 0.9375rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.88);
   }
 
   html[dir="rtl"] .hero__meta-value--venue span:last-child {
@@ -3360,23 +3388,27 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .lang-switcher {
-    top: max(0.75rem, env(safe-area-inset-top, 0px) + 0.4rem);
-    right: max(0.75rem, env(safe-area-inset-right, 0px) + 0.4rem);
+    top: max(0.65rem, env(safe-area-inset-top, 0px) + 0.3rem);
+    right: max(0.65rem, env(safe-area-inset-right, 0px) + 0.3rem);
     left: auto;
-    padding: 0.25rem 0.35rem;
+    padding: 0.18rem 0.28rem;
   }
 
   html[dir="rtl"] .lang-switcher {
-    left: max(0.75rem, env(safe-area-inset-left, 0px) + 0.4rem);
+    left: max(0.65rem, env(safe-area-inset-left, 0px) + 0.3rem);
     right: auto;
   }
 
   .lang-switcher__btn {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    padding: 0.55rem 0.7rem;
-    min-width: 2.5rem;
-    min-height: 2.25rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+    padding: 0.38rem 0.55rem;
+    min-width: 2.1rem;
+    min-height: 1.85rem;
+  }
+
+  .lang-switcher__divider {
+    height: 11px;
   }
 
   .music-btn {
@@ -3454,12 +3486,12 @@ html[dir="rtl"] .venue__wa-btn {
 @media (max-width: 480px) {
   .hero__name,
   .hero__name.hero__name--whole {
-    font-size: clamp(0.92rem, 4.2vw, 1.2rem);
+    font-size: clamp(1.25rem, 5.4vw, 1.375rem);
   }
 
   html[dir="rtl"] .hero__name,
   .hero__name[lang="ar"] {
-    font-size: clamp(1rem, 4.8vw, 1.35rem);
+    font-size: clamp(1.25rem, 5.6vw, 1.4375rem);
     letter-spacing: 0;
   }
 
@@ -3469,23 +3501,25 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .hero__line--opening {
-    font-size: clamp(1.0625rem, 5.5vw, 1.35rem);
+    font-size: clamp(1.625rem, 6.4vw, 1.8125rem);
   }
 
   html[dir="rtl"] .hero__line--opening {
-    font-size: clamp(1.125rem, 6vw, 1.45rem);
+    font-size: clamp(1.625rem, 6.6vw, 1.875rem);
   }
 
-  .hero__line--honor {
-    font-size: clamp(0.875rem, 4vw, 1rem);
+  .hero__line--honor,
+  .hero__line--invite,
+  .hero__line--event {
+    font-size: clamp(1.25rem, 5vw, 1.375rem);
   }
 
   .hero__line--family {
-    font-size: clamp(0.78rem, 3.6vw, 0.9rem);
+    font-size: clamp(0.9375rem, 4vw, 1.0625rem);
   }
 
-  .hero__line--event {
-    font-size: clamp(0.9375rem, 4.2vw, 1.125rem);
+  .hero__meta-card {
+    padding: 0.95rem 0.85rem;
   }
 
   .details-grid {
@@ -3512,7 +3546,7 @@ html[dir="rtl"] .venue__wa-btn {
 
 @media (max-width: 360px) {
   .hero__content {
-    padding-inline: 0.75rem;
+    padding-inline: 1.15rem;
   }
 
   .hero__invitation {
@@ -3520,21 +3554,21 @@ html[dir="rtl"] .venue__wa-btn {
   }
 
   .hero__couple {
-    gap: 0.3rem;
+    gap: 0.4rem;
   }
 
   .hero__name,
   .hero__name.hero__name--whole {
-    font-size: clamp(1.1rem, 5.2vw, 1.5rem);
+    font-size: 1.25rem;
   }
 
   html[dir="rtl"] .hero__name,
   .hero__name[lang="ar"] {
-    font-size: clamp(1.2rem, 5.8vw, 1.65rem);
+    font-size: 1.25rem;
   }
 
-  html[dir="rtl"] .hero__person-label {
-    font-size: clamp(0.8125rem, 3.6vw, 0.975rem);
+  .hero__meta-card {
+    padding: 0.9rem 0.75rem;
   }
 
   .countdown__number {
@@ -3548,9 +3582,12 @@ html[dir="rtl"] .venue__wa-btn {
 
 @media (hover: none) and (pointer: coarse) {
   .btn--luxury,
-  .venue__wa-btn,
-  .lang-switcher__btn {
+  .venue__wa-btn {
     min-height: 44px;
+  }
+
+  .lang-switcher__btn {
+    min-height: 1.85rem;
   }
 
   .hero__meta-card:hover,

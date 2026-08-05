@@ -78,11 +78,11 @@
       loader: 'جاري تحميل دعوتكم',
       loader_hint: 'المس الشاشة للدخول',
       hero_opening: 'لأن الفرح لا يكتمل إلا بوجودكم',
-      hero_honor: 'تتشرف',
+      hero_honor: '',
       hero_family_groom: 'عائلة المرحوم رمزي رحمون',
       hero_family_bride: 'عائلة السيد هيثم علي',
-      hero_invite: 'بدعوتكم لحضور',
-      hero_event: 'حفل زفاف ولديهما',
+      hero_invite: 'نتشرّف بدعوتكم لحضور حفل زفاف ولديهما',
+      hero_event: '',
       hero_groom_name: 'عمار رحمون',
       hero_bride_name: 'رنا علي',
       hero_date_label: 'تاريخ الزفاف',
@@ -182,7 +182,13 @@
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.dataset.i18n;
       const value = i18n[lang][key];
-      if (!value || el.hasAttribute('data-split')) return;
+      if (value === undefined || el.hasAttribute('data-split')) return;
+      if (!value) {
+        el.textContent = '';
+        el.setAttribute('hidden', '');
+        return;
+      }
+      el.removeAttribute('hidden');
       const normalized = toWesternDigits(value);
       if (normalized.includes('<')) {
         el.innerHTML = normalized;
