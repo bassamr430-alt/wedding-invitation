@@ -870,6 +870,7 @@ html[dir="rtl"] .hero__line--opening {
   font-weight: 500;
   line-height: 1.55;
   text-align: center;
+  min-height: 3.1em;
 }
 
 .hero__line[hidden] {
